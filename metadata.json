@@ -1,0 +1,53 @@
+{
+  "name": "danzilio-virtualbox',
+  "version": "1.0.0",
+  "author": "David Danzilio",
+  "summary": "A module to install VirtualBox on Linux hosts.",
+  "license": "Apache License, Version 2.0",
+  "source": "git://github.com/danzilio/danzilio-virtualbox",
+  "project_page": "https://github.com/danzilio/danzilio-virtualbox",
+  "issues_url": "https://github.com/danzilio/danzilio-virtualbox/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5.10",
+        "6.5",
+      ]
+    },{
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5.10",
+        "6.5",
+      ]
+    },{
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04",
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.1.0"
+    },{
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 1.1.0"
+    },{
+      "name": "stahnma/epel",
+      "version_requirement": ">= 0.0.6"
+    }
+  ]
+}
