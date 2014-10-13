@@ -49,8 +49,8 @@ class virtualbox::install (
           descr    => 'Oracle Linux / RHEL / CentOS-$releasever / $basearch - VirtualBox',
           baseurl  => 'http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch',
           gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox.asc',
-          gpgcheck => true,
-          enabled  => true,
+          gpgcheck => 1,
+          enabled  => 1,
         }
 
         if $manage_package {
