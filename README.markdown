@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/danzilio/danzilio-virtualbox.svg)](https://travis-ci.org/danzilio/danzilio-virtualbox)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/danzilio/virtualbox.svg)](https://forge.puppetlabs.com/danzilio/virtualbox) [![Build Status](https://travis-ci.org/danzilio/danzilio-virtualbox.svg)](https://travis-ci.org/danzilio/danzilio-virtualbox)
 
 This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.
 
