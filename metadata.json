@@ -1,5 +1,5 @@
 {
-  "name": "danzilio-virtualbox',
+  "name": "danzilio-virtualbox",
   "version": "1.0.0",
   "author": "David Danzilio",
   "summary": "A module to install VirtualBox on Linux hosts.",
