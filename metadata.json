@@ -7,6 +7,14 @@
   "source": "git://github.com/danzilio/danzilio-virtualbox",
   "project_page": "https://github.com/danzilio/danzilio-virtualbox",
   "issues_url": "https://github.com/danzilio/danzilio-virtualbox/issues",
+  "tags": [
+    "virtualbox",
+    "virtualization",
+    "ubuntu",
+    "redhat",
+    "rhel",
+    "centos"
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
