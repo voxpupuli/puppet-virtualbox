@@ -1,5 +1,8 @@
 Facter.add(:virtualbox_version) do
-    setcode do
-        Facter::Core::Execution.exec('/usr/bin/VBoxManage --version')
+  vboxmanage = '/usr/bin/VBoxManage'
+  setcode do
+    if File.exist? vboxmanage
+      %x{#{vboxmanage} --version}
     end
+  end
 end
