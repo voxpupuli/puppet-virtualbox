@@ -24,13 +24,13 @@ describe 'virtualbox class' do
         end
 
         describe command("VBoxManage --version") do
-          it { should return_exit_status 0 }
-          it { should return_stdout(/^4.3/) }
+          its(:exit_status) { should eq 0 }
+          its(:stdout) { should match /^4.3/ }
         end
 
         describe command("/etc/init.d/vboxdrv status") do
-          it { should return_exit_status 0 }
-          it { should return_stdout(/VirtualBox kernel modules \(.*\) are loaded\./) }
+          its(:exit_status) { should eq 0 }
+          its(:stdout) { should match /VirtualBox kernel modules \(.*\) are loaded\./ }
         end
     end
 end
