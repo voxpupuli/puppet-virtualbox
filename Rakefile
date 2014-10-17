@@ -26,6 +26,12 @@ exclude_paths = [
 PuppetLint.configuration.ignore_paths = exclude_paths
 PuppetSyntax.exclude_paths = exclude_paths
 
+desc "Run metadata-json-lint"
+task :metadata do
+  out = %x{bundle exec metadata-json-lint metadata.json}
+  $? != 0 ? (raise out) : (puts "Metadata OK!")
+end
+
 desc "Run acceptance tests"
 RSpec::Core::RakeTask.new(:acceptance) do |t|
       t.pattern = 'spec/acceptance'
