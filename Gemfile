@@ -7,6 +7,7 @@ group :test do
   gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
+  gem "metadata-json-lint"
 end
 
 group :development do
@@ -18,5 +19,4 @@ group :development do
   gem "puppet-blacksmith"
   gem "guard-rake"
   gem "pry"
-  gem "metadata-json-lint"
 end
