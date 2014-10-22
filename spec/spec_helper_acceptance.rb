@@ -3,13 +3,7 @@ require 'pry'
 
 hosts.each do |host|
   # Install Puppet
-  if host.name =~ /ubuntu-server-1404/
-    install_package host, 'ruby'
-  else
-    install_package host, 'rubygems'
-  end
-
-  on host, 'gem install puppet --no-ri --no-rdoc'
+  install_puppet
   on host, "mkdir -p #{host['distmoduledir']}"
 end
 
