@@ -10,6 +10,7 @@ This module is tested with:
 
 - CentOS 5.10
 - CentOS 6.5
+- CentOS 7.0
 - Debian 6.0.7
 - Debian 7.3
 - Ubuntu 10.04
