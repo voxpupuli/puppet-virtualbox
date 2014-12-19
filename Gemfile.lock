@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/rodjek/rspec-puppet.git
-  revision: 28c29d09e47211b65c0969b55082367a71d2e073
+  revision: 43fea603a5f308731e9b51337fb9adc66fa72d18
+  ref: v2.0.0
   specs:
-    rspec-puppet (1.0.1)
-      rspec (< 3.0.0)
+    rspec-puppet (2.0.0)
+      rspec (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -57,7 +58,7 @@ GEM
       ffi (>= 1.3.0)
     excon (0.40.0)
     extlib (0.9.16)
-    facter (2.2.0)
+    facter (2.3.0)
       CFPropertyList (~> 2.2.6)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
@@ -151,11 +152,10 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
-    puppet (3.6.2)
+    puppet (3.7.3)
       facter (> 1.6, < 3)
       hiera (~> 1.0)
       json_pure
-      rgen (~> 0.6.5)
     puppet-blacksmith (3.0.2)
       puppet (>= 2.7.16)
       rest-client
@@ -184,7 +184,6 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (1.4.1)
-    rgen (0.6.6)
     rspec (2.99.0)
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
@@ -245,7 +244,7 @@ DEPENDENCIES
   json
   metadata-json-lint
   pry
-  puppet (~> 3.6.0)
+  puppet (= 3.7.3)
   puppet-blacksmith
   puppet-lint
   puppet-syntax
