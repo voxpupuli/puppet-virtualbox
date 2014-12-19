@@ -38,6 +38,7 @@ describe 'virtualbox', :type => :class do
             if osfamily == 'RedHat'
                 let(:facts) {{
                     :osfamily => osfamily,
+                    :operatingsystem => "RedHat",
                     :operatingsystemrelease => '6.5',
                 }}
 

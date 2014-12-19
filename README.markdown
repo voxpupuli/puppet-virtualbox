@@ -18,6 +18,8 @@ This module is tested with:
 
 It may work on other distros and OS versions, but these are the versions that we're targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)
 
+This module is tested with the latest version of Puppet 2.7 and all minor versions of Puppet 3; all Puppet supported versions of Ruby are included in the test matrix. It is also tested with the future parser in the latest release of Puppet. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
+
 ##Usage
 
 To begin using the virtualbox module, just include the virtualbox class on your node like so:
