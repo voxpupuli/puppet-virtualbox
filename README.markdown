@@ -63,6 +63,21 @@ You can also opt to not manage the package with the `manage_package` parameter. 
 	  manage_package => false,
 	}
 
+###Extension Pack
+
+You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
+
+	class { 'virtualbox::extpack':
+	  version => '4.3.18r96516',
+	}
+
+This will download the Extension Pack from the Oracle's official webserver. You can also download the Extension Pack from your own server by specifying a custom source URL:
+
+	class { 'virtualbox::extpack':
+	  version => '4.3.20r96996',
+	  source => 'http://myserver.example.com/Oracle_VM_VirtualBox_Extension_Pack-4.3.20-96996.vbox-extpack',
+	}
+
 ##Development
 
 1. Fork it
