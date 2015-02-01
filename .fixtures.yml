@@ -3,6 +3,6 @@ fixtures:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
     apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     epel: "https://github.com/stahnma/puppet-module-epel.git"
-    wget: "https://github.com/maestrodev/puppet-wget.git"
+    archive: "https://github.com/camptocamp/puppet-archive.git"
   symlinks:
     virtualbox: "#{source_dir}"

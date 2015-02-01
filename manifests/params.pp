@@ -9,9 +9,6 @@ class virtualbox::params {
   $manage_package = true
   $manage_repo = true
   $package_ensure = present
-  $extpack_ensure = present
-  $extpack_version = $::virtualbox_version
-  $extpack_source = undef
 
   case $::osfamily {
     'Debian': {
