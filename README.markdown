@@ -1,10 +1,10 @@
-[![Puppet Forge](http://img.shields.io/puppetforge/v/danzilio/virtualbox.svg)](https://forge.puppetlabs.com/danzilio/virtualbox) [![Build Status](https://travis-ci.org/danzilio/danzilio-virtualbox.svg)](https://travis-ci.org/danzilio/danzilio-virtualbox)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/danzilio/virtualbox.svg?style=flat)](https://forge.puppetlabs.com/danzilio/virtualbox) [![Build Status](https://travis-ci.org/danzilio/danzilio-virtualbox.svg)](https://travis-ci.org/danzilio/danzilio-virtualbox) [![Documentation Status](http://img.shields.io/badge/docs-puppet--strings-ff69b4.svg?style=flat)](http://danzilio.github.io/danzilio-virtualbox)
 
 This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.
 
 By default, this module will install the Oracle VirtualBox yum/apt repo, install the VirtualBox package, and build the VirtualBox kernel modules. You can define a custom package name and/or version, you can also opt to not manage the repositories with this module. Because of the strange convention Oracle has opted to use for versioning VirtualBox, if you set a custom package name, the `version` parameter will be ignored. If you wish to define a package version with a custom package name, you must use the `package_ensure` parameter.
 
-##Support
+## Support
 
 This module is tested with:
 
@@ -21,7 +21,7 @@ It may work on other distros and OS versions, but these are the versions that we
 
 This module is tested with the latest version of Puppet 2.7 and all minor versions of Puppet 3; all Puppet supported versions of Ruby are included in the test matrix. It is also tested with the future parser in the latest release of Puppet. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
 
-##Usage
+## Usage
 
 To begin using the virtualbox module, just include the virtualbox class on your node like so:
 
@@ -63,22 +63,20 @@ You can also opt to not manage the package with the `manage_package` parameter. 
 	  manage_package => false,
 	}
 
-###Extension Pack
+### Extension Pack
 
-You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
+There's a defined type to install an Extension Pack. I'm not aware of any exteion packs other than the Oracle Extension Pack, but this type should work for third party extensions. You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
 
-	class { 'virtualbox::extpack':
-	  version => '4.3.18r96516',
+	virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
+		ensure           => present,
+		source           => 'http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack',
+		checksum_string  => '4b7546ddf94308901b629865c54d5840',
+		follow_redirects => true,
 	}
 
-This will download the Extension Pack from the Oracle's official webserver. You can also download the Extension Pack from your own server by specifying a custom source URL:
+This will download the extension pack, check to make sure the downloaded file matches the expected md5sum, then install the extension pack to `/usr/lib/virtualbox/ExtensionPacks`.
 
-	class { 'virtualbox::extpack':
-	  version => '4.3.20r96996',
-	  source => 'http://myserver.example.com/Oracle_VM_VirtualBox_Extension_Pack-4.3.20-96996.vbox-extpack',
-	}
-
-##Development
+## Development
 
 1. Fork it
 2. Create a feature branch
@@ -87,4 +85,4 @@ This will download the Extension Pack from the Oracle's official webserver. You 
 5. Refactor the code
 6. Submit a pull request
 
-We politely request (demand) tests for all new features. Pull requests that contain new features without a test will not be considered.
+We politely request (demand) tests for all new features. Pull requests that contain new features without a test will not be considered. If you need help, just ask!

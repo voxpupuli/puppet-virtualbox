@@ -22,7 +22,7 @@ RSpec.configure do |c|
       on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-apt'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','stahnma-epel'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','maestrodev-wget'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module','install','camptocamp-archive'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end

@@ -7,84 +7,79 @@
 # [*ensure*]
 #   Set to 'present' to install extension pack. Set to 'absent' to uninstall.
 #   Defaults to 'present'
-#
-# [*version*]
-#   Full version of the Extension Pack to install. E.g. '4.3.20r96996'. This
-#   parameter is mandatory.
-#
 # [*source*]
-#   Download extension pack from the given URL. If not specified download from
-#   Oracle's official server.
+#   Download extension pack from the given URL. Required string.
+# [*verify_checksum*]
+#   Whether to verify the checksum of the downloaded file. Optional boolean.
+#   Defaults to true.
+# [*checksum_string*]
+#   If $verify_checksum is true, this is the checksum to use to validate the
+#   downloaded file against.
+# [*checksum_type*]
+#   If $verify_checksum is true, this is the algorithm to use to validate the
+#   checksum. Can be md5, sha1, sha224, sha256, sha384, or sha512. Defaults to
+#   'md5'
+# [*follow_redirects*]
+#   If we should follow HTTP redirects. Defaults to false.
+# [*extpack_path*]
+#   This is the path where VirtualBox looks for extension packs. Defaults to
+#   '/usr/lib/virtualbox/ExtensionPacks'
 #
-class virtualbox::extpack (
-  $ensure  = $virtualbox::params::extpack_ensure,
-  $version = $virtualbox::params::extpack_version,
-  $source  = $virtualbox::params::extpack_source
-) inherits virtualbox::params {
-  validate_string($ensure)
-  validate_string($version)
-  if $source {
-    validate_string($source)
+define virtualbox::extpack (
+  $source,
+  $ensure           = present,
+  $verify_checksum  = true,
+  $checksum_string  = undef,
+  $checksum_type    = 'md5',
+  $follow_redirects = false,
+  $extpack_path     = '/usr/lib/virtualbox/ExtensionPacks'
+) {
+
+  validate_re($ensure, ['^present$', '^absent$'])
+  validate_string($source)
+  validate_absolute_path($extpack_path)
+  
+  $_verify_checksum = str2bool($verify_checksum)
+
+  if $_verify_checksum {
+    validate_re($checksum_type, ['^md5', '^sha1', '^sha224', '^sha256', '^sha384', '^sha512'])
+    validate_string($checksum_string)
+
+    $_checksum_type   = $checksum_type
+    $_checksum_string = $checksum_string
   }
 
+  $dest = "${extpack_path}/${name}"
+  
+  archive::download { "${name}.tgz":
+    ensure           => $ensure,
+    url              => $source,
+    checksum         => $_verify_checksum,
+    digest_type      => $_checksum_type,
+    digest_string    => $_checksum_string,
+    follow_redirects => $follow_redirects,
+    require          => Class['virtualbox']
+  }
+  
   case $ensure {
-    'present': {
-      if $virtualbox::package_ensure == 'absent' {
-        fail('Cannot install extension pack without installing VirtualBox')
-      }
-      if $version !~ /[^r]+r[^r]+/ {
-        fail("'${version}' is not a valid version string!")
-      }
-
-      # install/upgrade if we do not have the requested version
-      if $::virtualbox_extpack_version != $version {
-        $ver = regsubst($version, '^([^r]+)r([^r]+)', '\1')
-        $build = regsubst($version, '^([^r]+)r([^r]+)', '\2')
-        $filename = "Oracle_VM_VirtualBox_Extension_Pack-${ver}-${build}.vbox-extpack"
-        if $source {
-          $url = $source
-        } else {
-          $url = "http://download.virtualbox.org/virtualbox/${ver}/${filename}"
-        }
-        $dl_dir = '/tmp'
-
-        wget::fetch { 'download vbox extpack':
-          source      => $url,
-          destination => "${dl_dir}/${filename}",
-        }
-
-        exec { 'install vbox extpack':
-          command => "VBoxManage extpack install --replace ${dl_dir}/${filename}",
-          path    => '/usr/local/bin:/usr/bin:/bin',
-          require => [
-            Class['virtualbox::install'],
-            Wget::Fetch['download vbox extpack'],
-          ],
-        }
+    present: {
+      exec { "${name} unpack":
+        command => "mkdir -p ${dest} && tar --no-same-owner --no-same-permissions -xzf /usr/src/${name}.tgz -C ${dest}",
+        creates => $dest,
+        timeout => 120,
+        path    => $::path,
+        require => Archive::Download["${name}.tgz"],
       }
     }
-    'absent': {
-      if $::virtualbox_extpack_version {
-        exec { 'uninstall vbox extpack':
-          command => 'VBoxManage extpack uninstall "Oracle VM VirtualBox Extension Pack"',
-          path    => '/usr/local/bin:/usr/bin:/bin',
-        }
-
-        # Make sure we process uninstall request after installing VirtualBox
-        # (if VirtualBox will be installed during the same Puppet run) and
-        # before removing VirtualBox (if VirtualBox will be uninstalled during
-        # the same Puppet run)
-        if defined(Class['virtualbox::install']) {
-          if $virtualbox::package_ensure == 'absent' {
-            Exec['uninstall vbox extpack'] -> Class['virtualbox::install']
-          } else {
-            Class['virtualbox::install'] -> Exec['uninstall vbox extpack']
-          }
-        }
+    absent: {
+      file { "${extpack_path}/${name}":
+        ensure  => absent,
+        recurse => true,
+        purge   => true,
+        force   => true,
       }
     }
-    default: {
-      fail("Invalid value for attribute 'ensure'")
-    }
+    default: { fail('Unknown value for $ensure.') }
   }
+
 }
