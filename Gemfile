@@ -12,6 +12,7 @@ group :test do
 end
 
 group :development do
+  gem "yard"
   gem "travis"
   gem "travis-lint"
   gem "beaker"
