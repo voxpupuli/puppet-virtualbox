@@ -25,54 +25,54 @@ This module is tested with the latest version of Puppet 2.7 and all minor versio
 
 To begin using the virtualbox module, just include the virtualbox class on your node like so:
 
-	include virtualbox
+    include virtualbox
 
 This will get you set up with the basics and will meet 90% of the use cases out there.
 
 If you wish to manage your package repositories outside of this module, you just need to set `$manage_repo` to `false`:
 
-	class { 'virtualbox':
-	  manage_repo => false,
-	}
+    class { 'virtualbox':
+      manage_repo => false,
+    }
 
 You can also specify a custom package name like so:
 
-	class { 'virtualbox':
-	  manage_repo  => false,
-	  package_name => 'virtualbox-custom',
-	}
+    class { 'virtualbox':
+      manage_repo  => false,
+      package_name => 'virtualbox-custom',
+    }
 
 The peculiar versioning in use by Oracle has forced us to do some funky stuff with versioning. If you're using the default package name, this module will concatenate `$package_name` and `$version` together with a dash between them. If you opt to define your own package name, the `$version` parameter is ignored completely and the only way to specify a version would be to use the `$package_ensure` parameter:
 
-	class { 'virtualbox':
-	  manage_repo    => false,
-	  package_name   => 'virtualbox-custom',
-	  package_ensure => '4.3.18_96516',
-	}
+    class { 'virtualbox':
+      manage_repo    => false,
+      package_name   => 'virtualbox-custom',
+      package_ensure => '4.3.18_96516',
+    }
 
 If you don't want to install the VirtualBox kernel extensions, you can set the `manage_kernel` parameter to `false`.
 
-	class { 'virtualbox':
-	  manage_kernel => false,
-	}
+    class { 'virtualbox':
+      manage_kernel => false,
+    }
 
 You can also opt to not manage the package with the `manage_package` parameter. This would effectively just install the package repository:
 
-	class { 'virtualbox':
-	  manage_kernel  => false,
-	  manage_package => false,
-	}
+    class { 'virtualbox':
+      manage_kernel  => false,
+      manage_package => false,
+    }
 
 ### Extension Pack
 
 There's a defined type to install an Extension Pack. I'm not aware of any extension packs other than the Oracle Extension Pack, but this type should work for third party extensions. You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
 
-	virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
-		ensure           => present,
-		source           => 'http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack',
-		checksum_string  => '4b7546ddf94308901b629865c54d5840',
-		follow_redirects => true,
-	}
+    virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
+      ensure           => present,
+      source           => 'http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack',
+      checksum_string  => '4b7546ddf94308901b629865c54d5840',
+      follow_redirects => true,
+    }
 
 This will download the extension pack, check to make sure the downloaded file matches the expected md5sum, then install the extension pack to `/usr/lib/virtualbox/ExtensionPacks`.
 
