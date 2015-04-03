@@ -8,6 +8,7 @@ class virtualbox::params {
   $manage_kernel = true
   $manage_package = true
   $manage_repo = true
+  $manage_epel = true
   $package_ensure = present
 
   case $::osfamily {
