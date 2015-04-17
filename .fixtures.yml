@@ -4,5 +4,6 @@ fixtures:
     apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     epel: "https://github.com/stahnma/puppet-module-epel.git"
     archive: "https://github.com/camptocamp/puppet-archive.git"
+    zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
   symlinks:
     virtualbox: "#{source_dir}"

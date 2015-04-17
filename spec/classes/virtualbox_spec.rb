@@ -12,6 +12,10 @@ describe 'virtualbox', :type => :class do
       :osfamily => 'RedHat',
       :operatingsystem => "RedHat",
       :operatingsystemrelease => '6.5',
+    }, {
+      :osfamily => 'Suse',
+      :operatingsystem => "OpenSuSE",
+      :lsbdistrelease => '13.1',
     }
   ].each do |facts|
     context "on #{facts[:osfamily]}" do
@@ -60,6 +64,26 @@ describe 'virtualbox', :type => :class do
 
         context 'when managing the repo and the kernel' do
           it { should contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
+        end
+      end
+
+      # Suse specific stuff
+      #
+      if facts[:osfamily] == 'Suse'
+        it { should contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/13.1') }
+
+        context 'with a custom version' do
+          let(:params) {{ 'version' => '4.2' }}
+          it { should contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
+        end
+
+        context 'when not managing the package repository' do
+          let(:params) {{ 'manage_repo' => false }}
+          it { should_not contain_zypprepo('virtualbox') }
+        end
+
+        context 'when managing the package and the repository' do
+          it { should contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
         end
       end
 

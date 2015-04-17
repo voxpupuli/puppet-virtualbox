@@ -16,6 +16,7 @@ This module is tested with:
 - Ubuntu 10.04
 - Ubuntu 12.04
 - Ubuntu 14.04
+- OpenSuSE 13.1
 
 It may work on other distros and OS versions, but these are the versions that we're targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)
 
