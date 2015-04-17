@@ -58,7 +58,26 @@ class virtualbox::install (
         }
       }
     }
-    default: { fail("${::osfamily} is not supported by this module.") }
+    'Suse': {
+      case $::operatingsystem {
+        'OpenSuSE': {
+          if $manage_repo {
+            zypprepo { 'virtualbox':
+              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${::lsbdistrelease}",
+              enabled     => 1,
+              autorefresh => 1,
+              name        => 'Oracle Virtual Box',
+              gpgcheck    => 0,
+            }
+            if $manage_package {
+              Zypprepo['virtualbox'] -> Package['virtualbox']
+            }
+          }
+        }
+        default: { fail("${::osfamily}/${::operatingsystem} is not supported by ${::module_name}.") }
+      }
+    }
+    default: { fail("${::osfamily} is not supported by ${::module_name}.") }
   }
 
   if $manage_package {

@@ -34,8 +34,19 @@ class virtualbox::params {
         'glibc-devel'
       ]
     }
+    'Suse': {
+      $package_name = 'VirtualBox'
+      $vboxdrv_dependencies = [
+        'gcc',
+        'make',
+        'patch',
+        'kernel-source',
+        'binutils',
+        'glibc-devel',
+      ]
+    }
     default: {
-      fail("${::operatingsystem} not supported")
+      fail("${::operatingsystem} not supported by ${::module_name}")
     }
   }
 }

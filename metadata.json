@@ -13,6 +13,12 @@
   ],
   "operatingsystem_support": [
     {
+      "operatingsystem": "OpenSuSE",
+      "operatingsystemrelease": [
+        "13.1"
+      ]
+    },
+    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "5",
@@ -66,6 +72,10 @@
     {
       "name": "stahnma/epel",
       "version_requirement": ">=0.0.6 <2.0.0"
+    },
+    {
+      "name": "darin/zypprepo",
+      "version_requirement": ">=1.0.0 <2.0.0"
     },
     {
       "name": "camptocamp/archive",
