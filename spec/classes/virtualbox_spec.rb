@@ -89,7 +89,7 @@ describe 'virtualbox', :type => :class do
         context 'with manage_repo => true on an unsupported version' do
           let(:facts) {facts.merge({:operatingsystemrelease => '13.1' })}
           let(:params) {{ 'manage_repo' => true }}
-          it { is_expected.to raise_error(Puppet::Error, /manage your own repo/) }
+          it { should raise_error(Puppet::Error, /manage your own repo/) }
         end
       end
 
