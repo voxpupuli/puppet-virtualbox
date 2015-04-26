@@ -46,10 +46,10 @@ describe 'virtualbox::extpack' do
     it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_type('md5') }
     it { should contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
   end
-  
-  context 'with bad checksum type' do
-    let(:params) {sane_defaults.merge({ :checksum_type => 'invalid'})}
 
-    it { expect { should contain_archive('Oracle_VM_VirtualBox_Extension_Pack') }.to raise_error(Puppet::Error, /does not match/) }
+  context 'with bad checksum type' do
+    let(:params) {sane_defaults.merge({ :checksum_type => 'invalid' })}
+
+    it { is_expected.to raise_error(Puppet::Error, /does not match/) }
   end
 end
