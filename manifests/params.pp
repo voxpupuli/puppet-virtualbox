@@ -35,7 +35,7 @@ class virtualbox::params {
       ]
     }
     'Suse': {
-      warn('Careful! Support for SuSE is experimental at best.')
+      warning('Careful! Support for SuSE is experimental at best.')
 
       $package_name = 'VirtualBox'
       $vboxdrv_dependencies = [

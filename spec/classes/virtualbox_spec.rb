@@ -15,7 +15,7 @@ describe 'virtualbox', :type => :class do
     }, {
       :osfamily => 'Suse',
       :operatingsystem => "OpenSuSE",
-      :lsbdistrelease => '13.1',
+      :operatingsystemrelease => '12.3',
     }
   ].each do |facts|
     context "on #{facts[:osfamily]}" do
@@ -70,7 +70,7 @@ describe 'virtualbox', :type => :class do
       # Suse specific stuff
       #
       if facts[:osfamily] == 'Suse'
-        it { should contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/13.1') }
+        it { should contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
 
         context 'with a custom version' do
           let(:params) {{ 'version' => '4.2' }}
@@ -85,14 +85,17 @@ describe 'virtualbox', :type => :class do
         context 'when managing the package and the repository' do
           it { should contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
         end
+
+        context 'with manage_repo => true on an unsupported version' do
+          let(:facts) {facts.merge({:operatingsystemrelease => '13.1' })}
+          let(:params) {{ 'manage_repo' => true }}
+          it { is_expected.to raise_error(Puppet::Error, /manage your own repo/) }
+        end
       end
 
       # Non $::osfamily specific stuff
       #
       it { should compile.with_all_deps }
-      #it { should contain_class('virtualbox::install').that_comes_before('virtualbox::config') }
-      #it { should contain_class('virtualbox::service').that_subscribes_to('virtualbox::config') }
-      #it { should contain_class('virtualbox::config') }
 
       it { should contain_package('virtualbox') }
 
