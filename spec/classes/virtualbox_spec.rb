@@ -1,3 +1,4 @@
+require 'puppet'
 require 'spec_helper'
 
 describe 'virtualbox', :type => :class do
@@ -25,29 +26,36 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
+        if Puppet::Util::Package.versioncmp(Puppet.version, '3.4.0') == -1
+          context 'with $::puppetversion < 3.4.0' do
+            let(:facts) {facts.merge({:puppetversion => '3.3.0'})}
+            it { should_not contain_class('apt') }
+            it { should_not contain_apt__source('virtualbox') }
+          end
+        else
+          it { should contain_class('apt') }
+          it { should contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
 
-        context 'with $::puppetversion < 3.4.0' do
-          let(:facts) {facts.merge({:puppetversion => '3.2.0'})}
-          it { should_not contain_class('apt') }
-          it { should_not contain_apt__source('virtualbox') }
-        end
+          context 'with a custom version' do
+            let(:params) {{ 'version' => '4.2' }}
+            it { should contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
+          end
 
-        it { should contain_class('apt') }
-        it { should contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
+          context 'when not managing the package repository' do
+            let(:params) {{ 'manage_repo' => false }}
+            it { should_not contain_apt__source('virtualbox') }
+            it { should_not contain_class('apt') }
+          end
 
-        context 'with a custom version' do
-          let(:params) {{ 'version' => '4.2' }}
-          it { should contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
-        end
+          context 'when managing the package and the repository' do
+            it { should contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
+          end
 
-        context 'when not managing the package repository' do
-          let(:params) {{ 'manage_repo' => false }}
-          it { should_not contain_apt__source('virtualbox') }
-          it { should_not contain_class('apt') }
-        end
-
-        context 'when managing the package and the repository' do
-          it { should contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
+          context 'with $::puppetversion < 3.4.0' do
+            let(:facts) {facts.merge({:puppetversion => '3.3.0'})}
+            it { should_not contain_class('apt') }
+            it { should_not contain_apt__source('virtualbox') }
+          end
         end
       end
 
@@ -149,4 +157,3 @@ describe 'virtualbox', :type => :class do
     end
   end
 end
-
