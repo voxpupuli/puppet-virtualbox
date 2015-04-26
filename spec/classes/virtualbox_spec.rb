@@ -8,6 +8,7 @@ describe 'virtualbox', :type => :class do
       :lsbdistid => 'Ubuntu',
       :lsbdistcodename => 'trusty',
       :operatingsystemrelease => '14.04',
+      :puppetversion => '4.0.0'
     }, {
       :osfamily => 'RedHat',
       :operatingsystem => "RedHat",
@@ -24,6 +25,13 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
+
+        context 'with $::puppetversion < 3.4.0' do
+          let(:facts) {facts.merge({:puppetversion => '3.2.0'})}
+          it { should_not contain_class('apt') }
+          it { should_not contain_apt__source('virtualbox') }
+        end
+
         it { should contain_class('apt') }
         it { should contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
 
@@ -62,8 +70,15 @@ describe 'virtualbox', :type => :class do
           it { should contain_yumrepo('virtualbox').that_comes_before('Package[virtualbox]') }
         end
 
-        context 'when managing the repo and the kernel' do
+        context 'when managing the ext repo and the kernel' do
+          let(:params) {{ "manage_ext_repo" => true, "manage_kernel" => true }}
           it { should contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
+        end
+
+        context 'when managing the kernel, but not the ext repo' do
+          let(:params) {{ "manage_ext_repo" => false, "manage_kernel" => true }}
+          it { should contain_class('virtualbox::kernel') }
+          it { should_not contain_class('epel') }
         end
       end
 

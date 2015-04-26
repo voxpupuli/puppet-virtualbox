@@ -14,9 +14,9 @@
 # [*manage_repo*]
 #   Should this module manage the package repository?
 #   Defaults to true
-# [*manage_epel*]
-#   On applicable platforms, should this module manage the EPEL repository
-#   when `manage_kernel` is set to true?
+# [*manage_ext_repo*]
+#   On applicable platforms, should this module manage the external dependency
+#   repository when `manage_kernel` is set to true?
 #   Defaults to true
 # [*manage_package*]
 #   Should this module manage the package?
@@ -37,7 +37,7 @@ class virtualbox (
   $version              = $virtualbox::params::version,
   $package_ensure       = $virtualbox::params::package_ensure,
   $manage_repo          = $virtualbox::params::manage_repo,
-  $manage_epel          = $virtualbox::params::manage_epel,
+  $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
   $manage_package       = $virtualbox::params::manage_package,
   $manage_kernel        = $virtualbox::params::manage_kernel,
   $vboxdrv_dependencies = $virtualbox::params::vboxdrv_dependencies,
@@ -45,7 +45,7 @@ class virtualbox (
 ) inherits virtualbox::params {
 
   validate_bool($manage_repo)
-  validate_bool($manage_epel)
+  validate_bool($manage_ext_repo)
   validate_bool($manage_package)
   validate_bool($manage_kernel)
   validate_string($package_name)
@@ -57,7 +57,7 @@ class virtualbox (
     Class['virtualbox::install'] -> class { 'virtualbox::kernel': }
 
     if $::osfamily == 'RedHat' {
-      if $manage_epel {
+      if $manage_ext_repo {
         include epel
         Class['epel'] -> Class['virtualbox::kernel']
       }
