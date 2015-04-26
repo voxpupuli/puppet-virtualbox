@@ -9,7 +9,7 @@ describe 'virtualbox', :type => :class do
       :lsbdistid => 'Ubuntu',
       :lsbdistcodename => 'trusty',
       :operatingsystemrelease => '14.04',
-      :puppetversion => '4.0.0'
+      :puppetversion => Puppet.version
     }, {
       :osfamily => 'RedHat',
       :operatingsystem => "RedHat",
@@ -26,7 +26,7 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
-        if Puppet::Util::Package.versioncmp(Puppet.version, '3.4.0') == -1
+        if Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.4.0') == -1
           context 'with $::puppetversion < 3.4.0' do
             let(:facts) {facts.merge({:puppetversion => '3.3.0'})}
             it { should_not contain_class('apt') }
