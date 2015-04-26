@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Changed
+- Now depends on puppetlabs/apt >=2.0.
+- More meaningful error messages when an operating system is not supported.
+- Changed the `rspec-puppet` upstream in `Gemfile` to pull from `rubygems.org` instead of GitHub.
+- Bound the version requirement for `camptocamp/archive` < 1.0.0.
+- Cleaned up the Beaker node sets.
+
+### Added
+- Now formally supports Puppet 4.0.
+- Added a `manage_epel` parameter so you can now disable or enable the EPEL repo separately from the VirtualBox repo.
+- Added CentOS 6.6 and 5.11 to the beaker nodesets. Updated the documentation to reflect this.
+- Experimental support for OpenSuSE added. There are plenty of caveats here, so this is not officially supported.
+
+### Removed
+- Removed future parser tests from `.travis.yml`
+- This module no longer manages the `debian-keyring` and `debian-archive-keyring` packages as part of the `apt::source` resource.
 
 ## [1.2.1] - 2015-02-07
 ### Changed

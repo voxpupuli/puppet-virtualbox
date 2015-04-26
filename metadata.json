@@ -13,12 +13,6 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "OpenSuSE",
-      "operatingsystemrelease": [
-        "13.1"
-      ]
-    },
-    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "5",
@@ -52,12 +46,8 @@
   ],
   "requirements": [
     {
-      "name": "pe",
-      "version_requirement": "3.x"
-    },
-    {
       "name": "puppet",
-      "version_requirement": "3.x"
+      "version_requirement": ">= 3.4.0"
     }
   ],
   "dependencies": [
@@ -67,19 +57,15 @@
     },
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">=1.0.0 <2.0.0"
+      "version_requirement": ">=2.0.0 <3.0.0"
     },
     {
       "name": "stahnma/epel",
       "version_requirement": ">=0.0.6 <2.0.0"
     },
     {
-      "name": "darin/zypprepo",
-      "version_requirement": ">=1.0.0 <2.0.0"
-    },
-    {
       "name": "camptocamp/archive",
-      "version_requirement": ">=0.1.0"
+      "version_requirement": ">=0.1.0 <1.0.0"
     }
   ]
 }

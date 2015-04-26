@@ -1,9 +1,9 @@
 HOSTS:
-  centos-7-x64:
+  opensuse-131-x64:
     roles:
       - master
-    platform: el-7-x86_64
-    box: puppetlabs/centos-7.0-64-nocm
+    platform: sles-131-x86_64
+    box: webhippie/opensuse-13.1
     hypervisor: vagrant_virtualbox
 CONFIG:
   log_level: verbose

@@ -14,6 +14,10 @@
 # [*manage_repo*]
 #   Should this module manage the package repository?
 #   Defaults to true
+# [*manage_epel*]
+#   On applicable platforms, should this module manage the EPEL repository
+#   when `manage_kernel` is set to true?
+#   Defaults to true
 # [*manage_package*]
 #   Should this module manage the package?
 #   Defaults to true

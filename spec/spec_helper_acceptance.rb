@@ -3,7 +3,13 @@ require 'pry'
 
 hosts.each do |host|
   # Install Puppet
-  install_puppet
+  if host['platform'] =~ /sles/
+    host.install_package('puppet')
+    host.install_package('facter')
+  else
+    install_puppet :default_action => 'gem_install'
+  end
+
   on host, "mkdir -p #{host['distmoduledir']}"
 end
 
