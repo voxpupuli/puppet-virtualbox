@@ -7,7 +7,7 @@ hosts.each do |host|
     host.install_package('puppet')
     host.install_package('facter')
   else
-    install_puppet :default_action => 'gem_install'
+    install_puppet({:version => '3.7.5', :default_action => 'gem_install'})
   end
 
   on host, "mkdir -p #{host['distmoduledir']}"
