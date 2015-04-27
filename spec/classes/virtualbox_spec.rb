@@ -26,13 +26,13 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
-        if Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.4.0') == -1
-          context 'with $::puppetversion < 3.4.0' do
-            let(:facts) {facts.merge({:puppetversion => '3.3.0'})}
-            it { should_not contain_class('apt') }
-            it { should_not contain_apt__source('virtualbox') }
-          end
-        else
+        context 'with $::puppetversion < 3.5.0' do
+          let(:facts) {facts.merge({:puppetversion => '3.4.3'})}
+          it { should_not contain_class('apt') }
+          it { should_not contain_apt__source('virtualbox') }
+        end
+
+        unless Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.5.0') == -1
           it { should contain_class('apt') }
           it { should contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
 
@@ -49,12 +49,6 @@ describe 'virtualbox', :type => :class do
 
           context 'when managing the package and the repository' do
             it { should contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
-          end
-
-          context 'with $::puppetversion < 3.4.0' do
-            let(:facts) {facts.merge({:puppetversion => '3.3.0'})}
-            it { should_not contain_class('apt') }
-            it { should_not contain_apt__source('virtualbox') }
           end
         end
       end
