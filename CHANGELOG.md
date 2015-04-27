@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+
+## [1.3.1] - 2015-04-26
+### Changed
+- Fixed CHANGELOG headings.
+
+## [1.3.0] - 2015-04-26
 ### Changed
 - Now depends on puppetlabs/apt >=2.0. This means that users of Puppet < 3.5.0 will need to manage their own repositories since puppetlabs/apt is only compatible with Puppet >= 3.5.0. This has necessitated a change in default behavior. Now, the default setting for `manage_repo` is false if the `puppetversion` fact is < 3.5.0. Unfortunately, I can't express this in the module dependencies in `metadata.json` so users will have to work around this.
 - More meaningful error messages when an operating system is not supported.
@@ -79,7 +85,9 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.1...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.0.4...v1.1.0
