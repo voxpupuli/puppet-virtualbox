@@ -4,7 +4,8 @@ HOSTS:
       - master
     platform: el-5-x86_64
     box: centos-510-x64-virtualbox-puppet
-    box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-510-x64-virtualbox-puppet.box 
-    hypervisor: vagrant
+    box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-510-x64-virtualbox-puppet.box
+    hypervisor: vagrant_virtualbox
 CONFIG:
+  log_level: verbose
   type: foss

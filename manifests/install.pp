@@ -28,14 +28,16 @@ class virtualbox::install (
 
         include apt
 
+        apt::key { '98AB5139':
+          ensure => present,
+          source => 'https://www.virtualbox.org/download/oracle_vbox.asc',
+        }
+
         apt::source { 'virtualbox':
-          location          => 'http://download.virtualbox.org/virtualbox/debian',
-          release           => $::lsbdistcodename,
-          repos             => $apt_repos,
-          required_packages => 'debian-keyring debian-archive-keyring',
-          key               => '98AB5139',
-          key_source        => 'https://www.virtualbox.org/download/oracle_vbox.asc',
-          include_src       => false,
+          location => 'http://download.virtualbox.org/virtualbox/debian',
+          release  => $::lsbdistcodename,
+          repos    => $apt_repos,
+          require  => Apt::Key['98AB5139'],
         }
 
         if $manage_package {
@@ -62,8 +64,12 @@ class virtualbox::install (
       case $::operatingsystem {
         'OpenSuSE': {
           if $manage_repo {
+            if $::operatingsystemrelease !~ /^(12.3|11)/ {
+              fail('Oracle only supports OpenSuSE 11 and 12.3! You need to manage your own repo.')
+            }
+
             zypprepo { 'virtualbox':
-              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${::lsbdistrelease}",
+              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${::operatingsystemrelease}",
               enabled     => 1,
               autorefresh => 1,
               name        => 'Oracle Virtual Box',
