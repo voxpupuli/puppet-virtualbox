@@ -78,7 +78,7 @@ This will download the extension pack, check to make sure the downloaded file ma
 
 ## Note for Debian/Ubuntu Users using Puppet < 3.5.0
 
-This module depends on `puppetlabs/apt` >= 2.0.0 which has dropped support for Puppet < 3.5.0. While this module is still compatible with Puppet 2.7 and above, Debian/Ubuntu users on Puppet < 3.5.0 will no longer be able to manage the VirtualBox repository with this module. The default `manage_repo` setting for Debian/Ubuntu with Puppet < 3.5.0 is `false`, but remains `true` for all other `puppetversion` and `operatingsystemversion` combinations. Unfortunately, I am not able to express this nuance in the module metadata, so these users will need to work around the dependency resolution with `puppet module`. I apologize for the inconvenience.
+This module depends on `puppetlabs/apt` >= 2.0.0 which has dropped support for Puppet < 3.5.0. While this module is still compatible with Puppet 2.7 and above, Debian/Ubuntu users on Puppet < 3.5.0 will no longer be able to manage the VirtualBox repository with this module. The default `manage_repo` setting for Debian/Ubuntu with Puppet < 3.5.0 is `false`, but remains `true` for all other `puppetversion` and `operatingsystemversion` combinations. Unfortunately, I am not able to express this nuance in the module metadata, so these users will need to work around the dependency resolution in the `puppet module` tool. I apologize for the inconvenience.
 
 ## Development
 
