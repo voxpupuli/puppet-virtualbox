@@ -47,9 +47,14 @@ class virtualbox::install (
     }
     'RedHat': {
       if $manage_repo {
+        $platform = $::operatingsystem ? {
+          'Fedora' => 'fedora',
+          default  => 'el',
+        }
+
         yumrepo { 'virtualbox':
           descr    => 'Oracle Linux / RHEL / CentOS-$releasever / $basearch - VirtualBox',
-          baseurl  => 'http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch',
+          baseurl  => "http://download.virtualbox.org/virtualbox/rpm/${platform}/\$releasever/\$basearch",
           gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox.asc',
           gpgcheck => 1,
           enabled  => 1,
