@@ -15,6 +15,10 @@ describe 'virtualbox', :type => :class do
       :operatingsystem => "RedHat",
       :operatingsystemrelease => '6.5',
     }, {
+      :osfamily => 'RedHat',
+      :operatingsystem => 'Fedora',
+      :operatingsystemrelease => '22',
+    }, {
       :osfamily => 'Suse',
       :operatingsystem => "OpenSuSE",
       :operatingsystemrelease => '12.3',
@@ -56,7 +60,12 @@ describe 'virtualbox', :type => :class do
       # RedHat specific stuff
       #
       if facts[:osfamily] == 'RedHat'
-        it { should contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        case facts[:operatingsystem]
+        when 'Fedora'
+          it { should contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        else
+          it { should contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        end
 
         context 'with a custom version' do
           let(:params) {{ 'version' => '4.2' }}
