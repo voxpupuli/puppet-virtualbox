@@ -3,11 +3,11 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased][unreleased]
 ### Deprecated
-- Deprecated support for Puppet < 4.0.0
+- Deprecated support for Puppet < 4.0.0.
 
 ### Changed
 - Bump the puppetlabs/apt dependency to >=2.1.0 so we can have support for Puppet < 3.5.0 again.
-- Changed the default behavior for all Debian/Puppet > 3.0.0 combinations to manage the virtualbox repository.
+- Changed the default behavior for Debian/Puppet >= 3.0.0 combinations to manage the virtualbox repository.
 - Updated `rspec` syntax from `should` to `expect`.
 
 ### Removed
@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 - Added provisional support for Fedora.
-- Added warnings for Debian/Puppet < 3.0.0
+- Added warnings for Debian/Puppet < 3.0.0.
 
 ## [1.3.1] - 2015-04-26
 ### Changed
