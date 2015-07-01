@@ -5,8 +5,8 @@
 # dependencies.
 #
 class virtualbox::kernel (
-  $manage_repo          = $virtualbox::manage_repo,
-  $vboxdrv_dependencies = $virtualbox::vboxdrv_dependencies
+  Boolean $manage_repo        = $virtualbox::manage_repo,
+  Array $vboxdrv_dependencies = $virtualbox::vboxdrv_dependencies
 ) {
 
   ensure_packages($vboxdrv_dependencies)

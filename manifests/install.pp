@@ -5,11 +5,11 @@
 # also install a package repository.
 #
 class virtualbox::install (
-  $version        = $virtualbox::version,
-  $package_ensure = $virtualbox::package_ensure,
-  $package_name   = $virtualbox::package_name,
-  $manage_repo    = $virtualbox::manage_repo,
-  $manage_package = $virtualbox::manage_package
+  String $version         = $virtualbox::version,
+  String $package_name    = $virtualbox::package_name,
+  String $package_ensure  = $virtualbox::package_ensure,
+  Boolean $manage_repo    = $virtualbox::manage_repo,
+  Boolean $manage_package = $virtualbox::manage_package,
 ) {
 
   if $package_name == $::virtualbox::params::package_name {

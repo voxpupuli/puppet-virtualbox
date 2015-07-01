@@ -2,7 +2,7 @@
 
 This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.
 
-By default, this module will install the Oracle VirtualBox yum/apt repo (see the [Note for Debian/Ubuntu Users using Puppet < 3.5.0](#note-for-debianubuntu-users-using-puppet--350) below), install the VirtualBox package, and build the VirtualBox kernel modules. You can define a custom package name and/or version, you can also opt to not manage the repositories with this module. Because of the strange convention Oracle has opted to use for versioning VirtualBox, if you set a custom package name, the `version` parameter will be ignored. If you wish to define a package version with a custom package name, you must use the `package_ensure` parameter.
+By default, this module will install the Oracle VirtualBox yum/apt repo, install the VirtualBox package, and build the VirtualBox kernel modules. You can define a custom package name and/or version, you can also opt to not manage the repositories with this module. Because of the strange convention Oracle has opted to use for versioning VirtualBox, if you set a custom package name, the `version` parameter will be ignored. If you wish to define a package version with a custom package name, you must use the `package_ensure` parameter.
 
 ## Support
 
@@ -19,7 +19,11 @@ This module is tested with:
 
 It may work on other distros and OS versions, but these are the versions that we're targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)
 
-This module is tested with the latest version of Puppet 2.7 as well as all minor versions of Puppet 3 and Puppet 4; all Puppet supported versions of Ruby are included in the test matrix. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
+This module is tested with all minor versions of Puppet 4; all Puppet supported versions of Ruby are included in the test matrix. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
+
+## Backports
+
+As of version 2.0 of this module we no longer support Puppet < 4.0.0. We'll do our best to backport new features to the 1.X line until Puppet 5 is released. The `backports` branch is where the 1.X codebase lives.
 
 ## Usage
 
@@ -75,10 +79,6 @@ There's a defined type to install an Extension Pack. I'm not aware of any extens
     }
 
 This will download the extension pack, check to make sure the downloaded file matches the expected md5sum, then install the extension pack to `/usr/lib/virtualbox/ExtensionPacks`.
-
-## Note for Debian/Ubuntu Users using Puppet < 3.5.0
-
-This module depends on `puppetlabs/apt` >= 2.0.0 which has dropped support for Puppet < 3.5.0. While this module is still compatible with Puppet 2.7 and above, Debian/Ubuntu users on Puppet < 3.5.0 will no longer be able to manage the VirtualBox repository with this module. The default `manage_repo` setting for Debian/Ubuntu with Puppet < 3.5.0 is `false`, but remains `true` for all other `puppetversion` and `operatingsystemversion` combinations. Unfortunately, I am not able to express this nuance in the module metadata, so these users will need to work around the dependency resolution in the `puppet module` tool. I apologize for the inconvenience.
 
 ## Development
 

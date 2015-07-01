@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Breaks
+- This release breaks support for Puppet < 4.0.0; I will backport new features to the 1.X.X line until Puppet 5 is released.
+
+### Added
+- Static typing using the Puppet 4 type system
+- Support for Fedora
+
+### Removed
+- Support for Puppet < 4.0
+- Tests for Puppet < 4.0 in `.travis.yml`
+- Validate functions; these are replaced by the type system in Puppet 4
+- Warnings for Puppet < 3.5 users on Debian. These warnings are no longer needed since we're breaking support for Puppet < 4.0
+
+### Changed
+- Updated `rspec` syntax from `should` to `expect`
 
 ## [1.3.1] - 2015-04-26
 ### Changed
