@@ -30,22 +30,30 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
-        it { is_expected.to contain_class('apt') }
-        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
-
-        context 'with a custom version' do
-          let(:params) {{ 'version' => '4.2' }}
-          it { is_expected.to contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
+        context 'with $::puppetversion < 3.0.0' do
+          let(:facts) {facts.merge({:puppetversion => '2.7.26'})}
+          it { should_not contain_class('apt') }
+          it { should_not contain_apt__source('virtualbox') }
         end
 
-        context 'when not managing the package repository' do
-          let(:params) {{ 'manage_repo' => false }}
-          it { is_expected.not_to contain_apt__source('virtualbox') }
-          it { is_expected.not_to contain_class('apt') }
-        end
+        unless Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.0.0') == -1
+          it { is_expected.to contain_class('apt') }
+          it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
 
-        context 'when managing the package and the repository' do
-          it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
+          context 'with a custom version' do
+            let(:params) {{ 'version' => '4.2' }}
+            it { is_expected.to contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
+          end
+
+          context 'when not managing the package repository' do
+            let(:params) {{ 'manage_repo' => false }}
+            it { is_expected.not_to contain_apt__source('virtualbox') }
+            it { is_expected.not_to contain_class('apt') }
+          end
+
+          context 'when managing the package and the repository' do
+            it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
+          end
         end
       end
 
