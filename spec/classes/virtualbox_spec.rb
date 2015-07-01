@@ -32,8 +32,8 @@ describe 'virtualbox', :type => :class do
       if facts[:osfamily] == 'Debian'
         context 'with $::puppetversion < 3.0.0' do
           let(:facts) {facts.merge({:puppetversion => '2.7.26'})}
-          it { should_not contain_class('apt') }
-          it { should_not contain_apt__source('virtualbox') }
+          it { is_expected.not_to contain_class('apt') }
+          it { is_expected.not_to contain_apt__source('virtualbox') }
         end
 
         unless Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.0.0') == -1
