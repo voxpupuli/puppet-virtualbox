@@ -13,10 +13,7 @@ All notable changes to this project will be documented in this file. This projec
 - Support for Puppet < 4.0
 - Tests for Puppet < 4.0 in `.travis.yml`
 - Validate functions; these are replaced by the type system in Puppet 4
-- Warnings for Puppet < 3.5 users on Debian. These warnings are no longer needed since we're breaking support for Puppet < 4.0
-
-### Changed
-- Updated `rspec` syntax from `should` to `expect`
+- Removed warnings for Puppet < 3 users on Debian. These warnings are no longer needed since we're breaking support for Puppet < 4.0
 
 ## [1.4.0] - 2015-07-01
 ### Deprecated
