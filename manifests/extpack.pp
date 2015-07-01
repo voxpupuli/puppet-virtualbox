@@ -26,41 +26,33 @@
 #   '/usr/lib/virtualbox/ExtensionPacks'
 #
 define virtualbox::extpack (
-  $source,
-  $ensure           = present,
-  $verify_checksum  = true,
-  $checksum_string  = undef,
-  $checksum_type    = 'md5',
-  $follow_redirects = false,
-  $extpack_path     = '/usr/lib/virtualbox/ExtensionPacks'
+  String $source,
+  Enum['present', 'absent'] $ensure = present,
+  Boolean $verify_checksum          = true,
+  Optional[String] $checksum_string = undef,
+  Optional[Enum['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512']]
+    $checksum_type                  = undef,
+  Boolean $follow_redirects         = false,
+  String $extpack_path              = '/usr/lib/virtualbox/ExtensionPacks'
 ) {
 
-  validate_re($ensure, ['^present$', '^absent$'])
-  validate_string($source)
-  validate_absolute_path($extpack_path)
-  
-  $_verify_checksum = str2bool($verify_checksum)
+  $dest = "${extpack_path}/${name}"
 
-  if $_verify_checksum {
-    validate_re($checksum_type, ['^md5', '^sha1', '^sha224', '^sha256', '^sha384', '^sha512'])
-    validate_string($checksum_string)
-
+  if $verify_checksum {
     $_checksum_type   = $checksum_type
     $_checksum_string = $checksum_string
   }
 
-  $dest = "${extpack_path}/${name}"
-  
   archive::download { "${name}.tgz":
     ensure           => $ensure,
     url              => $source,
-    checksum         => $_verify_checksum,
+    checksum         => $verify_checksum,
     digest_type      => $_checksum_type,
     digest_string    => $_checksum_string,
     follow_redirects => $follow_redirects,
     require          => Class['virtualbox']
   }
-  
+
   case $ensure {
     present: {
       exec { "${name} unpack":
