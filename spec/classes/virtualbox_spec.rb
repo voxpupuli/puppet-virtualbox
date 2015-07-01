@@ -30,30 +30,22 @@ describe 'virtualbox', :type => :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
-        context 'with $::puppetversion < 3.5.0' do
-          let(:facts) {facts.merge({:puppetversion => '3.4.3'})}
-          it { should_not contain_class('apt') }
-          it { should_not contain_apt__source('virtualbox') }
+        it { is_expected.to contain_class('apt') }
+        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
+
+        context 'with a custom version' do
+          let(:params) {{ 'version' => '4.2' }}
+          it { is_expected.to contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
         end
 
-        unless Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.5.0') == -1
-          it { should contain_class('apt') }
-          it { should contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
+        context 'when not managing the package repository' do
+          let(:params) {{ 'manage_repo' => false }}
+          it { is_expected.not_to contain_apt__source('virtualbox') }
+          it { is_expected.not_to contain_class('apt') }
+        end
 
-          context 'with a custom version' do
-            let(:params) {{ 'version' => '4.2' }}
-            it { should contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
-          end
-
-          context 'when not managing the package repository' do
-            let(:params) {{ 'manage_repo' => false }}
-            it { should_not contain_apt__source('virtualbox') }
-            it { should_not contain_class('apt') }
-          end
-
-          context 'when managing the package and the repository' do
-            it { should contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
-          end
+        context 'when managing the package and the repository' do
+          it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
         end
       end
 
@@ -62,54 +54,54 @@ describe 'virtualbox', :type => :class do
       if facts[:osfamily] == 'RedHat'
         case facts[:operatingsystem]
         when 'Fedora'
-          it { should contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
         else
-          it { should contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
         end
 
         context 'with a custom version' do
           let(:params) {{ 'version' => '4.2' }}
-          it { should contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
           let(:params) {{ 'manage_repo' => false }}
-          it { should_not contain_yumrepo('virtualbox') }
+          it { is_expected.not_to contain_yumrepo('virtualbox') }
         end
 
         context 'when managing the package and the repository' do
-          it { should contain_yumrepo('virtualbox').that_comes_before('Package[virtualbox]') }
+          it { is_expected.to contain_yumrepo('virtualbox').that_comes_before('Package[virtualbox]') }
         end
 
         context 'when managing the ext repo and the kernel' do
           let(:params) {{ "manage_ext_repo" => true, "manage_kernel" => true }}
-          it { should contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
+          it { is_expected.to contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
         end
 
         context 'when managing the kernel, but not the ext repo' do
           let(:params) {{ "manage_ext_repo" => false, "manage_kernel" => true }}
-          it { should contain_class('virtualbox::kernel') }
-          it { should_not contain_class('epel') }
+          it { is_expected.to contain_class('virtualbox::kernel') }
+          it { is_expected.not_to contain_class('epel') }
         end
       end
 
       # Suse specific stuff
       #
       if facts[:osfamily] == 'Suse'
-        it { should contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
+        it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
 
         context 'with a custom version' do
           let(:params) {{ 'version' => '4.2' }}
-          it { should contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
           let(:params) {{ 'manage_repo' => false }}
-          it { should_not contain_zypprepo('virtualbox') }
+          it { is_expected.not_to contain_zypprepo('virtualbox') }
         end
 
         context 'when managing the package and the repository' do
-          it { should contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
+          it { is_expected.to contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
         end
 
         context 'with manage_repo => true on an unsupported version' do
@@ -121,23 +113,23 @@ describe 'virtualbox', :type => :class do
 
       # Non $::osfamily specific stuff
       #
-      it { should compile.with_all_deps }
+      it { is_expected.to compile.with_all_deps }
 
-      it { should contain_package('virtualbox') }
+      it { is_expected.to contain_package('virtualbox') }
 
       context 'when managing the kernel' do
         let(:params) {{ 'manage_kernel' => true }}
-        it { should contain_class('virtualbox::kernel').that_requires('Class[virtualbox::install]') }
+        it { is_expected.to contain_class('virtualbox::kernel').that_requires('Class[virtualbox::install]') }
       end
 
       context 'when not managing the kernel' do
         let(:params) {{ 'manage_kernel' => false }}
-        it { should_not contain_class('virtualbox::kernel') }
+        it { is_expected.not_to contain_class('virtualbox::kernel') }
       end
 
       context 'when not managing the package' do
         let(:params) {{ 'manage_package' => false }}
-        it { should_not contain_packge('virtualbox') }
+        it { is_expected.not_to contain_packge('virtualbox') }
       end
 
       context 'with a custom package name and version' do
@@ -145,17 +137,17 @@ describe 'virtualbox', :type => :class do
           'package_name' => 'virtualbox-custom-package-name',
           'version' => '4.2',
         }}
-        it { should contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
+        it { is_expected.to contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
       end
 
       context 'with a custom package name' do
         let(:params) {{ 'package_name' => 'virtualbox-custom-package-name' }}
-        it { should contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
+        it { is_expected.to contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
       end
 
       context 'with a custom package_ensure value' do
         let(:params) {{ 'package_ensure' => '4.3.16-95972' }}
-        it { should contain_package('virtualbox').with_ensure('4.3.16-95972') }
+        it { is_expected.to contain_package('virtualbox').with_ensure('4.3.16-95972') }
       end
     end
   end

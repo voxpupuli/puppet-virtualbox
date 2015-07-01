@@ -44,6 +44,10 @@ class virtualbox (
   $package_name         = $virtualbox::params::package_name
 ) inherits virtualbox::params {
 
+  if versioncmp($::puppetversion, '4.0.0') == -1 {
+    warning 'Support for Puppet < 3.0 is deprecated. Version 2.0 of this module will only support Puppet >= 4.0' # lint:ignore:80chars
+  }
+
   validate_bool($manage_repo)
   validate_bool($manage_ext_repo)
   validate_bool($manage_package)
