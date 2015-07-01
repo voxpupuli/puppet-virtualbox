@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Deprecated
+- Deprecated support for Puppet < 4.0.0.
+
+### Changed
+- Bump the puppetlabs/apt dependency to >=2.1.0 so we can have support for Puppet < 3.5.0 again.
+- Changed the default behavior for Debian/Puppet >= 3.0.0 combinations to manage the virtualbox repository.
+- Updated `rspec` syntax from `should` to `expect`.
+
+### Removed
+- Removed the warnings for Debian/Puppet < 3.5.0.
+
+### Added
+- Added provisional support for Fedora.
+- Added warnings for Debian/Puppet < 3.0.0.
 
 ## [1.3.1] - 2015-04-26
 ### Changed
