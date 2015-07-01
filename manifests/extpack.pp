@@ -42,7 +42,6 @@ define virtualbox::extpack (
   Stdlib::Absolutepath $extpack_path                                                      = '/usr/lib/virtualbox/ExtensionPacks',
   Optional[Enum['puppet','puppet-community','voxpupuli','camptocamp']] $archive_provider  = undef,
 ) {
-
   if $verify_checksum {
     $_checksum_type   = $checksum_type
     $_checksum_string = $checksum_string

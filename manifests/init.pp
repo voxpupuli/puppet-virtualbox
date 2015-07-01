@@ -38,15 +38,16 @@
 class virtualbox (
   String $version               = $virtualbox::params::version,
   String $package_ensure        = $virtualbox::params::package_ensure,
+  String $package_name          = $virtualbox::params::package_name,
   Boolean $manage_repo          = $virtualbox::params::manage_repo,
   Boolean $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
-  Optional[String] $repo_proxy  = $virtualbox::params::repo_proxy,
   Boolean $manage_package       = $virtualbox::params::manage_package,
   Boolean $manage_kernel        = $virtualbox::params::manage_kernel,
   Array $vboxdrv_dependencies   = $virtualbox::params::vboxdrv_dependencies,
-  String $package_name          = $virtualbox::params::package_name
+  Optional[String] $repo_proxy  = $virtualbox::params::repo_proxy,
 ) inherits virtualbox::params {
 
+  # this warning is never reached. If Puppet < 4 is used with tis module, Puppet fail with error about data type like "Syntax error at 'String'; expected ')'"
   if versioncmp($::puppetversion, '4.0.0') == -1 {
     warning 'Support for Puppet < 3.0 is deprecated. Version 2.0 of this module will only support Puppet >= 4.0' # lint:ignore:80chars
   }
