@@ -38,6 +38,7 @@ class virtualbox (
   $package_ensure       = $virtualbox::params::package_ensure,
   $manage_repo          = $virtualbox::params::manage_repo,
   $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
+  $repo_proxy           = $virtualbox::params::repo_proxy,
   $manage_package       = $virtualbox::params::manage_package,
   $manage_kernel        = $virtualbox::params::manage_kernel,
   $vboxdrv_dependencies = $virtualbox::params::vboxdrv_dependencies,
