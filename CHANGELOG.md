@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased][unreleased]
 
+## [1.4.0] - 2015-07-01
+### Deprecated
+- Deprecated support for Puppet < 4.0.0.
+
+### Changed
+- Bump the puppetlabs/apt dependency to >=2.1.0 so we can have support for Puppet < 3.5.0 again.
+- Changed the default behavior for Debian/Puppet >= 3.0.0 combinations to manage the virtualbox repository.
+- Updated `rspec` syntax from `should` to `expect`.
+
+### Removed
+- Removed the warnings for Debian/Puppet < 3.5.0.
+
+### Added
+- Added provisional support for Fedora.
+- Added warnings for Debian/Puppet < 3.0.0.
+
 ## [1.3.1] - 2015-04-26
 ### Changed
 - Fixed CHANGELOG headings.
@@ -85,7 +101,8 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.0...v1.2.1

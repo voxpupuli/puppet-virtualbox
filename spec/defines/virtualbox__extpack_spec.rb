@@ -19,19 +19,19 @@ describe 'virtualbox::extpack' do
   context 'with defaults' do
     let(:params) {sane_defaults}
 
-    it { should compile.with_all_deps }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(true) }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string('d41d8cd98f00b204e9800998ecf8427e') }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_type('md5') }
-    it { should contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
-    it { should contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').that_requires('Archive::Download[Oracle_VM_VirtualBox_Extension_Pack.tgz]') }
+    it { is_expected.to compile.with_all_deps }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(true) }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string('d41d8cd98f00b204e9800998ecf8427e') }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_type('md5') }
+    it { is_expected.to contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
+    it { is_expected.to contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').that_requires('Archive::Download[Oracle_VM_VirtualBox_Extension_Pack.tgz]') }
 
   end
 
   context 'with ensure => absent' do
     let(:params) {sane_defaults.merge({:ensure => 'absent'})}
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
-    it { should contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
+    it { is_expected.to contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
   end
 
   context 'with $verify_checksum => false' do
@@ -40,11 +40,11 @@ describe 'virtualbox::extpack' do
       :checksum_type    => 'sha1',
     })}
 
-    it { should compile.with_all_deps }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(false) }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string(nil) }
-    it { should contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_type('md5') }
-    it { should contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
+    it { is_expected.to compile.with_all_deps }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(false) }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string(nil) }
+    it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_type('md5') }
+    it { is_expected.to contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
   end
 
   context 'with bad checksum type' do

@@ -1,7 +1,9 @@
 fixtures:
   repositories:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
+    apt:
+      repo: "https://github.com/puppetlabs/puppetlabs-apt.git"
+      ref: '2.1.0'
     epel: "https://github.com/stahnma/puppet-module-epel.git"
     archive: "https://github.com/camptocamp/puppet-archive.git"
     zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
