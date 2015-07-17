@@ -14,7 +14,7 @@ class virtualbox::params {
       $package_ensure = present
       $package_name = 'virtualbox'
 
-      if versioncmp($::puppetversion, '3.5.0') == -1 {
+      if versioncmp($::puppetversion, '3.0.0') == -1 {
         notice "The default behavior for the manage_repo parameter has changed for ${::puppetversion} on Debian/Ubuntu systems. You must now manage Apt repos separate from the virtualbox module. See the README.md for more details." # lint:ignore:80chars
         $manage_repo = false
       } else {
