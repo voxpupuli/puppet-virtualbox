@@ -9,6 +9,7 @@ class virtualbox::install (
   $package_ensure = $virtualbox::package_ensure,
   $package_name   = $virtualbox::package_name,
   $manage_repo    = $virtualbox::manage_repo,
+  $repo_proxy     = $virtualbox::repo_proxy,
   $manage_package = $virtualbox::manage_package
 ) {
 
@@ -58,6 +59,7 @@ class virtualbox::install (
           gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox.asc',
           gpgcheck => 1,
           enabled  => 1,
+          proxy    => $repo_proxy,
         }
 
         if $manage_package {

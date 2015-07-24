@@ -5,6 +5,7 @@
 #
 class virtualbox::params {
   $manage_ext_repo = true
+  $repo_proxy      = undef
 
   case $::osfamily {
     'Debian': {

@@ -91,6 +91,15 @@ describe 'virtualbox', :type => :class do
           it { is_expected.to contain_class('virtualbox::kernel') }
           it { is_expected.not_to contain_class('epel') }
         end
+
+        context 'when not specifying a repository proxy' do
+          it { should contain_yumrepo('virtualbox').with_proxy(nil) }
+        end
+
+        context 'when specifying a repository proxy' do
+          let (:params) {{ 'repo_proxy' => 'http://proxy:8080/' }}
+          it { should contain_yumrepo('virtualbox').with_proxy('http://proxy:8080/') }
+        end
       end
 
       # Suse specific stuff
