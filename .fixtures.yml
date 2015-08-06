@@ -5,7 +5,7 @@ fixtures:
       repo: "https://github.com/puppetlabs/puppetlabs-apt.git"
       ref: '2.1.0'
     epel: "https://github.com/stahnma/puppet-module-epel.git"
-    archive: "https://github.com/camptocamp/puppet-archive.git"
+    archive: "https://github.com/puppet-community/puppet-archive.git"
     zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
   symlinks:
     virtualbox: "#{source_dir}"

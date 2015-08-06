@@ -28,36 +28,30 @@
 define virtualbox::extpack (
   $source,
   $ensure           = present,
-  $verify_checksum  = true,
-  $checksum_string  = undef,
+  $checksum         = undef,
   $checksum_type    = 'md5',
-  $follow_redirects = false,
   $extpack_path     = '/usr/lib/virtualbox/ExtensionPacks'
 ) {
+  include archive
 
   validate_re($ensure, ['^present$', '^absent$'])
   validate_string($source)
   validate_absolute_path($extpack_path)
   
-  $_verify_checksum = str2bool($verify_checksum)
 
-  if $_verify_checksum {
-    validate_re($checksum_type, ['^md5', '^sha1', '^sha224', '^sha256', '^sha384', '^sha512'])
-    validate_string($checksum_string)
+  validate_re($checksum_type, ['^md5', '^sha1', '^sha224', '^sha256', '^sha384', '^sha512'])
+  validate_string($checksum)
 
-    $_checksum_type   = $checksum_type
-    $_checksum_string = $checksum_string
-  }
+  $_checksum_type   = $checksum_type
+  $_checksum        = $checksum
 
   $dest = "${extpack_path}/${name}"
   
-  archive::download { "${name}.tgz":
+  archive { "${extpack_path}/${name}.tgz":
     ensure           => $ensure,
-    url              => $source,
-    checksum         => $_verify_checksum,
-    digest_type      => $_checksum_type,
-    digest_string    => $_checksum_string,
-    follow_redirects => $follow_redirects,
+    source           => $source,
+    checksum_type    => $_checksum_type,
+    checksum         => $_checksum,
     require          => Class['virtualbox']
   }
   
@@ -68,7 +62,7 @@ define virtualbox::extpack (
         creates => $dest,
         timeout => 120,
         path    => $::path,
-        require => Archive::Download["${name}.tgz"],
+        require => Archive["${extpack_path}/${name}.tgz"],
       }
     }
     absent: {
