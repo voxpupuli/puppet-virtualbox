@@ -1,6 +1,6 @@
 {
   "name": "danzilio-virtualbox",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "author": "David Danzilio",
   "summary": "A module to install VirtualBox on Linux hosts.",
   "license": "Apache-2.0",
