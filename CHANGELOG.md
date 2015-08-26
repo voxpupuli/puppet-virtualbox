@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Added
+- Added repo_proxy parameter to the `virtualbox` and `virtualbox::install` classes. Currently only implemented on RedHat-like systems.
+
+### Changed
+- Changed the default Puppet version in `Gemfile` to ~> 4.2
+- Changed Ruby versions in `.travis.yml` from '2.1.0' and '2.0.0' to '2.1' and '2.0' respectively so we're testing with the most recent patchlevel
+- Added the Puppet 3.8 series to the test matrix in `.travis.yml`
+- Changed the `apt::key` resource to use the 40-character signature. Closes #19
 
 ## [1.4.0] - 2015-07-01
 ### Deprecated

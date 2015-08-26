@@ -29,7 +29,11 @@ class virtualbox::install (
 
         include apt
 
-        apt::key { '98AB5139':
+        if $repo_proxy {
+          warning('The $repo_proxy parameter is not implemented on Debian-like systems. Please use the $proxy parameter on the apt class. Ignoring.')
+        }
+
+        apt::key { '7B0FAB3A13B907435925D9C954422A4B98AB5139':
           ensure => present,
           source => 'https://www.virtualbox.org/download/oracle_vbox.asc',
         }
@@ -38,7 +42,7 @@ class virtualbox::install (
           location => 'http://download.virtualbox.org/virtualbox/debian',
           release  => $::lsbdistcodename,
           repos    => $apt_repos,
-          require  => Apt::Key['98AB5139'],
+          require  => Apt::Key['7B0FAB3A13B907435925D9C954422A4B98AB5139'],
         }
 
         if $manage_package {
