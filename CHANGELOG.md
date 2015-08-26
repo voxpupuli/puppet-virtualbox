@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+
+## [1.5.0] - 2015-08-26
 ### Added
 - Added repo_proxy parameter to the `virtualbox` and `virtualbox::install` classes. Currently only implemented on RedHat-like systems.
 
@@ -109,7 +111,8 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.1...v1.3.0
