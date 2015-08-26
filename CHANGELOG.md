@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased][unreleased]
 
+## [1.5.0] - 2015-08-26
+### Added
+- Added repo_proxy parameter to the `virtualbox` and `virtualbox::install` classes. Currently only implemented on RedHat-like systems.
+
+### Changed
+- Changed the default Puppet version in `Gemfile` to ~> 4.2
+- Changed Ruby versions in `.travis.yml` from '2.1.0' and '2.0.0' to '2.1' and '2.0' respectively so we're testing with the most recent patchlevel
+- Added the Puppet 3.8 series to the test matrix in `.travis.yml`
+- Changed the `apt::key` resource to use the 40-character signature. Closes #19
+
 ## [1.4.0] - 2015-07-01
 ### Deprecated
 - Deprecated support for Puppet < 4.0.0.
@@ -101,7 +111,8 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.2.1...v1.3.0
