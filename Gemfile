@@ -14,7 +14,7 @@ group :test do
 end
 
 group :development do
-  gem 'yard'
+  gem 'puppetlabs-strings', :git => 'https://github.com/danzilio/puppetlabs-strings.git', :branch => 'gem'
   gem 'travis'
   gem 'travis-lint'
   gem 'beaker'
