@@ -9,12 +9,10 @@ group :test do
   gem 'rspec-puppet'
   gem 'puppet-syntax'
   gem 'puppetlabs_spec_helper'
-  gem 'json'
   gem 'metadata-json-lint'
 end
 
 group :development do
-  gem 'puppetlabs-strings', :git => 'https://github.com/danzilio/puppetlabs-strings.git', :branch => 'gem'
   gem 'travis'
   gem 'travis-lint'
   gem 'beaker'

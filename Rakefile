@@ -1,4 +1,3 @@
-require 'puppet-strings/rake_tasks'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
@@ -7,6 +6,7 @@ require 'puppet-syntax/tasks/puppet-syntax'
 # on Travis with --without development
 begin
   require 'puppet_blacksmith/rake_tasks'
+  require 'puppet-strings/rake_tasks'
 rescue LoadError
 end
 
@@ -45,4 +45,3 @@ task :test => [
   :metadata,
   :spec,
 ]
-
