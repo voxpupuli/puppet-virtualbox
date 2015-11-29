@@ -39,9 +39,9 @@ class virtualbox::params {
         'gcc',
         'make',
         'patch',
-        'dkms',
         'kernel-headers',
         'kernel-devel',
+        'dkms',
         'binutils',
         'glibc-headers',
         'glibc-devel'
