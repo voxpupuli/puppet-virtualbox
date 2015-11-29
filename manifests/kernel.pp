@@ -6,12 +6,14 @@
 #
 class virtualbox::kernel (
   $manage_repo          = $virtualbox::manage_repo,
-  $vboxdrv_dependencies = $virtualbox::vboxdrv_dependencies
+  $vboxdrv_dependencies = $virtualbox::vboxdrv_dependencies,
+  $vboxdrv_command      = $virtualbox::vboxdrv_command
 ) {
 
   ensure_packages($vboxdrv_dependencies)
 
-  exec { '/etc/init.d/vboxdrv setup':
+  exec { 'vboxdrv':
+    command     => "${vboxdrv_command} setup",
     unless      => '/sbin/lsmod | grep vboxdrv',
     environment => 'KERN_DIR=/usr/src/kernels/`uname -r`',
     require     => Package[$vboxdrv_dependencies],
