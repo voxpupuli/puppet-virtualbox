@@ -49,6 +49,12 @@ class virtualbox (
     warning 'Support for Puppet < 3.0 is deprecated. Version 2.0 of this module will only support Puppet >= 4.0' # lint:ignore:80chars
   }
 
+  if versioncmp($version, '5.0') == -1 {
+    $vboxdrv_command = '/etc/init.d/vboxdrv'
+  } else {
+    $vboxdrv_command = '/usr/lib/virtualbox/vboxdrv.sh'
+  }
+
   validate_bool($manage_repo)
   validate_bool($manage_ext_repo)
   validate_bool($manage_package)
