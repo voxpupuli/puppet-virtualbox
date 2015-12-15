@@ -158,6 +158,16 @@ describe 'virtualbox', :type => :class do
         it { is_expected.to contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
       end
 
+      context 'with the version parameter set to 5.0' do
+        let(:params) {{ 'version' => '5.0' }}
+        it { is_expected.to contain_class('virtualbox::kernel').with_vboxdrv_command('/usr/lib/virtualbox/vboxdrv.sh') }
+      end
+
+      context 'with the version parameter set to < 5.0' do
+        let(:params) {{ 'version' => '4.3' }}
+        it { is_expected.to contain_class('virtualbox::kernel').with_vboxdrv_command('/etc/init.d/vboxdrv') }
+      end
+
       context 'with a custom package name' do
         let(:params) {{ 'package_name' => 'virtualbox-custom-package-name' }}
         it { is_expected.to contain_package('virtualbox').with_name('virtualbox-custom-package-name').with_ensure('present') }
