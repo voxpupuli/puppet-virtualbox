@@ -46,7 +46,7 @@ class virtualbox::install (
         }
 
         if $manage_package {
-          Apt::Source['virtualbox'] -> Package['virtualbox']
+          Apt::Source['virtualbox'] -> Class['apt::update'] -> Package['virtualbox']
         }
       }
     }
