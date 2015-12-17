@@ -53,7 +53,8 @@ describe 'virtualbox', :type => :class do
           end
 
           context 'when managing the package and the repository' do
-            it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Package[virtualbox]') }
+            it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
+            it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
           end
         end
       end
