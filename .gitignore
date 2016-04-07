@@ -1,4 +1,7 @@
 .*.sw?
+/doc
+/.yardoc
+strings.json
 pkg
 spec/fixtures
 .rspec_system

@@ -267,6 +267,9 @@ GEM
       puppet (>= 2.7.16)
       rest-client
     puppet-lint (1.1.0)
+    puppet-strings (0.4.0)
+      puppet (>= 3.7.0)
+      yard (~> 0.8)
     puppet-syntax (2.0.0)
       rake
     puppetlabs_spec_helper (1.0.1)
@@ -357,6 +360,7 @@ GEM
     unf_ext (0.0.7.1)
     vagrant-wrapper (2.0.3)
     websocket (1.2.2)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -370,6 +374,7 @@ DEPENDENCIES
   puppet (~> 4.2.0)
   puppet-blacksmith
   puppet-lint
+  puppet-strings
   puppet-syntax
   puppetlabs_spec_helper
   rake
@@ -378,3 +383,6 @@ DEPENDENCIES
   travis
   travis-lint
   vagrant-wrapper
+
+BUNDLED WITH
+   1.11.2
