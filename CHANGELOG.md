@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. This projec
 ## [Unreleased][unreleased]
 
 ## [1.7.0] - 2016-04-07
+### Added
+- Added the ability to use either `camptocamp/archive` or `puppet/archive`
+
 ### Changed
 - Changed the default VirtualBox version to `5.0`
 
