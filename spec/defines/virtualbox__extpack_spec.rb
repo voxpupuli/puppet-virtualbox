@@ -10,6 +10,8 @@ describe 'virtualbox::extpack' do
     :operatingsystem => "RedHat",
     :operatingsystemrelease => '6.5',
     :path => '/sbin:/bin',
+    :puppetversion => Puppet.version,
+    :kernelrelease => '4.10'
   }}
 
   let(:sane_defaults) {{

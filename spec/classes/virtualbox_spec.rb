@@ -9,19 +9,23 @@ describe 'virtualbox', :type => :class do
       :lsbdistid => 'Ubuntu',
       :lsbdistcodename => 'trusty',
       :operatingsystemrelease => '14.04',
-      :puppetversion => Puppet.version
+      :puppetversion => Puppet.version,
+      :kernelrelease => '4.10'
     }, {
       :osfamily => 'RedHat',
       :operatingsystem => "RedHat",
       :operatingsystemrelease => '6.5',
+      :puppetversion => Puppet.version
     }, {
       :osfamily => 'RedHat',
       :operatingsystem => 'Fedora',
       :operatingsystemrelease => '22',
+      :puppetversion => Puppet.version
     }, {
       :osfamily => 'Suse',
       :operatingsystem => "OpenSuSE",
       :operatingsystemrelease => '12.3',
+      :puppetversion => Puppet.version
     }
   ].each do |facts|
     context "on #{facts[:osfamily]}" do

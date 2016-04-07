@@ -56,6 +56,9 @@ define virtualbox::extpack (
 
     $_checksum_type   = $checksum_type
     $_checksum_string = $checksum_string
+  } else {
+    $_checksum_type   = undef
+    $_checksum_string = undef
   }
 
   $dest = "${extpack_path}/${name}"
