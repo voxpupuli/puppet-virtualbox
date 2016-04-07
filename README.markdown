@@ -65,6 +65,8 @@ You can also opt to not manage the package with the `manage_package` parameter. 
 
 ### Extension Pack
 
+NOTE: To use this feature, you must have either [camptocamp/archive](https://forge.puppet.com/camptocamp/archive) or [puppet/archive](https://forge.puppet.com/puppet/archive) installed.
+
 There's a defined type to install an Extension Pack. I'm not aware of any extension packs other than the Oracle Extension Pack, but this type should work for third party extensions. You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
 
     virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':

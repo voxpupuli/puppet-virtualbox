@@ -4,9 +4,9 @@ describe 'virtualbox class' do
 
   case fact('osfamily')
   when 'RedHat'
-    package_name = 'VirtualBox-4.3'
+    package_name = 'VirtualBox-5.0'
   else
-    package_name = 'virtualbox-4.3'
+    package_name = 'virtualbox-5.0'
   end
 
   context 'default parameters' do
@@ -25,10 +25,10 @@ describe 'virtualbox class' do
 
     describe command("VBoxManage --version") do
       its(:exit_status) { should eq 0 }
-      its(:stdout) { should match /^4.3/ }
+      its(:stdout) { should match /^5.0/ }
     end
 
-    describe command("/etc/init.d/vboxdrv status") do
+    describe command("/usr/lib/virtualbox/vboxdrv.sh status") do
       its(:exit_status) { should eq 0 }
       its(:stdout) { should match /VirtualBox kernel modules \(.*\) are loaded\./ }
     end

@@ -6,7 +6,7 @@
 #
 # [*version*]
 #   The major version of the package to install.
-#   Defaults to 4.3
+#   Defaults to 5.0
 # [*package_ensure*]
 #   This gets passed to the package resource as the value of the 'ensure'
 #   parameter. This can be used to specify a package version.

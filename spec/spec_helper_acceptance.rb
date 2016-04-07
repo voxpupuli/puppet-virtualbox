@@ -7,7 +7,7 @@ hosts.each do |host|
     host.install_package('puppet')
     host.install_package('facter')
   else
-    install_puppet({:version => '3.7.5', :default_action => 'gem_install'})
+    install_puppet({:default_action => 'gem_install'})
   end
 
   on host, "mkdir -p #{host['distmoduledir']}"
@@ -28,7 +28,6 @@ RSpec.configure do |c|
       on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-apt'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','stahnma-epel'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','camptocamp-archive'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','darin-zypprepo'), { :acceptable_exit_codes => [0,1] }
     end
   end
