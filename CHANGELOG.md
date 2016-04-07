@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased][unreleased]
 
+## [1.7.0] - 2016-04-07
+### Changed
+- Changed the default VirtualBox version to `5.0`
+
+### Fixed
+- Fixed a resource ordering bug on Debian-like systems (Issue: [#25](https://github.com/danzilio/danzilio-virtualbox/issues/25), PR: [#26](https://github.com/danzilio/danzilio-virtualbox/pull/26))
+
 ## [1.6.0] - 2015-12-14
 ### Added
 - Parameterized the `vboxdrv` command in `virtualbox::kernel`
@@ -115,7 +122,8 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.6.0...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.3.1...v1.4.0

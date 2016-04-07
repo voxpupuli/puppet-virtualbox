@@ -9,7 +9,7 @@ class virtualbox::params {
 
   case $::osfamily {
     'Debian': {
-      $version = '4.3'
+      $version = '5.0'
       $manage_kernel = true
       $manage_package = true
       $package_ensure = present
@@ -29,7 +29,7 @@ class virtualbox::params {
       ]
     }
     'RedHat': {
-      $version = '4.3'
+      $version = '5.0'
       $manage_kernel = true
       $manage_package = true
       $manage_repo = true
@@ -49,7 +49,7 @@ class virtualbox::params {
     }
     'Suse': {
       warning('Careful! Support for SuSE is experimental at best.')
-      $version = '4.3'
+      $version = '5.0'
       $manage_kernel = true
       $manage_package = true
       $manage_repo = true

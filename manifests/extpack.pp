@@ -38,7 +38,7 @@ define virtualbox::extpack (
   validate_re($ensure, ['^present$', '^absent$'])
   validate_string($source)
   validate_absolute_path($extpack_path)
-  
+
   $_verify_checksum = str2bool($verify_checksum)
 
   if $_verify_checksum {
@@ -50,7 +50,7 @@ define virtualbox::extpack (
   }
 
   $dest = "${extpack_path}/${name}"
-  
+
   archive::download { "${name}.tgz":
     ensure           => $ensure,
     url              => $source,
@@ -60,7 +60,7 @@ define virtualbox::extpack (
     follow_redirects => $follow_redirects,
     require          => Class['virtualbox']
   }
-  
+
   case $ensure {
     present: {
       exec { "${name} unpack":
