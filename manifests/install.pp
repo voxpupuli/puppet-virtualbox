@@ -10,7 +10,9 @@ class virtualbox::install (
   $package_name   = $virtualbox::package_name,
   $manage_repo    = $virtualbox::manage_repo,
   $repo_proxy     = $virtualbox::repo_proxy,
-  $manage_package = $virtualbox::manage_package
+  $manage_package = $virtualbox::manage_package,
+  $apt_key_thumb  = $virtualbox::apt_key_thumb,
+  $apt_key_source = $virtualbox::apt_key_source
 ) {
 
   if $package_name == $::virtualbox::params::package_name {
@@ -33,16 +35,16 @@ class virtualbox::install (
           warning('The $repo_proxy parameter is not implemented on Debian-like systems. Please use the $proxy parameter on the apt class. Ignoring.')
         }
 
-        apt::key { '7B0FAB3A13B907435925D9C954422A4B98AB5139':
+        apt::key { $apt_key_thumb:
           ensure => present,
-          source => 'https://www.virtualbox.org/download/oracle_vbox.asc',
+          source => $apt_key_source,
         }
 
         apt::source { 'virtualbox':
           location => 'http://download.virtualbox.org/virtualbox/debian',
           release  => $::lsbdistcodename,
           repos    => $apt_repos,
-          require  => Apt::Key['7B0FAB3A13B907435925D9C954422A4B98AB5139'],
+          require  => Apt::Key[ $apt_key_thumb ],
         }
 
         if $manage_package {
