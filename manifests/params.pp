@@ -6,6 +6,8 @@
 class virtualbox::params {
   $manage_ext_repo = true
   $repo_proxy      = undef
+  $apt_key_thumb   = undef
+  $apt_key_source  = undef
 
   case $::osfamily {
     'Debian': {
