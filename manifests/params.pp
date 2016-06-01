@@ -6,8 +6,6 @@
 class virtualbox::params {
   $manage_ext_repo = true
   $repo_proxy      = undef
-  $apt_key_thumb   = undef
-  $apt_key_source  = undef
 
   case $::osfamily {
     'Debian': {
@@ -30,16 +28,6 @@ class virtualbox::params {
         'build-essential',
       ]
 
-      case $::lsbdistcodename {
-        /^(jessie|xenial)$/: {
-          $apt_key_thumb  = 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'
-          $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
-        }
-        default: {
-          $apt_key_thumb  = '7B0FAB3A13B907435925D9C954422A4B98AB5139'
-          $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox.asc'
-        }
-      }
     }
     'RedHat': {
       $version = '5.0'

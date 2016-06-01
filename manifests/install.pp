@@ -10,9 +10,7 @@ class virtualbox::install (
   $package_name   = $virtualbox::package_name,
   $manage_repo    = $virtualbox::manage_repo,
   $repo_proxy     = $virtualbox::repo_proxy,
-  $manage_package = $virtualbox::manage_package,
-  $apt_key_thumb  = $virtualbox::apt_key_thumb,
-  $apt_key_source = $virtualbox::apt_key_source
+  $manage_package = $virtualbox::manage_package
 ) {
 
   if $package_name == $::virtualbox::params::package_name {
@@ -33,6 +31,17 @@ class virtualbox::install (
 
         if $repo_proxy {
           warning('The $repo_proxy parameter is not implemented on Debian-like systems. Please use the $proxy parameter on the apt class. Ignoring.')
+        }
+
+        case $::lsbdistcodename {
+          /^(jessie|xenial)$/: {
+            $apt_key_thumb  = 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'
+            $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
+          }
+          default: {
+            $apt_key_thumb  = '7B0FAB3A13B907435925D9C954422A4B98AB5139'
+            $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox.asc'
+          }
         }
 
         apt::key { $apt_key_thumb:
