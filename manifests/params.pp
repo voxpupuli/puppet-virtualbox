@@ -27,6 +27,7 @@ class virtualbox::params {
         "linux-headers-${::kernelrelease}",
         'build-essential',
       ]
+
     }
     'RedHat': {
       $version = '5.0'
