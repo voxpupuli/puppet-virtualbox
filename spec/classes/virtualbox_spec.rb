@@ -15,12 +15,14 @@ describe 'virtualbox', :type => :class do
       :osfamily => 'RedHat',
       :operatingsystem => "RedHat",
       :operatingsystemrelease => '6.5',
-      :puppetversion => Puppet.version
+      :puppetversion => Puppet.version,
+      :kernelrelease => '4.10'
     }, {
       :osfamily => 'RedHat',
       :operatingsystem => 'Fedora',
       :operatingsystemrelease => '22',
-      :puppetversion => Puppet.version
+      :puppetversion => Puppet.version,
+      :kernelrelease => '4.10'
     }, {
       :osfamily => 'Suse',
       :operatingsystem => "OpenSuSE",
@@ -59,6 +61,11 @@ describe 'virtualbox', :type => :class do
           context 'when managing the package and the repository' do
             it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
             it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
+          end
+
+          context 'when managing the Debian kernel ' do
+            let(:params) {{ 'manage_kernel' => true }}
+            it { is_expected.to contain_package('linux-headers-4.10').with_ensure('present') }
           end
         end
       end
@@ -105,6 +112,11 @@ describe 'virtualbox', :type => :class do
         context 'when specifying a repository proxy' do
           let (:params) {{ 'repo_proxy' => 'http://proxy:8080/' }}
           it { should contain_yumrepo('virtualbox').with_proxy('http://proxy:8080/') }
+        end
+        context 'when managing the Redhat kernel ' do
+          let(:params) {{ 'manage_kernel' => true }}
+          it { is_expected.to contain_package('kernel-devel-4.10').with_name('kernel-devel-4.10').with_ensure('present') }
+          it { is_expected.to contain_package('kernel-headers-4.10').with_name('kernel-headers-4.10').with_ensure('present') }
         end
       end
 
