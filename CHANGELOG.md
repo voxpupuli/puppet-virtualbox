@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased][unreleased]
 
+## [1.7.1] - 2016-07-19
+### Fixed
+- Fixed a typo in `extpack` that prevented proper detection of the `archive` module.
+- Fixing missing APT keys for newer Debian/Ubuntu versions.
+- Fixes typo in `spec/classes/virtualbox_spec.rb`
+
 ## [1.7.0] - 2016-04-07
 ### Added
 - Added the ability to use either `camptocamp/archive` or `puppet/archive`
@@ -125,7 +131,8 @@ All notable changes to this project will be documented in this file. This projec
 ## [1.0.0] - 2014-10-13
 Initial Release
 
-[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.7.0...HEAD
+[unreleased]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.7.1...HEAD
+[1.7.1]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/danzilio/danzilio-virtualbox/compare/v1.4.0...v1.5.0
