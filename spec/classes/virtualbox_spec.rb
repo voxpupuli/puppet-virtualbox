@@ -152,7 +152,7 @@ describe 'virtualbox', :type => :class do
 
       context 'when not managing the package' do
         let(:params) {{ 'manage_package' => false }}
-        it { is_expected.not_to contain_packge('virtualbox') }
+        it { is_expected.not_to contain_package('virtualbox') }
       end
 
       context 'with a custom package name and version' do
