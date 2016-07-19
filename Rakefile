@@ -10,7 +10,7 @@ begin
 rescue LoadError
 end
 
-PuppetLint.configuration.send("disable_80chars")
+PuppetLint.configuration.send("disable_140chars")
 PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
 
 # Forsake support for Puppet 2.6.2 for the benefit of cleaner code.
@@ -26,12 +26,6 @@ exclude_paths = [
 ]
 PuppetLint.configuration.ignore_paths = exclude_paths
 PuppetSyntax.exclude_paths = exclude_paths
-
-desc "Run metadata-json-lint"
-task :metadata do
-  out = %x{bundle exec metadata-json-lint metadata.json}
-  $? != 0 ? (raise out) : (puts "Metadata OK!")
-end
 
 desc "Run acceptance tests"
 RSpec::Core::RakeTask.new(:acceptance) do |t|
@@ -77,6 +71,6 @@ desc "Run syntax, lint, and spec tests."
 task :test => [
   :syntax,
   :lint,
-  :metadata,
+  :metadata_lint,
   :spec,
 ]

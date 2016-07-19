@@ -70,7 +70,7 @@ define virtualbox::extpack (
     $metadata = load_module_metadata('archive')
     $_provider = $metadata['source'] ? {
       /github\.com\/camptocamp/                   => 'camptocamp',
-      /githun\.com\/(puppet-community|voxpupuli)/ => 'voxpupuli',
+      /github\.com\/(puppet-community|voxpupuli)/ => 'voxpupuli',
     }
   }
 
