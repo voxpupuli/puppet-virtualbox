@@ -1,3 +1,7 @@
+# **THIS MODULE HAS BEEN MOVED TO VOXPUPULI**
+
+This module has been donated to Vox Pupuli and can be found at https://github.com/voxpupuli/puppet-virtualbox.
+
 [![Puppet Forge](http://img.shields.io/puppetforge/v/danzilio/virtualbox.svg?style=flat)](https://forge.puppetlabs.com/danzilio/virtualbox) [![Build Status](https://travis-ci.org/danzilio/danzilio-virtualbox.svg)](https://travis-ci.org/danzilio/danzilio-virtualbox) [![Documentation Status](http://img.shields.io/badge/docs-puppet--strings-ff69b4.svg?style=flat)](http://danzilio.github.io/danzilio-virtualbox)
 
 This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.

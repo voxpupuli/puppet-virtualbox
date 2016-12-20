@@ -1,8 +1,8 @@
 {
   "name": "danzilio-virtualbox",
-  "version": "1.7.2",
+  "version": "999.999.999",
   "author": "David Danzilio",
-  "summary": "A module to install VirtualBox on Linux hosts.",
+  "summary": "This module has been moved to puppet/virtualbox",
   "license": "Apache-2.0",
   "source": "https://github.com/danzilio/danzilio-virtualbox",
   "project_page": "https://github.com/danzilio/danzilio-virtualbox",
