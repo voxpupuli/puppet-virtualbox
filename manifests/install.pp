@@ -27,7 +27,7 @@ class virtualbox::install (
           default           => 'contrib',
         }
 
-        include apt
+        include ::apt
 
         if $repo_proxy {
           warning('The $repo_proxy parameter is not implemented on Debian-like systems. Please use the $proxy parameter on the apt class. Ignoring.')

@@ -45,7 +45,7 @@ class virtualbox::params {
         'dkms',
         'binutils',
         'glibc-headers',
-        'glibc-devel'
+        'glibc-devel',
       ]
     }
     'Suse': {
