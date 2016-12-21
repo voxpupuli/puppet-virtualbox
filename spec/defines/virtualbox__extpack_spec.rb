@@ -5,21 +5,25 @@ require 'fileutils'
 describe 'virtualbox::extpack' do
   let(:title) { 'Oracle_VM_VirtualBox_Extension_Pack' }
   let(:pre_condition) { 'include virtualbox' }
-  let(:facts) {{
-    :osfamily => 'RedHat',
-    :operatingsystem => "RedHat",
-    :operatingsystemrelease => '6.5',
-    :path => '/sbin:/bin',
-    :puppetversion => Puppet.version,
-    :kernelrelease => '4.10'
-  }}
+  let(:facts) do
+    {
+      osfamily: 'RedHat',
+      operatingsystem: 'RedHat',
+      operatingsystemrelease: '6.5',
+      path: '/sbin:/bin',
+      puppetversion: Puppet.version,
+      kernelrelease: '4.10'
+    }
+  end
 
-  let(:sane_defaults) {{
-    :ensure           => 'present',
-    :source           => 'http://server.example.com/extpack.vbox-extpack',
-    :checksum_string  => 'd41d8cd98f00b204e9800998ecf8427e',
-    :archive_provider => provider
-  }}
+  let(:sane_defaults) do
+    {
+      ensure: 'present',
+      source: 'http://server.example.com/extpack.vbox-extpack',
+      checksum_string: 'd41d8cd98f00b204e9800998ecf8427e',
+      archive_provider: provider
+    }
+  end
 
   shared_context 'archive fixtures' do
     before(:all) do
@@ -35,10 +39,10 @@ describe 'virtualbox::extpack' do
   context 'with unsupported archive module' do
     let(:provider) { 'fubar' }
     let(:params) { sane_defaults }
-    it { is_expected.to raise_error(Puppet::Error, /does not match/) }
+    it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
   end
 
-  context "with camptocamp/archive" do
+  context 'with camptocamp/archive' do
     let(:provider) { 'camptocamp' }
     include_context 'archive fixtures'
 
@@ -53,17 +57,15 @@ describe 'virtualbox::extpack' do
     end
 
     context 'with ensure => absent' do
-      let(:params) {sane_defaults.merge({:ensure => 'absent'})}
+      let(:params) { sane_defaults.merge(ensure: 'absent') }
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
       it { is_expected.to contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
     end
 
     context 'with $verify_checksum => false' do
       let(:params) do
-        sane_defaults.merge({
-          :verify_checksum  => false,
-          :checksum_type    => 'sha1',
-        })
+        sane_defaults.merge(verify_checksum: false,
+                            checksum_type: 'sha1')
       end
 
       it { is_expected.to compile.with_all_deps }
@@ -73,12 +75,12 @@ describe 'virtualbox::extpack' do
     end
 
     context 'with bad checksum type' do
-      let(:params) { sane_defaults.merge({ :checksum_type => 'invalid' }) }
-      it { is_expected.to raise_error(Puppet::Error, /does not match/) }
+      let(:params) { sane_defaults.merge(checksum_type: 'invalid') }
+      it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
     end
   end
 
-  context "with voxpupuli/archive" do
+  context 'with voxpupuli/archive' do
     let(:provider) { 'voxpupuli' }
     include_context 'archive fixtures'
 
@@ -92,17 +94,15 @@ describe 'virtualbox::extpack' do
     end
 
     context 'with ensure => absent' do
-      let(:params) {sane_defaults.merge({:ensure => 'absent'})}
+      let(:params) { sane_defaults.merge(ensure: 'absent') }
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
       it { is_expected.to contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
     end
 
     context 'with $verify_checksum => false' do
       let(:params) do
-        sane_defaults.merge({
-          :verify_checksum  => false,
-          :checksum_type    => 'sha1',
-        })
+        sane_defaults.merge(verify_checksum: false,
+                            checksum_type: 'sha1')
       end
 
       it { is_expected.to compile.with_all_deps }
@@ -112,8 +112,8 @@ describe 'virtualbox::extpack' do
     end
 
     context 'with bad checksum type' do
-      let(:params) { sane_defaults.merge({ :checksum_type => 'invalid' }) }
-      it { is_expected.to raise_error(Puppet::Error, /does not match/) }
+      let(:params) { sane_defaults.merge(checksum_type: 'invalid') }
+      it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
     end
   end
 end

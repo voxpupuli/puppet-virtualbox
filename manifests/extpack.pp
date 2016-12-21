@@ -83,7 +83,7 @@ define virtualbox::extpack (
         digest_type      => $_checksum_type,
         digest_string    => $_checksum_string,
         follow_redirects => $follow_redirects,
-        require          => Class['virtualbox']
+        require          => Class['virtualbox'],
       }
 
       if $ensure =~ /^present$/ {
@@ -102,7 +102,7 @@ define virtualbox::extpack (
         checksum_type   => $_checksum_type,
         checksum_verify => $_verify_checksum,
         extract         => false,
-        require         => Class['virtualbox']
+        require         => Class['virtualbox'],
       }
 
       if $ensure =~ /^present$/ {
@@ -113,7 +113,7 @@ define virtualbox::extpack (
   }
 
   case $ensure {
-    present: {
+    'present': {
       exec { "${name} unpack":
         command => "mkdir -p ${dest} && tar --no-same-owner --no-same-permissions -xzf /usr/src/${name}.tgz -C ${dest}",
         creates => $dest,
@@ -121,7 +121,7 @@ define virtualbox::extpack (
         path    => $::path,
       }
     }
-    absent: {
+    'absent': {
       file { $dest:
         ensure  => absent,
         recurse => true,

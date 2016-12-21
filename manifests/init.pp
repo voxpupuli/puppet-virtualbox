@@ -61,15 +61,15 @@ class virtualbox (
   validate_bool($manage_kernel)
   validate_string($package_name)
 
-  class { 'virtualbox::install': } -> Class['virtualbox']
+  class { '::virtualbox::install': } -> Class['virtualbox']
 
   if $manage_kernel {
     validate_array($vboxdrv_dependencies)
-    Class['virtualbox::install'] -> class { 'virtualbox::kernel': }
+    Class['virtualbox::install'] -> class { '::virtualbox::kernel': }
 
     if $::osfamily == 'RedHat' {
       if $manage_ext_repo {
-        include epel
+        include ::epel
         Class['epel'] -> Class['virtualbox::kernel']
       }
     }

@@ -1,0 +1,5 @@
+---
+.travis.yml:
+  secret: "teZNCByZ84vCAqGpKCjsZhb8X0vRZ2OIDFpNPxZ6w+SLS1R72DScPJd18OAeg+nLNrMC4YIn+48lf1EplM+u/tZv7cxWwNUCUpAQipr2ZpjrGoy0LzpdaS7Yh5mpkCFf7Aj/QXsRbqtCs670nmL26IQgXN0Fr4RDmfb8VFNhDkQ="
+spec/spec_helper.rb:
+  spec_overrides: "require 'spec_helper_methods'"
