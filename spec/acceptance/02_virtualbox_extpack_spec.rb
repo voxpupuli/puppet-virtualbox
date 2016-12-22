@@ -9,7 +9,7 @@ describe 'virtualbox extpack' do
 
     virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
       ensure           => present,
-      source           => 'http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack',
+      source           => 'http://download.virtualbox.org/virtualbox/5.1.8/Oracle_VM_VirtualBox_Extension_Pack-5.1.8-111374.vbox-extpack',
       checksum_string  => '41f1d66e0be1c183917c95efed89db56',
       follow_redirects => true,
     }
@@ -22,7 +22,7 @@ describe 'virtualbox extpack' do
 
     virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
       ensure           => absent,
-      source           => 'http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack',
+      source           => 'http://download.virtualbox.org/virtualbox/5.1.8/Oracle_VM_VirtualBox_Extension_Pack-5.1.8-111374.vbox-extpack',
       checksum_string  => '41f1d66e0be1c183917c95efed89db56',
       follow_redirects => true,
     }
