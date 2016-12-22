@@ -1,6 +1,11 @@
 # virtualbox
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/virtualbox.svg?style=flat)](https://forge.puppetlabs.com/puppet/virtualbox) [![Build Status](https://travis-ci.org/voxpupuli/puppet-virtualbox.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-virtualbox) ![puppet-strings](http://img.shields.io/badge/docs-puppet--strings-ff69b4.svg?style=flat)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-virtualbox.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-virtualbox)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-virtualbox/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-virtualboc)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/virtualbox.svg)](https://forge.puppetlabs.com/puppet/virtualbox)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/virtualbox.svg)](https://forge.puppetlabs.com/puppet/virtualbox)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/virtualbox.svg)](https://forge.puppetlabs.com/puppet/virtualbox)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/virtualbox.svg)](https://forge.puppetlabs.com/puppet/virtualbox)
 
 This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.
 
@@ -27,43 +32,55 @@ This module is tested with the latest version of Puppet 3 and Puppet 4; all Pupp
 
 To begin using the virtualbox module, just include the virtualbox class on your node like so:
 
-    include virtualbox
+```puppet
+include ::virtualbox
+```
 
 This will get you set up with the basics and will meet 90% of the use cases out there.
 
 If you wish to manage your package repositories outside of this module, you just need to set `$manage_repo` to `false`:
 
-    class { 'virtualbox':
-      manage_repo => false,
-    }
+```puppet
+class { 'virtualbox':
+	manage_repo => false,
+}
+```
 
 You can also specify a custom package name like so:
 
-    class { 'virtualbox':
-      manage_repo  => false,
-      package_name => 'virtualbox-custom',
-    }
+```puppet
+class { 'virtualbox':
+	manage_repo  => false,
+	package_name => 'virtualbox-custom',
+}
+```
 
 The peculiar versioning in use by Oracle has forced us to do some funky stuff with versioning. If you're using the default package name, this module will concatenate `$package_name` and `$version` together with a dash between them. If you opt to define your own package name, the `$version` parameter is ignored completely and the only way to specify a version would be to use the `$package_ensure` parameter:
 
-    class { 'virtualbox':
-      manage_repo    => false,
-      package_name   => 'virtualbox-custom',
-      package_ensure => '4.3.18_96516',
-    }
+```puppet
+class { 'virtualbox':
+	manage_repo    => false,
+	package_name   => 'virtualbox-custom',
+	package_ensure => '4.3.18_96516',
+}
+```
 
 If you don't want to install the VirtualBox kernel extensions, you can set the `manage_kernel` parameter to `false`.
 
-    class { 'virtualbox':
-      manage_kernel => false,
-    }
+```puppet
+class { 'virtualbox':
+	manage_kernel => false,
+}
+```
 
 You can also opt to not manage the package with the `manage_package` parameter. This would effectively just install the package repository:
 
-    class { 'virtualbox':
-      manage_kernel  => false,
-      manage_package => false,
-    }
+```puppet
+class { 'virtualbox':
+	manage_kernel  => false,
+	manage_package => false,
+}
+```
 
 ### Extension Pack
 
@@ -71,12 +88,14 @@ NOTE: To use this feature, you must have either [camptocamp/archive](https://for
 
 There's a defined type to install an Extension Pack. I'm not aware of any extension packs other than the Oracle Extension Pack, but this type should work for third party extensions. You can install Oracle's Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:
 
-    virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
-      ensure           => present,
-      source           => 'http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack',
-      checksum_string  => '4b7546ddf94308901b629865c54d5840',
-      follow_redirects => true,
-    }
+```puppet
+virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
+	ensure           => present,
+	source           => 'http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack',
+	checksum_string  => '4b7546ddf94308901b629865c54d5840',
+	follow_redirects => true,
+}
+```
 
 This will download the extension pack, check to make sure the downloaded file matches the expected md5sum, then install the extension pack to `/usr/lib/virtualbox/ExtensionPacks`.
 

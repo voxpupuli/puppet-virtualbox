@@ -1,7 +1,9 @@
 # Change log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
+## 2016-12-22 Release 1.7.2
+- Modulesync with latest Vox Pupuli defaults
+- First Release in the Vox Pupuli namespace, this moduel got donated by danzilio
 
 ## [1.7.1] - 2016-07-19
 ### Fixed

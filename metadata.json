@@ -1,12 +1,12 @@
 {
-  "name": "danzilio-virtualbox",
-  "version": "999.999.1000",
-  "author": "David Danzilio",
-  "summary": "This module has been moved to puppet/virtualbox",
+  "name": "puppet-virtualbox",
+  "version": "1.7.2",
+  "author": "Vox Pupuli",
+  "summary": "Installs Virtualbox on RHEL and Debian-like systems",
   "license": "Apache-2.0",
-  "source": "https://github.com/danzilio/danzilio-virtualbox",
-  "project_page": "https://github.com/danzilio/danzilio-virtualbox",
-  "issues_url": "https://github.com/danzilio/danzilio-virtualbox/issues",
+  "source": "https://github.com/voxpupuli/puppet-virtualbox",
+  "project_page": "https://github.com/voxpupuli/puppet-virtualbox",
+  "issues_url": "https://github.com/voxpupuli/puppet-virtualbox/issues",
   "tags": [
     "virtualbox",
     "virtualization"
