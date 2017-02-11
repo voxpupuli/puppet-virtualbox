@@ -1,6 +1,6 @@
 {
   "name": "puppet-virtualbox",
-  "version": "1.8.0",
+  "version": "1.8.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Installs Virtualbox on RHEL and Debian-like systems",
   "license": "Apache-2.0",
