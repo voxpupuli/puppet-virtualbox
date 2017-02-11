@@ -1,6 +1,11 @@
 # Change log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2017-02-11 Release 1.8.0
+
+This is the last release with Puppet3 support!
+* Modulesync
+
 ## 2016-12-22 Release 1.7.3
 - Rerelease of 1.7.2 which didn't make it to the forge
 
