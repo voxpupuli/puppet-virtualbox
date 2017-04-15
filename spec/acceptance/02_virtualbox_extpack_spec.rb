@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-authors = %w(camptocamp puppet)
+authors = %w[camptocamp puppet]
 
 describe 'virtualbox extpack' do
   let(:install) do

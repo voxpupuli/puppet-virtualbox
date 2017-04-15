@@ -26,7 +26,7 @@ describe 'virtualbox::extpack' do
   end
 
   shared_context 'archive fixtures' do
-    before(:all) do
+    before(:all) do # rubocop:disable RSpec/BeforeAfterAll
       FileUtils.rm_rf "#{fixture_path}/modules/archive"
     end
 
@@ -38,10 +38,12 @@ describe 'virtualbox::extpack' do
 
   context 'with camptocamp/archive' do
     let(:provider) { 'camptocamp' }
+
     include_context 'archive fixtures'
 
     context 'with defaults' do
       let(:params) { sane_defaults }
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(true) }
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string('d41d8cd98f00b204e9800998ecf8427e') }
@@ -52,6 +54,7 @@ describe 'virtualbox::extpack' do
 
     context 'with ensure => absent' do
       let(:params) { sane_defaults.merge(ensure: 'absent') }
+
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
       it { is_expected.to contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
     end
@@ -71,10 +74,12 @@ describe 'virtualbox::extpack' do
 
   context 'with voxpupuli/archive' do
     let(:provider) { 'voxpupuli' }
+
     include_context 'archive fixtures'
 
     context 'with defaults' do
       let(:params) { sane_defaults }
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum('d41d8cd98f00b204e9800998ecf8427e') }
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum_type('md5') }
@@ -84,6 +89,7 @@ describe 'virtualbox::extpack' do
 
     context 'with ensure => absent' do
       let(:params) { sane_defaults.merge(ensure: 'absent') }
+
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_ensure('absent') }
       it { is_expected.to contain_file('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack').with_ensure('absent') }
     end
