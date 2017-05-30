@@ -46,7 +46,7 @@ define virtualbox::extpack (
   if $verify_checksum {
     $_checksum_type   = $checksum_type
     $_checksum_string = $checksum_string
-  }  else {
+  } else {
     $_checksum_type   = undef
     $_checksum_string = undef
   }
