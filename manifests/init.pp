@@ -18,6 +18,8 @@
 #   On applicable platforms, should this module manage the external dependency
 #   repository when `manage_kernel` is set to true?
 #   Defaults to true
+# [*repo_proxy*]
+#   Defaults to undef
 # [*manage_package*]
 #   Should this module manage the package?
 #   Defaults to true
@@ -34,15 +36,15 @@
 #   Defaults to 'VirtualBox' for RedHat and 'virtualbox' for Debian
 #
 class virtualbox (
-  $version              = $virtualbox::params::version,
-  $package_ensure       = $virtualbox::params::package_ensure,
-  $manage_repo          = $virtualbox::params::manage_repo,
-  $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
-  $repo_proxy           = $virtualbox::params::repo_proxy,
-  $manage_package       = $virtualbox::params::manage_package,
-  $manage_kernel        = $virtualbox::params::manage_kernel,
-  $vboxdrv_dependencies = $virtualbox::params::vboxdrv_dependencies,
-  $package_name         = $virtualbox::params::package_name
+  String $version               = $virtualbox::params::version,
+  String $package_ensure        = $virtualbox::params::package_ensure,
+  Boolean $manage_repo          = $virtualbox::params::manage_repo,
+  Boolean $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
+  Optional[String] $repo_proxy  = $virtualbox::params::repo_proxy,
+  Boolean $manage_package       = $virtualbox::params::manage_package,
+  Boolean $manage_kernel        = $virtualbox::params::manage_kernel,
+  Array $vboxdrv_dependencies   = $virtualbox::params::vboxdrv_dependencies,
+  String $package_name          = $virtualbox::params::package_name
 ) inherits virtualbox::params {
 
   if versioncmp($::puppetversion, '4.0.0') == -1 {
@@ -55,16 +57,9 @@ class virtualbox (
     $vboxdrv_command = '/usr/lib/virtualbox/vboxdrv.sh'
   }
 
-  validate_bool($manage_repo)
-  validate_bool($manage_ext_repo)
-  validate_bool($manage_package)
-  validate_bool($manage_kernel)
-  validate_string($package_name)
-
   class { '::virtualbox::install': } -> Class['virtualbox']
 
   if $manage_kernel {
-    validate_array($vboxdrv_dependencies)
     Class['virtualbox::install'] -> class { '::virtualbox::kernel': }
 
     if $::osfamily == 'RedHat' {

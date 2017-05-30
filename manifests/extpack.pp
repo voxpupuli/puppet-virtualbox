@@ -4,11 +4,11 @@
 #
 # === Parameters
 #
+# [*source*]
+#   Download extension pack from the given URL. Required string.
 # [*ensure*]
 #   Set to 'present' to install extension pack. Set to 'absent' to uninstall.
 #   Defaults to 'present'
-# [*source*]
-#   Download extension pack from the given URL. Required string.
 # [*verify_checksum*]
 #   Whether to verify the checksum of the downloaded file. Optional boolean.
 #   Defaults to true.
@@ -30,30 +30,20 @@
 #   This can be set to the Puppet Forge username of the developer of the
 #   `archive` module you wish to use. If a falsey value is passed, this module
 #   will try and determine the module author by using the `load_module_metadata`
-#   function from Stdlib. This is the default behavior. Defaults to `false`.
+#   function from Stdlib. This is the default behavior. Defaults to `undef`.
 #
 define virtualbox::extpack (
-  $source,
-  $ensure           = present,
-  $verify_checksum  = true,
-  $checksum_string  = undef,
-  $checksum_type    = 'md5',
-  $follow_redirects = false,
-  $extpack_path     = '/usr/lib/virtualbox/ExtensionPacks',
-  $archive_provider = false,
+  String $source,
+  Enum['present', 'absent'] $ensure                                                       = 'present',
+  Boolean $verify_checksum                                                                = true,
+  Optional[String] $checksum_string                                                       = undef,
+  Enum['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512'] $checksum_type              = 'md5',
+  Boolean $follow_redirects                                                               = false,
+  Stdlib::Absolutepath $extpack_path                                                      = '/usr/lib/virtualbox/ExtensionPacks',
+  Optional[Enum['puppet','puppet-community','voxpupuli','camptocamp']] $archive_provider  = undef,
 ) {
 
-  validate_re($ensure, ['^present$', '^absent$'])
-  validate_string($source)
-  validate_absolute_path($extpack_path)
-  validate_bool($follow_redirects)
-
-  $_verify_checksum = str2bool($verify_checksum)
-
-  if $_verify_checksum {
-    validate_re($checksum_type, ['^md5', '^sha1', '^sha224', '^sha256', '^sha384', '^sha512'])
-    validate_string($checksum_string)
-
+  if $verify_checksum {
     $_checksum_type   = $checksum_type
     $_checksum_string = $checksum_string
   } else {
@@ -63,23 +53,20 @@ define virtualbox::extpack (
 
   $dest = "${extpack_path}/${name}"
 
-  if $archive_provider {
-    validate_re($archive_provider, ['^puppet$', '^puppet-community$', '^voxpupuli$', '^camptocamp$'])
-    $_provider = $archive_provider
-  } else {
+  unless $archive_provider {
     $metadata = load_module_metadata('archive')
-    $_provider = $metadata['source'] ? {
+    $archive_provider = $metadata['source'] ? {
       /github\.com\/camptocamp/                   => 'camptocamp',
       /github\.com\/(puppet-community|voxpupuli)/ => 'voxpupuli',
     }
   }
 
-  case $_provider {
+  case $archive_provider {
     'camptocamp': {
       archive::download { "${name}.tgz":
         ensure           => $ensure,
         url              => $source,
-        checksum         => $_verify_checksum,
+        checksum         => $verify_checksum,
         digest_type      => $_checksum_type,
         digest_string    => $_checksum_string,
         follow_redirects => $follow_redirects,
@@ -100,7 +87,7 @@ define virtualbox::extpack (
         source          => $source,
         checksum        => $_checksum_string,
         checksum_type   => $_checksum_type,
-        checksum_verify => $_verify_checksum,
+        checksum_verify => $verify_checksum,
         extract         => false,
         require         => Class['virtualbox'],
       }

@@ -36,12 +36,6 @@ describe 'virtualbox::extpack' do
     end
   end
 
-  context 'with unsupported archive module' do
-    let(:provider) { 'fubar' }
-    let(:params) { sane_defaults }
-    it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
-  end
-
   context 'with camptocamp/archive' do
     let(:provider) { 'camptocamp' }
     include_context 'archive fixtures'
@@ -72,11 +66,6 @@ describe 'virtualbox::extpack' do
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(false) }
       it { is_expected.to contain_archive__download('Oracle_VM_VirtualBox_Extension_Pack.tgz').with_digest_string(nil) }
       it { is_expected.to contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
-    end
-
-    context 'with bad checksum type' do
-      let(:params) { sane_defaults.merge(checksum_type: 'invalid') }
-      it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
     end
   end
 
@@ -109,11 +98,6 @@ describe 'virtualbox::extpack' do
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum(nil) }
       it { is_expected.to contain_archive('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz').with_checksum_type(nil) }
       it { is_expected.to contain_exec('Oracle_VM_VirtualBox_Extension_Pack unpack').with_creates('/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack') }
-    end
-
-    context 'with bad checksum type' do
-      let(:params) { sane_defaults.merge(checksum_type: 'invalid') }
-      it { is_expected.to raise_error(Puppet::Error, %r{does not match}) }
     end
   end
 end
