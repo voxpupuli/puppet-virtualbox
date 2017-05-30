@@ -60,7 +60,6 @@ class virtualbox (
   class { '::virtualbox::install': } -> Class['virtualbox']
 
   if $manage_kernel {
-    validate_array($vboxdrv_dependencies)
     Class['virtualbox::install'] -> class { '::virtualbox::kernel': }
 
     if $::osfamily == 'RedHat' {
