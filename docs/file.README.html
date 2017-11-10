@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.9
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1>virtualbox</h1>
+
+<p><a href="https://travis-ci.org/voxpupuli/puppet-virtualbox"><img src="https://travis-ci.org/voxpupuli/puppet-virtualbox.png?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/voxpupuli/puppet-virtualboc"><img src="https://coveralls.io/repos/github/voxpupuli/puppet-virtualbox/badge.svg?branch=master" alt="Code Coverage"></a>
+<a href="https://forge.puppetlabs.com/puppet/virtualbox"><img src="https://img.shields.io/puppetforge/v/puppet/virtualbox.svg" alt="Puppet Forge"></a>
+<a href="https://forge.puppetlabs.com/puppet/virtualbox"><img src="https://img.shields.io/puppetforge/dt/puppet/virtualbox.svg" alt="Puppet Forge - downloads"></a>
+<a href="https://forge.puppetlabs.com/puppet/virtualbox"><img src="https://img.shields.io/puppetforge/e/puppet/virtualbox.svg" alt="Puppet Forge - endorsement"></a>
+<a href="https://forge.puppetlabs.com/puppet/virtualbox"><img src="https://img.shields.io/puppetforge/f/puppet/virtualbox.svg" alt="Puppet Forge - scores"></a></p>
+
+<p>This module installs VirtualBox on a Linux host using the official repositories or custom defined repositories. By default, this module will also configure the kernel modules required to run VirtualBox.</p>
+
+<p>By default, this module will install the Oracle VirtualBox yum/apt repo, install the VirtualBox package, and build the VirtualBox kernel modules. You can define a custom package name and/or version, you can also opt to not manage the repositories with this module. Because of the strange convention Oracle has opted to use for versioning VirtualBox, if you set a custom package name, the <code>version</code> parameter will be ignored. If you wish to define a package version with a custom package name, you must use the <code>package_ensure</code> parameter.</p>
+
+<h2>Support</h2>
+
+<p>This module is tested with:</p>
+
+<ul>
+<li>CentOS 5.11</li>
+<li>CentOS 6.6</li>
+<li>CentOS 7.0</li>
+<li>Debian 6.0.10</li>
+<li>Debian 7.8</li>
+<li>Ubuntu 10.04</li>
+<li>Ubuntu 12.04</li>
+<li>Ubuntu 14.04</li>
+</ul>
+
+<p>It may work on other distros and OS versions, but these are the versions that we&#39;re targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)</p>
+
+<p>This module is tested with the latest version of Puppet 3 and Puppet 4; all Puppet supported versions of Ruby are included in the test matrix. If you&#39;re interested in the testing matrix, please have a look at the <code>.travis.yml</code> file in the root of the module.</p>
+
+<h2>Usage</h2>
+
+<p>To begin using the virtualbox module, just include the virtualbox class on your node like so:</p>
+
+<pre class="code puppet"><code class="puppet">include ::virtualbox
+</code></pre>
+
+<p>This will get you set up with the basics and will meet 90% of the use cases out there.</p>
+
+<p>If you wish to manage your package repositories outside of this module, you just need to set <code>$manage_repo</code> to <code>false</code>:</p>
+
+<pre class="code puppet"><code class="puppet">class { &#39;virtualbox&#39;:
+    manage_repo =&gt; false,
+}
+</code></pre>
+
+<p>You can also specify a custom package name like so:</p>
+
+<pre class="code puppet"><code class="puppet">class { &#39;virtualbox&#39;:
+    manage_repo  =&gt; false,
+    package_name =&gt; &#39;virtualbox-custom&#39;,
+}
+</code></pre>
+
+<p>The peculiar versioning in use by Oracle has forced us to do some funky stuff with versioning. If you&#39;re using the default package name, this module will concatenate <code>$package_name</code> and <code>$version</code> together with a dash between them. If you opt to define your own package name, the <code>$version</code> parameter is ignored completely and the only way to specify a version would be to use the <code>$package_ensure</code> parameter:</p>
+
+<pre class="code puppet"><code class="puppet">class { &#39;virtualbox&#39;:
+    manage_repo    =&gt; false,
+    package_name   =&gt; &#39;virtualbox-custom&#39;,
+    package_ensure =&gt; &#39;4.3.18_96516&#39;,
+}
+</code></pre>
+
+<p>If you don&#39;t want to install the VirtualBox kernel extensions, you can set the <code>manage_kernel</code> parameter to <code>false</code>.</p>
+
+<pre class="code puppet"><code class="puppet">class { &#39;virtualbox&#39;:
+    manage_kernel =&gt; false,
+}
+</code></pre>
+
+<p>You can also opt to not manage the package with the <code>manage_package</code> parameter. This would effectively just install the package repository:</p>
+
+<pre class="code puppet"><code class="puppet">class { &#39;virtualbox&#39;:
+    manage_kernel  =&gt; false,
+    manage_package =&gt; false,
+}
+</code></pre>
+
+<h3>Extension Pack</h3>
+
+<p>NOTE: To use this feature, you must have either <a href="https://forge.puppet.com/camptocamp/archive">camptocamp/archive</a> or <a href="https://forge.puppet.com/puppet/archive">puppet/archive</a> installed.</p>
+
+<p>There&#39;s a defined type to install an Extension Pack. I&#39;m not aware of any extension packs other than the Oracle Extension Pack, but this type should work for third party extensions. You can install Oracle&#39;s Extension Pack (adding support for USB 2.0, access to webcam, RDP and E1000 PXE ROM) like so:</p>
+
+<pre class="code puppet"><code class="puppet">virtualbox::extpack { &#39;Oracle_VM_VirtualBox_Extension_Pack&#39;:
+    ensure           =&gt; present,
+    source           =&gt; &#39;http://download.virtualbox.org/virtualbox/4.3.20/Oracle_VM_VirtualBox_Extension_Pack-4.3.20.vbox-extpack&#39;,
+    checksum_string  =&gt; &#39;4b7546ddf94308901b629865c54d5840&#39;,
+    follow_redirects =&gt; true,
+}
+</code></pre>
+
+<p>This will download the extension pack, check to make sure the downloaded file matches the expected md5sum, then install the extension pack to <code>/usr/lib/virtualbox/ExtensionPacks</code>.</p>
+
+<h2>Development</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create a feature branch</li>
+<li>Write a failing test</li>
+<li>Write the code to make that test pass</li>
+<li>Refactor the code</li>
+<li>Submit a pull request</li>
+</ol>
+
+<p>We politely request (demand) tests for all new features. Pull requests that contain new features without a test will not be considered. If you need help, just ask!</p>
+</div></div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
