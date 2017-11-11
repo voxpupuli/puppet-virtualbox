@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Puppet Class: virtualbox
+  
+    &mdash; Documentation by YARD 0.9.9
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "puppet_classes::virtualbox";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (v)</a> &raquo;
+    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+     &raquo; 
+    <span class="title">virtualbox</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Puppet Class: virtualbox</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd><span class='object_link'><a href="virtualbox_3A_3Aparams.html" title="puppet_classes::virtualbox::params (puppet_class)">virtualbox::params</a></span></dd>
+  </dl>
+  
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/init.pp
+    </dd>
+  </dl>
+</div>
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    <p>== Class: virtualbox</p>
+
+<p>This is a public class. This class installs VirtualBox.</p>
+
+<p>=== Parameters</p>
+
+<p>[<em>version</em>]
+  The major version of the package to install.
+  Defaults to 5.0
+[<em>package_ensure</em>]
+  This gets passed to the package resource as the value of the &#39;ensure&#39;
+  parameter. This can be used to specify a package version.
+  Defaults to present
+[<em>manage_repo</em>]
+  Should this module manage the package repository?
+  Defaults to true
+[<em>manage_ext_repo</em>]
+  On applicable platforms, should this module manage the external dependency
+  repository when <code>manage_kernel</code> is set to true?
+  Defaults to true
+[<em>repo_proxy</em>]
+  Defaults to undef
+[<em>manage_package</em>]
+  Should this module manage the package?
+  Defaults to true
+[<em>manage_kernel</em>]
+  Should this module install the VirtualBox kernel modules?
+  Defaults to true
+[<em>vboxdrv_dependencies</em>]
+  Dependencies for building the VirtualBox kernel modules.
+  Defaults depend on the platform. See virtualbox::params.
+[<em>package_name</em>]
+  The name of the package to install. This must be the full packge name when
+  not the default. When the default is in use, it gets compounded with the
+  major.minor components of the version number.
+  Defaults to &#39;VirtualBox&#39; for RedHat and &#39;virtualbox&#39; for Debian</p>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::version</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>package_ensure</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::package_ensure</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_repo</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::manage_repo</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_ext_repo</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::manage_ext_repo</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>repo_proxy</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::repo_proxy</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_package</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::manage_package</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_kernel</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::manage_kernel</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vboxdrv_dependencies</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::vboxdrv_dependencies</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>package_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$virtualbox::params::package_name</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 38</span>
+
+class virtualbox (
+  String $version               = $virtualbox::params::version,
+  String $package_ensure        = $virtualbox::params::package_ensure,
+  Boolean $manage_repo          = $virtualbox::params::manage_repo,
+  Boolean $manage_ext_repo      = $virtualbox::params::manage_ext_repo,
+  Optional[String] $repo_proxy  = $virtualbox::params::repo_proxy,
+  Boolean $manage_package       = $virtualbox::params::manage_package,
+  Boolean $manage_kernel        = $virtualbox::params::manage_kernel,
+  Array $vboxdrv_dependencies   = $virtualbox::params::vboxdrv_dependencies,
+  String $package_name          = $virtualbox::params::package_name
+) inherits virtualbox::params {
+
+  if versioncmp($::puppetversion, &#39;4.0.0&#39;) == -1 {
+    warning &#39;Support for Puppet &lt; 3.0 is deprecated. Version 2.0 of this module will only support Puppet &gt;= 4.0&#39; # lint:ignore:80chars
+  }
+
+  if versioncmp($version, &#39;5.0&#39;) == -1 {
+    $vboxdrv_command = &#39;/etc/init.d/vboxdrv&#39;
+  } else {
+    $vboxdrv_command = &#39;/usr/lib/virtualbox/vboxdrv.sh&#39;
+  }
+
+  class { &#39;::virtualbox::install&#39;: } -&gt; Class[&#39;virtualbox&#39;]
+
+  if $manage_kernel {
+    Class[&#39;virtualbox::install&#39;] -&gt; class { &#39;::virtualbox::kernel&#39;: }
+
+    if $::osfamily == &#39;RedHat&#39; {
+      if $manage_ext_repo {
+        include ::epel
+        Class[&#39;epel&#39;] -&gt; Class[&#39;virtualbox::kernel&#39;]
+      }
+    }
+  }
+
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
