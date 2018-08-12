@@ -42,11 +42,13 @@ describe 'virtualbox', type: :class do
 
           context 'with a custom version' do
             let(:params) { { 'version' => '5.1' } }
+
             it { is_expected.to contain_package('virtualbox').with_name('virtualbox-5.1').with_ensure('present') }
           end
 
           context 'when not managing the package repository' do
             let(:params) { { 'manage_repo' => false } }
+
             it { is_expected.not_to contain_apt__source('virtualbox') }
             it { is_expected.not_to contain_class('apt') }
           end
@@ -70,11 +72,13 @@ describe 'virtualbox', type: :class do
 
         context 'with a custom version' do
           let(:params) { { 'version' => '5.1' } }
+
           it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
           let(:params) { { 'manage_repo' => false } }
+
           it { is_expected.not_to contain_yumrepo('virtualbox') }
         end
 
@@ -84,6 +88,7 @@ describe 'virtualbox', type: :class do
 
         context 'when managing the ext repo and the kernel' do
           let(:params) { { 'manage_ext_repo' => true, 'manage_kernel' => true } }
+
           it { is_expected.to contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
         end
 
@@ -112,11 +117,13 @@ describe 'virtualbox', type: :class do
 
         context 'with a custom version' do
           let(:params) { { 'version' => '5.1' } }
+
           it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
           let(:params) { { 'manage_repo' => false } }
+
           it { is_expected.not_to contain_zypprepo('virtualbox') }
         end
 
@@ -140,11 +147,13 @@ describe 'virtualbox', type: :class do
 
       context 'when managing the kernel' do
         let(:params) { { 'manage_kernel' => true } }
+
         it { is_expected.to contain_class('virtualbox::kernel').that_requires('Class[virtualbox::install]') }
       end
 
       context 'when not managing the kernel' do
         let(:params) { { 'manage_kernel' => false } }
+
         it { is_expected.not_to contain_class('virtualbox::kernel') }
       end
 
@@ -185,6 +194,7 @@ describe 'virtualbox', type: :class do
 
       context 'with a custom package_ensure value' do
         let(:params) { { 'package_ensure' => '4.3.16-95972' } }
+
         it { is_expected.to contain_package('virtualbox').with_ensure('4.3.16-95972') }
       end
     end
