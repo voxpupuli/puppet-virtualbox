@@ -1,5 +1,12 @@
 ---
 .travis.yml:
   secure: "mfTBE/J94XtpQ3O7WWmgiGW9wBNV2zJlj33914lUeprD+mmR4nQzXVbZGa0hRjaGpwcW1cZszDPin9VkueESVOOlwQIX0+p5NTn+U3TJO5ea6UMVAzS1pOpgCuOZ5JjEneaIscQLwAZ7BBYeP+Kov/24oh4OhBPQ0OW+w1uNAKk="
+  docker_sets:
+    - set: ubuntu1404-64
+    - set: ubuntu1604-64
+    - set: ubuntu1804-64
+    - set: centos7-64
+    - set: debian8-64
+    - set: debian9-64
 spec/spec_helper.rb:
   spec_overrides: "require 'spec_helper_methods'"
