@@ -40,17 +40,18 @@ group :development do
 end
 
 group :system_tests do
+  gem 'pry'
+  gem 'pry-stack_explorer'
+  if RUBY_VERSION =~ /^2/
+    gem 'pry-byebug'
+  else
+    gem 'pry-debugger'
+  end
   gem 'winrm',                              :require => false
-  if beaker_version = ENV['BEAKER_VERSION']
-    gem 'beaker', *location_for(beaker_version)
-  else
-    gem 'beaker', '>= 3.9.0', :require => false
-  end
-  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-  else
-    gem 'beaker-rspec',  :require => false
-  end
+  gem 'beaker',                             :require => false
+  gem 'beaker-puppet',                      :require => false
+  gem 'beaker-vagrant',                     :require => false
+  gem 'beaker-rspec',                       :require => false
   gem 'serverspec',                         :require => false
   gem 'beaker-hostgenerator', '>= 1.1.10',  :require => false
   gem 'beaker-docker',                      :require => false

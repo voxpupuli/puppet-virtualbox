@@ -1,17 +1,10 @@
 require 'beaker-rspec'
+require 'beaker-puppet'
+require 'beaker/puppet_install_helper'
+require 'beaker/module_install_helper'
 require 'pry'
 
-hosts.each do |host|
-  # Install Puppet
-  if host['platform'] =~ %r{sles}
-    host.install_package('puppet')
-    host.install_package('facter')
-  else
-    install_puppet(default_action: 'gem_install')
-  end
-
-  on host, "mkdir -p #{host['distmoduledir']}"
-end
+install_puppet_agent_on(hosts)
 
 RSpec.configure do |c|
   # Project root
