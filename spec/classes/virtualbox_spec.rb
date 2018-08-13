@@ -34,35 +34,27 @@ describe 'virtualbox', type: :class do
       # Debian specific stuff
       #
       if facts[:osfamily] == 'Debian'
-        context 'with $::puppetversion < 3.0.0' do
-          let(:facts) { facts.merge(puppetversion: '2.7.26') }
 
-          it { is_expected.not_to contain_class('apt') }
-          it { is_expected.not_to contain_apt__source('virtualbox') }
+        it { is_expected.to contain_class('apt') }
+        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
+        it { is_expected.to contain_apt__key('7B0FAB3A13B907435925D9C954422A4B98AB5139').with_source('https://www.virtualbox.org/download/oracle_vbox.asc') }
+
+        context 'with a custom version' do
+          let(:params) { { 'version' => '5.1' } }
+
+          it { is_expected.to contain_package('virtualbox').with_name('virtualbox-5.1').with_ensure('present') }
         end
 
-        unless Puppet::Util::Package.versioncmp(facts[:puppetversion], '3.0.0') == -1
-          it { is_expected.to contain_class('apt') }
-          it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
-          it { is_expected.to contain_apt__key('7B0FAB3A13B907435925D9C954422A4B98AB5139').with_source('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        context 'when not managing the package repository' do
+          let(:params) { { 'manage_repo' => false } }
 
-          context 'with a custom version' do
-            let(:params) { { 'version' => '4.2' } }
+          it { is_expected.not_to contain_apt__source('virtualbox') }
+          it { is_expected.not_to contain_class('apt') }
+        end
 
-            it { is_expected.to contain_package('virtualbox').with_name('virtualbox-4.2').with_ensure('present') }
-          end
-
-          context 'when not managing the package repository' do
-            let(:params) { { 'manage_repo' => false } }
-
-            it { is_expected.not_to contain_apt__source('virtualbox') }
-            it { is_expected.not_to contain_class('apt') }
-          end
-
-          context 'when managing the package and the repository' do
-            it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
-            it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
-          end
+        context 'when managing the package and the repository' do
+          it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
+          it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
         end
       end
 
@@ -77,9 +69,9 @@ describe 'virtualbox', type: :class do
         end
 
         context 'with a custom version' do
-          let(:params) { { 'version' => '4.2' } }
+          let(:params) { { 'version' => '5.1' } }
 
-          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
@@ -122,9 +114,9 @@ describe 'virtualbox', type: :class do
         it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
 
         context 'with a custom version' do
-          let(:params) { { 'version' => '4.2' } }
+          let(:params) { { 'version' => '5.1' } }
 
-          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-4.2').with_ensure('present') }
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
         end
 
         context 'when not managing the package repository' do
