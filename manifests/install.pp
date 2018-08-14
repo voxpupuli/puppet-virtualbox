@@ -109,6 +109,20 @@ class virtualbox::install (
   }
 
   if $manage_package {
+    $_install_status = $::facts['virtualbox_version'] ? {
+      Pattern["^${version}"] => 'already-installed',
+      Pattern['^5']          => 'upgrade',
+      default                => 'not-yet-installed',
+    }
+
+    if $_install_status == 'upgrade' {
+      $_current_version = $::facts['virtualbox_version'].match(/^5[^0-9]{1}[0-9]{1}/)
+
+      package { "${package_name}-${_current_version[0]}":
+        ensure => absent,
+        notify => Package['virtualbox'],
+      }
+    }
     package { 'virtualbox':
       ensure => $package_ensure,
       name   => $validated_package_name,
