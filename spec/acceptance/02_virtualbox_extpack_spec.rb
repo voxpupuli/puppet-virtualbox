@@ -9,8 +9,8 @@ describe 'virtualbox extpack' do
 
     virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
       ensure           => present,
-      source           => 'http://download.virtualbox.org/virtualbox/5.1.8/Oracle_VM_VirtualBox_Extension_Pack-5.1.8-111374.vbox-extpack',
-      checksum_string  => '41f1d66e0be1c183917c95efed89db56',
+      source           => 'http://download.virtualbox.org/virtualbox/5.1.38/Oracle_VM_VirtualBox_Extension_Pack-5.1.38.vbox-extpack',
+      checksum_string  => '008cfd5aca246552f98df97614bdb7e1',
       follow_redirects => true,
     }
     EOS
@@ -22,8 +22,8 @@ describe 'virtualbox extpack' do
 
     virtualbox::extpack { 'Oracle_VM_VirtualBox_Extension_Pack':
       ensure           => absent,
-      source           => 'http://download.virtualbox.org/virtualbox/5.1.8/Oracle_VM_VirtualBox_Extension_Pack-5.1.8-111374.vbox-extpack',
-      checksum_string  => '41f1d66e0be1c183917c95efed89db56',
+      source           => 'http://download.virtualbox.org/virtualbox/5.1.38/Oracle_VM_VirtualBox_Extension_Pack-5.1.38.vbox-extpack',
+      checksum_string  => '008cfd5aca246552f98df97614bdb7e1',
       follow_redirects => true,
     }
     EOS
@@ -53,7 +53,7 @@ describe 'virtualbox extpack' do
 
         describe file('/usr/src/Oracle_VM_VirtualBox_Extension_Pack.tgz') do
           it { is_expected.to be_file }
-          its(:md5sum) { is_expected.to eq '41f1d66e0be1c183917c95efed89db56' }
+          its(:md5sum) { is_expected.to eq '008cfd5aca246552f98df97614bdb7e1' }
         end
 
         describe command('VBoxManage list extpacks') do

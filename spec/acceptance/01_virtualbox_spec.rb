@@ -3,9 +3,9 @@ require 'spec_helper_acceptance'
 describe 'virtualbox class' do
   package_name = case fact('osfamily')
                  when 'RedHat'
-                   'VirtualBox-5.0'
+                   'VirtualBox-5.1'
                  else
-                   'virtualbox-5.0'
+                   'virtualbox-5.1'
                  end
 
   context 'default parameters' do
@@ -24,7 +24,7 @@ describe 'virtualbox class' do
 
     describe command('VBoxManage --version') do
       its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{^5.0} }
+      its(:stdout) { is_expected.to match %r{^5.1} }
     end
 
     describe command('/usr/lib/virtualbox/vboxdrv.sh status') do

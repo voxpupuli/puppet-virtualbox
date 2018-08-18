@@ -52,16 +52,20 @@ define virtualbox::extpack (
 
   $dest = "${extpack_path}/${name}"
 
-  unless $archive_provider {
+  if $archive_provider {
+    $valid_archive_provider = $archive_provider
+  } else {
     $metadata = load_module_metadata('archive')
-    $archive_provider = $metadata['source'] ? {
+    $valid_archive_provider = $metadata['source'] ? {
       /github\.com\/camptocamp/                   => 'camptocamp',
       /github\.com\/(puppet-community|voxpupuli)/ => 'voxpupuli',
     }
   }
 
-  case $archive_provider {
+  case $valid_archive_provider {
     'camptocamp': {
+
+      warning 'Support for module camptocamp/archive is deprecated. Futur version of this module will only support puppet/archive.'
       archive::download { "${name}.tgz":
         ensure           => $ensure,
         url              => $source,

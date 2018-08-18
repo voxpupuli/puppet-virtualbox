@@ -1,11 +1,16 @@
+---
+# This file is managed via modulesync
+# https://github.com/voxpupuli/modulesync
+# https://github.com/voxpupuli/modulesync_config
 HOSTS:
-  ubuntu-server-12042-x64:
+  ubuntu-server-1604-x64:
     roles:
-      - agent
-    platform: ubuntu-server-12.04-amd64
-    box: ubuntu-server-12042-x64-vbox4210-nocm
-    box_url: http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210-nocm.box
-    hypervisor: vagrant_virtualbox
+      - master
+    platform: ubuntu-16.04-amd64
+    box: puppetlabs/ubuntu-16.04-64-nocm
+    hypervisor: vagrant
 CONFIG:
-  log_level: verbose
   type: foss
+  log_level: verbose
+...
+# vim: syntax=yaml
