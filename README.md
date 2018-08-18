@@ -52,6 +52,14 @@ class { 'virtualbox':
 }
 ```
 
+You can also specify the version of the desired version `5.x`. If the host is already running a lower version of virtualbox, it is upgraded. If the host is not yet running virtualbox, it is installed.
+
+```puppet
+class { 'virtualbox':
+  version => '5.2',
+}
+```
+
 The peculiar versioning in use by Oracle has forced us to do some funky stuff with versioning. If you're using the default package name, this module will concatenate `$package_name` and `$version` together with a dash between them. If you opt to define your own package name, the `$version` parameter is ignored completely and the only way to specify a version would be to use the `$package_ensure` parameter:
 
 ```puppet
