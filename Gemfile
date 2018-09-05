@@ -60,10 +60,11 @@ group :system_tests do
   gem 'rbnacl', '>= 4',                     :require => false if RUBY_VERSION >= '2.2.6'
   gem 'rbnacl-libsodium',                   :require => false if RUBY_VERSION >= '2.2.6'
   gem 'bcrypt_pbkdf',                       :require => false
+  gem 'beaker-vagrant',                     :require => false
 end
 
 group :release do
-  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/skywinder/github-changelog-generator' if RUBY_VERSION >= '2.2.2'
+  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/github-changelog-generator/github-changelog-generator' if RUBY_VERSION >= '2.2.2'
   gem 'puppet-blacksmith',           :require => false
   gem 'voxpupuli-release',           :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem'
   gem 'puppet-strings', '>= 1.0',    :require => false

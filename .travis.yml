@@ -47,4 +47,3 @@ deploy:
     all_branches: true
     # Only publish the build marked with "DEPLOY_TO_FORGE"
     condition: "$DEPLOY_TO_FORGE = yes"
-
