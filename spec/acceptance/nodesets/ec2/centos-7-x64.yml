@@ -1,15 +1,17 @@
 ---
 HOSTS:
-  centos7-64:
+  centos-7-64:
     roles:
       - "master"
       - "default"
-    vmname: "centos-7-x86-64-east"
+    vmname: "centos-7-x86-64-west"
     platform: "el-7-x86_64"
     hypervisor: ec2
-    amisize: t2.micro
+    amisize: "t2.micro"
     snapshot: "puppet"
     user: "centos"
+    vpc_id: "vpc-98466bfd"
+    subnet_id: "subnet-282b4571"
 CONFIG:
   type: aio
   ec2_yaml: "spec/acceptance/nodesets/ec2/image_templates.yaml"

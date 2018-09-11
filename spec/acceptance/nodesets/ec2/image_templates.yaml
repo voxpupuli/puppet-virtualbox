@@ -14,9 +14,9 @@ AMI:
     :region: "us-west-2"
   "ubuntu-1604-x86-64-west":
     :image:
-      :puppet: "ami-5d4f6c25"
+      :puppet: "ami-51537029"
     :region: "us-west-2"
   "ubuntu-1804-x86-64-west":
     :image:
-      :puppet: "ami-03715f92274307130"
+      :puppet: "ami-05705259d15c98ef1"
     :region: "us-west-2"

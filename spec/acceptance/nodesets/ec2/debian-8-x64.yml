@@ -7,9 +7,11 @@ HOSTS:
     vmname: "debian-8-x86-64-west"
     platform: "debian-8-x86_64"
     hypervisor: ec2
-    amisize: t2.micro
+    amisize: "t2.micro"
     snapshot: "puppet"
-    user: "centos"
+    user: "admin"
+    vpc_id: "vpc-98466bfd"
+    subnet_id: "subnet-282b4571"
 CONFIG:
   type: aio
   ec2_yaml: "spec/acceptance/nodesets/ec2/image_templates.yaml"

@@ -5,6 +5,7 @@ language: ruby
 cache: bundler
 before_install:
   - rm -f Gemfile.lock
+  - 'ssh-keygen -b 2048 -t rsa -f /home/travis/.ssh/id_rsa -q -P ""'
 script:
   - 'bundle exec rake $CHECK'
 matrix:
