@@ -15,18 +15,15 @@ By default, this module will install the Oracle VirtualBox yum/apt repo, install
 
 This module is tested with:
 
-- CentOS 5.11
-- CentOS 6.6
-- CentOS 7.0
-- Debian 6.0.10
-- Debian 7.8
-- Ubuntu 10.04
-- Ubuntu 12.04
-- Ubuntu 14.04
+- CentOS 6
+- CentOS 7
+- Debian 8
+- Debian 9
+- Ubuntu 16.04
 
 It may work on other distros and OS versions, but these are the versions that we're targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)
 
-This module is tested with the latest version of Puppet 3 and Puppet 4; all Puppet supported versions of Ruby are included in the test matrix. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
+This module is tested with the latest version Puppet 4 and Puppet 5; all Puppet supported versions of Ruby are included in the test matrix. If you're interested in the testing matrix, please have a look at the `.travis.yml` file in the root of the module.
 
 ## Usage
 
@@ -52,6 +49,14 @@ You can also specify a custom package name like so:
 class { 'virtualbox':
 	manage_repo  => false,
 	package_name => 'virtualbox-custom',
+}
+```
+
+You can also specify the version of the desired version `5.x`. If the host is already running a lower version of virtualbox, it is upgraded. If the host is not yet running virtualbox, it is installed.
+
+```puppet
+class { 'virtualbox':
+  version => '5.2',
 }
 ```
 
