@@ -1,22 +1,22 @@
 ---
 AMI:
-  "centos-7-x86-64-east":
+  "centos-7-x86-64-west":
     :image:
       :puppet: "ami-a042f4d8"
     :region: "us-west-2"
-  "debian-8-x86-64-east":
+  "debian-8-x86-64-west":
     :image:
       :puppet: "ami-221ea342"
     :region: "us-west-2"
-  "debian-9-x86-64-east":
+  "debian-9-x86-64-west":
     :image:
       :puppet: "ami-0b0a94056bd604a92"
     :region: "us-west-2"
-  "ubuntu-1604-x86-64-east":
+  "ubuntu-1604-x86-64-west":
     :image:
       :puppet: "ami-5d4f6c25"
     :region: "us-west-2"
-  "ubuntu-1804-x86-64-east":
+  "ubuntu-1804-x86-64-west":
     :image:
       :puppet: "ami-03715f92274307130"
     :region: "us-west-2"

@@ -1,11 +1,11 @@
 ---
 HOSTS:
-  ubuntu-1604-64:
+  debian-8-64:
     roles:
       - "master"
       - "default"
-    vmname: "ubuntu-1604-x86-64-west"
-    platform: "ubuntu-1604-x86_64"
+    vmname: "debian-8-x86-64-west"
+    platform: "debian-8-x86_64"
     hypervisor: ec2
     amisize: t2.micro
     snapshot: "puppet"
