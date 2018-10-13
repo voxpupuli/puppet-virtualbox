@@ -6,5 +6,3 @@ fixtures:
       ref: '2.1.0'
     epel: "https://github.com/stahnma/puppet-module-epel.git"
     zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
-  symlinks:
-    virtualbox: "#{source_dir}"
