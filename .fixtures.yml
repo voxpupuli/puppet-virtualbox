@@ -1,10 +1,9 @@
 fixtures:
   repositories:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    apt:
-      repo: "https://github.com/puppetlabs/puppetlabs-apt.git"
-      ref: '2.1.0'
+    apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     epel: "https://github.com/stahnma/puppet-module-epel.git"
     zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
-  symlinks:
-    virtualbox: "#{source_dir}"
+    yumrepo_core:
+      repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+      puppet_version: ">= 6.0.0"

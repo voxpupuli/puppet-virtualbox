@@ -10,21 +10,25 @@ describe 'virtualbox', type: :class do
       lsbdistcodename: 'trusty',
       operatingsystemrelease: '14.04',
       puppetversion: Puppet.version,
+      os: { name: 'Ubuntu', release: { full: '14' } },
       kernelrelease: '4.10'
     }, {
       osfamily: 'RedHat',
       operatingsystem: 'RedHat',
       operatingsystemrelease: '6.5',
+      os: { name: 'RedHat', release: { full: '6' } },
       puppetversion: Puppet.version
     }, {
       osfamily: 'RedHat',
       operatingsystem: 'Fedora',
       operatingsystemrelease: '22',
+      os: { name: 'Fedora', release: { full: '22' } },
       puppetversion: Puppet.version
     }, {
       osfamily: 'Suse',
       operatingsystem: 'OpenSuSE',
       operatingsystemrelease: '12.3',
+      os: { name: 'OpenSuSe', release: { full: '12' } },
       puppetversion: Puppet.version
     }
   ].each do |facts|
