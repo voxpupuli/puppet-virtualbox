@@ -34,7 +34,7 @@ class virtualbox::install (
         }
 
         case $::lsbdistcodename {
-          /^(jessie|stretch|xenial)$/: {
+          /^(jessie|stretch|xenial|bionic)$/: {
             $apt_key_thumb  = 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'
             $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
           }
