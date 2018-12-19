@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v2.2.1](https://github.com/voxpupuli/puppet-virtualbox/tree/v2.2.1) (2018-10-20)
+## [v2.3.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v2.3.0) (2018-12-19)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v2.2.1...v2.3.0)
+
+**Closed issues:**
+
+- Missing repository key for Ubuntu 18.04 [\#82](https://github.com/voxpupuli/puppet-virtualbox/issues/82)
+- Warning message regarding unsupported architecture [\#80](https://github.com/voxpupuli/puppet-virtualbox/issues/80)
+
+**Merged pull requests:**
+
+- Add bionic to the apt::key regexp to support Ubuntu 18.04 [\#83](https://github.com/voxpupuli/puppet-virtualbox/pull/83) ([meskaya](https://github.com/meskaya))
+- Add node architecture to the apt repository [\#81](https://github.com/voxpupuli/puppet-virtualbox/pull/81) ([meskaya](https://github.com/meskaya))
+
+## [v2.2.1](https://github.com/voxpupuli/puppet-virtualbox/tree/v2.2.1) (2018-10-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v2.2.0...v2.2.1)
 
