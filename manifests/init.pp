@@ -58,14 +58,14 @@ class virtualbox (
     $vboxdrv_command = '/usr/lib/virtualbox/vboxdrv.sh'
   }
 
-  class { '::virtualbox::install': } -> Class['virtualbox']
+  class { 'virtualbox::install': } -> Class['virtualbox']
 
   if $manage_kernel {
-    Class['virtualbox::install'] -> class { '::virtualbox::kernel': }
+    Class['virtualbox::install'] -> class { 'virtualbox::kernel': }
 
     if $::osfamily == 'RedHat' {
       if $manage_ext_repo {
-        include ::epel
+        include epel
         Class['epel'] -> Class['virtualbox::kernel']
       }
     }
