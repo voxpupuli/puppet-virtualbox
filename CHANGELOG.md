@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v3.0.0) (2019-05-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v2.3.0...v3.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.7.0 and drop puppet 4 [\#88](https://github.com/voxpupuli/puppet-virtualbox/pull/88) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add support of Ubuntu Cosmic and Disco \(repo key\) [\#90](https://github.com/voxpupuli/puppet-virtualbox/pull/90) ([meskaya](https://github.com/meskaya))
+
+**Merged pull requests:**
+
+- Allow puppetlabs/apt 7.x [\#89](https://github.com/voxpupuli/puppet-virtualbox/pull/89) ([dhoppe](https://github.com/dhoppe))
+
 ## [v2.3.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v2.3.0) (2018-12-19)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v2.2.1...v2.3.0)
