@@ -13,7 +13,7 @@ class virtualbox::install (
   Boolean $manage_package       = $virtualbox::manage_package
 ) {
 
-  if $package_name == $::virtualbox::params::package_name {
+  if $package_name == $virtualbox::params::package_name {
     $validated_package_name = "${package_name}-${version}"
   } else {
     $validated_package_name = $package_name
