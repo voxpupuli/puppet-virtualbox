@@ -1,8 +1,22 @@
-# == Class: virtualbox::install
+# @summary installs the VirtualBox package
 #
 # This is a private class meant to be called from virtualbox
 # This class installs the VirtualBox package. Based on the parameters it will
 # also install a package repository.
+#
+# @param version The major version of the package to install.
+# @param package_ensure
+#   This gets passed to the package resource as the value of the 'ensure'
+#   parameter. This can be used to specify a package version.
+# @param package_name
+#   The name of the package to install. This must be the full packge name when
+#   not the default. When the default is in use, it gets compounded with the
+#   major.minor components of the version number.
+# @param manage_repo Should this module manage the package repository?
+# @param repo_proxy proxy used by yum
+# @param manage_package Should this module manage the package?
+#
+# @api private
 #
 class virtualbox::install (
   String $version               = $virtualbox::version,
