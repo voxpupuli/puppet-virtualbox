@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v3.1.0) (2019-10-15)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v3.0.0...v3.1.0)
+
+**Merged pull requests:**
+
+- allow puppetlabs-stdlib 6.x [\#96](https://github.com/voxpupuli/puppet-virtualbox/pull/96) ([Dan33l](https://github.com/Dan33l))
+- use puppet strings [\#95](https://github.com/voxpupuli/puppet-virtualbox/pull/95) ([Dan33l](https://github.com/Dan33l))
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v3.0.0) (2019-05-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v2.3.0...v3.0.0)
