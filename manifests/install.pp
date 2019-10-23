@@ -53,17 +53,15 @@ class virtualbox::install (
           }
         }
 
-        apt::key { $apt_key_thumb:
-          ensure => present,
-          source => $apt_key_source,
-        }
-
         apt::source { 'virtualbox':
           architecture => $facts['os']['architecture'],
           location     => 'http://download.virtualbox.org/virtualbox/debian',
           release      => $facts['lsbdistcodename'],
           repos        => 'contrib',
-          require      => Apt::Key[ $apt_key_thumb ],
+          key          => {
+            'id'     => $apt_key_thumb,
+            'source' => $apt_key_source,
+          },
         }
 
         if $manage_package {
