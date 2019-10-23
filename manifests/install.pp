@@ -48,7 +48,7 @@ class virtualbox::install (
         }
 
         case $::lsbdistcodename {
-          /^(jessie|stretch|xenial|bionic|cosmic|disco)$/: {
+          /^(jessie|stretch|buster|xenial|bionic|cosmic|disco)$/: {
             $apt_key_thumb  = 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'
             $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
           }
@@ -56,6 +56,11 @@ class virtualbox::install (
             $apt_key_thumb  = '7B0FAB3A13B907435925D9C954422A4B98AB5139'
             $apt_key_source = 'https://www.virtualbox.org/download/oracle_vbox.asc'
           }
+        }
+        if $::lsbdistcodename == 'buster' {
+          $distcodename = bionic 
+        } else {
+          $distcodename = $::lsbdistcodename
         }
 
         apt::key { $apt_key_thumb:
@@ -66,7 +71,7 @@ class virtualbox::install (
         apt::source { 'virtualbox':
           architecture => $facts['os']['architecture'],
           location     => 'http://download.virtualbox.org/virtualbox/debian',
-          release      => $::lsbdistcodename,
+          release      => $distcodename,
           repos        => $apt_repos,
           require      => Apt::Key[ $apt_key_thumb ],
         }
