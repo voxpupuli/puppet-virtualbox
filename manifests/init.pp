@@ -28,7 +28,7 @@
 #   Defaults to 'VirtualBox' for RedHat and 'virtualbox' for Debian
 #
 class virtualbox (
-  String $version               = '5.1',
+  String $version               = '6.0',
   String $package_ensure        = 'present',
   String $package_name          = $virtualbox::params::package_name,
   Boolean $manage_repo          = $virtualbox::params::manage_repo,
@@ -63,5 +63,4 @@ class virtualbox (
       }
     }
   }
-
 }
