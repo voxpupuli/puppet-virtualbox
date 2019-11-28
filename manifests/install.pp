@@ -66,7 +66,7 @@ class virtualbox::install (
         apt::source { 'virtualbox':
           architecture => $facts['os']['architecture'],
           location     => 'http://download.virtualbox.org/virtualbox/debian',
-          release      => $::lsbdistcodename,
+          release      => $facts['lsbdistcodename'],
           repos        => $apt_repos,
           require      => Apt::Key[ $apt_key_thumb ],
         }
@@ -131,12 +131,15 @@ class virtualbox::install (
     }
 
     if $_install_status == 'upgrade' {
-      $_current_version = $::facts['virtualbox_version'].match(/^5[^0-9]{1}[0-9]{1}/)
+      # The version returned by fact is complete, like 5.2.27r129424.
+      # Bellow, we try to match only the firsts two digits, like 5.2.
+      $_current_version = $::facts['virtualbox_version'].match(/^[0-9][^0-9]{1}[0-9]{1}/)
 
       package { "${package_name}-${_current_version[0]}":
         ensure => absent,
-        notify => Package['virtualbox'],
       }
+
+      Package["${package_name}-${_current_version[0]}"] -> Package['virtualbox']
     }
     package { 'virtualbox':
       ensure => $package_ensure,
