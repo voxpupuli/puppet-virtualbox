@@ -40,8 +40,7 @@ describe 'virtualbox', type: :class do
       if facts[:osfamily] == 'Debian'
 
         it { is_expected.to contain_class('apt') }
-        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian') }
-        it { is_expected.to contain_apt__key('7B0FAB3A13B907435925D9C954422A4B98AB5139').with_source('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian').with_key('id' => '7B0FAB3A13B907435925D9C954422A4B98AB5139', 'source' => 'https://www.virtualbox.org/download/oracle_vbox.asc') }
 
         context 'with a custom version' do
           let(:params) { { 'version' => '5.1' } }

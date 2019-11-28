@@ -36,11 +36,6 @@ class virtualbox::install (
   case $::osfamily {
     'Debian': {
       if $manage_repo {
-        $apt_repos = $::lsbdistcodename ? {
-          /(lucid|squeeze)/ => 'contrib non-free',
-          default           => 'contrib',
-        }
-
         include apt
 
         if $repo_proxy {
@@ -58,17 +53,14 @@ class virtualbox::install (
           }
         }
 
-        apt::key { $apt_key_thumb:
-          ensure => present,
-          source => $apt_key_source,
-        }
-
         apt::source { 'virtualbox':
           architecture => $facts['os']['architecture'],
           location     => 'http://download.virtualbox.org/virtualbox/debian',
-          release      => $facts['lsbdistcodename'],
-          repos        => $apt_repos,
-          require      => Apt::Key[ $apt_key_thumb ],
+          repos        => 'contrib',
+          key          => {
+            'id'     => $apt_key_thumb,
+            'source' => $apt_key_source,
+          },
         }
 
         if $manage_package {
