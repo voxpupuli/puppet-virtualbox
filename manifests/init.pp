@@ -39,12 +39,6 @@ class virtualbox (
   Optional[String] $repo_proxy  = undef,
 ) inherits virtualbox::params {
 
-  # this warning is never reached. If Puppet < 4 is used with tis module,
-  # Puppet fail with error about data type like "Syntax error at 'String'; expected ')'"
-  if versioncmp($facts['puppetversion'], '4.0.0') == -1 {
-    warning 'Support for Puppet < 3.0 is deprecated. Version 2.0 of this module will only support Puppet >= 4.0' # lint:ignore:80chars
-  }
-
   if versioncmp($version, '5.0') == -1 {
     $vboxdrv_command = '/etc/init.d/vboxdrv'
   } else {
