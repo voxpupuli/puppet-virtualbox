@@ -156,10 +156,10 @@ describe 'virtualbox', type: :class do
           let(:facts) { facts.merge(operatingsystemrelease: '13.1') }
           let(:params) { { 'manage_repo' => true } }
 
-          it { is_expected.to raise_error(Puppet::Error, %r{manage your own repo}) }
+          it { is_expected.to compile.and_raise_error(%r{manage your own repo}) }
         end
       else
-        it { is_expected.to raise_error(Puppet::Error, %r{not supported}) }
+        it { is_expected.to compile.and_raise_error(%r{not supported}) }
       end
     end
   end
