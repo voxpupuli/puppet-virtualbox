@@ -33,9 +33,10 @@ class virtualbox::install (
     $validated_package_name = $package_name
   }
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       if $manage_repo {
+
         include apt
 
         if $repo_proxy {
@@ -59,7 +60,7 @@ class virtualbox::install (
     }
     'RedHat': {
       if $manage_repo {
-        $platform = $::operatingsystem ? {
+        $platform = $facts['os']['name'] ? {
           'Fedora' => 'fedora',
           default  => 'el',
         }
@@ -79,15 +80,15 @@ class virtualbox::install (
       }
     }
     'Suse': {
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         'OpenSuSE': {
           if $manage_repo {
-            if $::operatingsystemrelease !~ /^(12.3|11)/ {
+            if $facts['os']['release']['full'] !~ /^(12.3|11)/ {
               fail('Oracle only supports OpenSuSE 11 and 12.3! You need to manage your own repo.')
             }
 
             zypprepo { 'virtualbox':
-              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${::operatingsystemrelease}",
+              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${facts['os']['release']['full']}",
               enabled     => 1,
               autorefresh => 1,
               name        => 'Oracle Virtual Box',
@@ -98,14 +99,14 @@ class virtualbox::install (
             }
           }
         }
-        default: { fail("${::osfamily}/${::operatingsystem} is not supported by ${::module_name}.") }
+        default: { fail("${facts['os']['family']}/${facts['os']['name']} is not supported.") }
       }
     }
-    default: { fail("${::osfamily} is not supported by ${::module_name}.") }
+    default: { fail("${facts['os']['family']} is not supported.") }
   }
 
   if $manage_package {
-    $_install_status = $::facts['virtualbox_version'] ? {
+    $_install_status = $facts['virtualbox_version'] ? {
       Pattern["^${version}"] => 'already-installed',
       Pattern['^5']          => 'upgrade',
       default                => 'not-yet-installed',
@@ -114,7 +115,7 @@ class virtualbox::install (
     if $_install_status == 'upgrade' {
       # The version returned by fact is complete, like 5.2.27r129424.
       # Bellow, we try to match only the firsts two digits, like 5.2.
-      $_current_version = $::facts['virtualbox_version'].match(/^[0-9][^0-9]{1}[0-9]{1}/)
+      $_current_version = $facts['virtualbox_version'].match(/^[0-9][^0-9]{1}[0-9]{1}/)
 
       package { "${package_name}-${_current_version[0]}":
         ensure => absent,

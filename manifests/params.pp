@@ -19,7 +19,7 @@ class virtualbox::params {
 
       $vboxdrv_dependencies = [
         'dkms',
-        "linux-headers-${::kernelrelease}",
+        "linux-headers-${facts['kernelrelease']}",
         'build-essential',
       ]
 
@@ -53,7 +53,7 @@ class virtualbox::params {
       ]
     }
     default: {
-      fail("${::operatingsystem} not supported by ${::module_name}")
+      fail("${facts['operatingsystem']} not supported")
     }
   }
 }
