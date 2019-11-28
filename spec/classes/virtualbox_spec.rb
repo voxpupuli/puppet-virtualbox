@@ -1,147 +1,12 @@
-require 'puppet'
 require 'spec_helper'
 
 describe 'virtualbox', type: :class do
-  [
-    {
-      osfamily: 'Debian',
-      operatingsystem: 'Ubuntu',
-      lsbdistid: 'Ubuntu',
-      lsbdistcodename: 'trusty',
-      operatingsystemrelease: '14.04',
-      puppetversion: Puppet.version,
-      os: { name: 'Ubuntu', release: { full: '14' } },
-      kernelrelease: '4.10'
-    }, {
-      osfamily: 'RedHat',
-      operatingsystem: 'RedHat',
-      operatingsystemrelease: '6.5',
-      os: { name: 'RedHat', release: { full: '6' } },
-      puppetversion: Puppet.version
-    }, {
-      osfamily: 'RedHat',
-      operatingsystem: 'Fedora',
-      operatingsystemrelease: '22',
-      os: { name: 'Fedora', release: { full: '22' } },
-      puppetversion: Puppet.version
-    }, {
-      osfamily: 'Suse',
-      operatingsystem: 'OpenSuSE',
-      operatingsystemrelease: '12.3',
-      os: { name: 'OpenSuSe', release: { full: '12' } },
-      puppetversion: Puppet.version
-    }
-  ].each do |facts|
-    context "on #{facts[:osfamily]}" do
-      let(:facts) { facts }
-
-      # Debian specific stuff
-      #
-      if facts[:osfamily] == 'Debian'
-
-        it { is_expected.to contain_class('apt') }
-        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian').with_key('id' => '7B0FAB3A13B907435925D9C954422A4B98AB5139', 'source' => 'https://www.virtualbox.org/download/oracle_vbox.asc') }
-
-        context 'with a custom version' do
-          let(:params) { { 'version' => '5.1' } }
-
-          it { is_expected.to contain_package('virtualbox').with_name('virtualbox-5.1').with_ensure('present') }
-        end
-
-        context 'when not managing the package repository' do
-          let(:params) { { 'manage_repo' => false } }
-
-          it { is_expected.not_to contain_apt__source('virtualbox') }
-          it { is_expected.not_to contain_class('apt') }
-        end
-
-        context 'when managing the package and the repository' do
-          it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
-          it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
-        end
+  on_supported_os.each do |os, facts|
+    context "on #{os}" do
+      let(:facts) do
+        facts
       end
 
-      # RedHat specific stuff
-      #
-      if facts[:osfamily] == 'RedHat'
-        case facts[:operatingsystem]
-        when 'Fedora'
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
-        else
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
-        end
-
-        context 'with a custom version' do
-          let(:params) { { 'version' => '5.1' } }
-
-          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
-        end
-
-        context 'when not managing the package repository' do
-          let(:params) { { 'manage_repo' => false } }
-
-          it { is_expected.not_to contain_yumrepo('virtualbox') }
-        end
-
-        context 'when managing the package and the repository' do
-          it { is_expected.to contain_yumrepo('virtualbox').that_comes_before('Package[virtualbox]') }
-        end
-
-        context 'when managing the ext repo and the kernel' do
-          let(:params) { { 'manage_ext_repo' => true, 'manage_kernel' => true } }
-
-          it { is_expected.to contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
-        end
-
-        context 'when managing the kernel, but not the ext repo' do
-          let(:params) { { 'manage_ext_repo' => false, 'manage_kernel' => true } }
-
-          it { is_expected.to contain_class('virtualbox::kernel') }
-          it { is_expected.not_to contain_class('epel') }
-        end
-
-        context 'when not specifying a repository proxy' do
-          it { is_expected.to contain_yumrepo('virtualbox').with_proxy(nil) }
-        end
-
-        context 'when specifying a repository proxy' do
-          let(:params) { { 'repo_proxy' => 'http://proxy:8080/' } }
-
-          it { is_expected.to contain_yumrepo('virtualbox').with_proxy('http://proxy:8080/') }
-        end
-      end
-
-      # Suse specific stuff
-      #
-      if facts[:osfamily] == 'Suse'
-        it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
-
-        context 'with a custom version' do
-          let(:params) { { 'version' => '5.1' } }
-
-          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
-        end
-
-        context 'when not managing the package repository' do
-          let(:params) { { 'manage_repo' => false } }
-
-          it { is_expected.not_to contain_zypprepo('virtualbox') }
-        end
-
-        context 'when managing the package and the repository' do
-          it { is_expected.to contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
-        end
-
-        context 'with manage_repo => true on an unsupported version' do
-          let(:facts) { facts.merge(operatingsystemrelease: '13.1') }
-          let(:params) { { 'manage_repo' => true } }
-
-          it { is_expected.to raise_error(Puppet::Error, %r{manage your own repo}) }
-        end
-      end
-
-      # Non $::osfamily specific stuff
-      #
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to contain_package('virtualbox') }
@@ -197,6 +62,104 @@ describe 'virtualbox', type: :class do
         let(:params) { { 'package_ensure' => '4.3.16-95972' } }
 
         it { is_expected.to contain_package('virtualbox').with_ensure('4.3.16-95972') }
+      end
+
+      # operating system specific tests
+      case facts[:osfamily]
+      when 'Debian'
+        it { is_expected.to contain_class('apt') }
+        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian').with_key('id' => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF', 'source' => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
+
+        context 'with a custom version' do
+          let(:params) { { 'version' => '5.1' } }
+
+          it { is_expected.to contain_package('virtualbox').with_name('virtualbox-5.1').with_ensure('present') }
+        end
+
+        context 'when not managing the package repository' do
+          let(:params) { { 'manage_repo' => false } }
+
+          it { is_expected.not_to contain_apt__source('virtualbox') }
+          it { is_expected.not_to contain_class('apt') }
+        end
+
+        context 'when managing the package and the repository' do
+          it { is_expected.to contain_apt__source('virtualbox').that_comes_before('Class[apt::update]') }
+          it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
+        end
+      when 'RedHat'
+        case facts[:operatingsystem]
+        when 'Fedora'
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        else
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+        end
+
+        context 'with a custom version' do
+          let(:params) { { 'version' => '5.1' } }
+
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
+        end
+
+        context 'when not managing the package repository' do
+          let(:params) { { 'manage_repo' => false } }
+
+          it { is_expected.not_to contain_yumrepo('virtualbox') }
+        end
+
+        context 'when managing the package and the repository' do
+          it { is_expected.to contain_yumrepo('virtualbox').that_comes_before('Package[virtualbox]') }
+        end
+
+        context 'when managing the ext repo and the kernel' do
+          let(:params) { { 'manage_ext_repo' => true, 'manage_kernel' => true } }
+
+          it { is_expected.to contain_class('epel').that_comes_before('Class[virtualbox::kernel]') }
+        end
+
+        context 'when managing the kernel, but not the ext repo' do
+          let(:params) { { 'manage_ext_repo' => false, 'manage_kernel' => true } }
+
+          it { is_expected.to contain_class('virtualbox::kernel') }
+          it { is_expected.not_to contain_class('epel') }
+        end
+
+        context 'when not specifying a repository proxy' do
+          it { is_expected.to contain_yumrepo('virtualbox').with_proxy(nil) }
+        end
+
+        context 'when specifying a repository proxy' do
+          let(:params) { { 'repo_proxy' => 'http://proxy:8080/' } }
+
+          it { is_expected.to contain_yumrepo('virtualbox').with_proxy('http://proxy:8080/') }
+        end
+      when 'Suse'
+        it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
+
+        context 'with a custom version' do
+          let(:params) { { 'version' => '5.1' } }
+
+          it { is_expected.to contain_package('virtualbox').with_name('VirtualBox-5.1').with_ensure('present') }
+        end
+
+        context 'when not managing the package repository' do
+          let(:params) { { 'manage_repo' => false } }
+
+          it { is_expected.not_to contain_zypprepo('virtualbox') }
+        end
+
+        context 'when managing the package and the repository' do
+          it { is_expected.to contain_zypprepo('virtualbox').that_comes_before('Package[virtualbox]') }
+        end
+
+        context 'with manage_repo => true on an unsupported version' do
+          let(:facts) { facts.merge(operatingsystemrelease: '13.1') }
+          let(:params) { { 'manage_repo' => true } }
+
+          it { is_expected.to compile.and_raise_error(%r{manage your own repo}) }
+        end
+      else
+        it { is_expected.to compile.and_raise_error(%r{not supported}) }
       end
     end
   end
