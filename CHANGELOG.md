@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v4.0.0) (2019-11-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v3.1.0...v4.0.0)
+
+**Breaking changes:**
+
+- defaults to virtualbox 6.0 [\#101](https://github.com/voxpupuli/puppet-virtualbox/pull/101) ([Dan33l](https://github.com/Dan33l))
+
+**Merged pull requests:**
+
+- update REFERENCE.md [\#104](https://github.com/voxpupuli/puppet-virtualbox/pull/104) ([Dan33l](https://github.com/Dan33l))
+- use structured facts via hash $facts [\#102](https://github.com/voxpupuli/puppet-virtualbox/pull/102) ([Dan33l](https://github.com/Dan33l))
+- Simplify apt repository handling [\#100](https://github.com/voxpupuli/puppet-virtualbox/pull/100) ([ekohl](https://github.com/ekohl))
+
 ## [v3.1.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v3.1.0) (2019-10-15)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v3.0.0...v3.1.0)
