@@ -35,7 +35,7 @@ Data type: `String`
 
 The major version of the package to install.
 
-Default value: '5.1'
+Default value: '6.0'
 
 ##### `package_ensure`
 
