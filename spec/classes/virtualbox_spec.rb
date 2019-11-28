@@ -65,7 +65,7 @@ describe 'virtualbox', type: :class do
       end
 
       # operating system specific tests
-      case facts[:osfamily]
+      case facts[:os]['family']
       when 'Debian'
         it { is_expected.to contain_class('apt') }
         it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian').with_key('id' => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF', 'source' => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
@@ -88,7 +88,7 @@ describe 'virtualbox', type: :class do
           it { is_expected.to contain_class('apt::update').that_comes_before('Package[virtualbox]') }
         end
       when 'RedHat'
-        case facts[:operatingsystem]
+        case facts[:os]['name']
         when 'Fedora'
           it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
         else
@@ -153,7 +153,6 @@ describe 'virtualbox', type: :class do
         end
 
         context 'with manage_repo => true on an unsupported version' do
-          let(:facts) { facts.merge(operatingsystemrelease: '13.1') }
           let(:params) { { 'manage_repo' => true } }
 
           it { is_expected.to compile.and_raise_error(%r{manage your own repo}) }
