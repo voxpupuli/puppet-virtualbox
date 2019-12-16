@@ -6,7 +6,7 @@
 #
 class virtualbox::params {
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       $package_name = 'virtualbox'
       $manage_repo = true
@@ -46,7 +46,7 @@ class virtualbox::params {
       ]
     }
     default: {
-      fail("${facts['operatingsystem']} not supported")
+      fail("${facts['os']['name']} not supported")
     }
   }
 }
