@@ -45,7 +45,7 @@ class virtualbox::install (
 
         apt::source { 'virtualbox':
           architecture => $facts['os']['architecture'],
-          location     => 'http://download.virtualbox.org/virtualbox/debian',
+          location     => 'https://download.virtualbox.org/virtualbox/debian',
           repos        => 'contrib',
           key          => {
             'id'     => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF',
@@ -67,7 +67,7 @@ class virtualbox::install (
 
         yumrepo { 'virtualbox':
           descr    => 'Oracle Linux / RHEL / CentOS-$releasever / $basearch - VirtualBox',
-          baseurl  => "http://download.virtualbox.org/virtualbox/rpm/${platform}/\$releasever/\$basearch",
+          baseurl  => "https://download.virtualbox.org/virtualbox/rpm/${platform}/\$releasever/\$basearch",
           gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox.asc',
           gpgcheck => 1,
           enabled  => 1,
@@ -88,7 +88,7 @@ class virtualbox::install (
             }
 
             zypprepo { 'virtualbox':
-              baseurl     => "http://download.virtualbox.org/virtualbox/rpm/opensuse/${facts['os']['release']['full']}",
+              baseurl     => "https://download.virtualbox.org/virtualbox/rpm/opensuse/${facts['os']['release']['full']}",
               enabled     => 1,
               autorefresh => 1,
               name        => 'Oracle Virtual Box',
