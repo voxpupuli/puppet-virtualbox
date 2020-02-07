@@ -68,7 +68,7 @@ describe 'virtualbox', type: :class do
       case facts[:os]['family']
       when 'Debian'
         it { is_expected.to contain_class('apt') }
-        it { is_expected.to contain_apt__source('virtualbox').with_location('http://download.virtualbox.org/virtualbox/debian').with_key('id' => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF', 'source' => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
+        it { is_expected.to contain_apt__source('virtualbox').with_location('https://download.virtualbox.org/virtualbox/debian').with_key('id' => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF', 'source' => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
 
         context 'with a custom version' do
           let(:params) { { 'version' => '5.1' } }
@@ -90,9 +90,9 @@ describe 'virtualbox', type: :class do
       when 'RedHat'
         case facts[:os]['name']
         when 'Fedora'
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
         else
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
         end
 
         context 'with a custom version' do
@@ -134,7 +134,7 @@ describe 'virtualbox', type: :class do
           it { is_expected.to contain_yumrepo('virtualbox').with_proxy('http://proxy:8080/') }
         end
       when 'Suse'
-        it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('http://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
+        it { is_expected.to contain_zypprepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/opensuse/12.3') }
 
         context 'with a custom version' do
           let(:params) { { 'version' => '5.1' } }
