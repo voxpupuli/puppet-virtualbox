@@ -20,7 +20,7 @@ class virtualbox::kernel (
   exec { 'vboxdrv':
     command     => "${vboxdrv_command} setup",
     unless      => '/sbin/lsmod | grep vboxdrv',
-    environment => 'KERN_DIR=/usr/src/kernels/`uname -r`',
+    environment => [ "KERN_DIR=/lib/modules/${facts['kernelrelease']}/build" ],
     require     => Package[$vboxdrv_dependencies],
   }
 
