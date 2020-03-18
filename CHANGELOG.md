@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.1](https://github.com/voxpupuli/puppet-virtualbox/tree/v4.0.1) (2020-03-18)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v4.0.0...v4.0.1)
+
+**Fixed bugs:**
+
+- uname -r call without full path  [\#92](https://github.com/voxpupuli/puppet-virtualbox/issues/92)
+- Replace `uname` exec with fact output [\#109](https://github.com/voxpupuli/puppet-virtualbox/pull/109) ([mwaldmueller](https://github.com/mwaldmueller))
+
+**Closed issues:**
+
+- Remove hard dependencies which should be soft ones [\#43](https://github.com/voxpupuli/puppet-virtualbox/issues/43)
+
+**Merged pull requests:**
+
+- use https in repository url [\#108](https://github.com/voxpupuli/puppet-virtualbox/pull/108) ([meskaya](https://github.com/meskaya))
+
 ## [v4.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v4.0.0) (2019-11-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v3.1.0...v4.0.0)
