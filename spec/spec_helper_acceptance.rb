@@ -1,11 +1,6 @@
-require 'beaker-rspec'
-require 'beaker-puppet'
-require 'beaker/puppet_install_helper'
-require 'beaker/module_install_helper'
+require 'voxpupuli/acceptance/spec_helper_acceptance'
 
-run_puppet_install_helper unless ENV['BEAKER_provision'] == 'no'
-install_module
-install_module_dependencies
+configure_beaker
 
 shared_examples 'an idempotent puppet code' do
   it 'applies without error' do
