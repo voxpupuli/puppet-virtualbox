@@ -25,7 +25,6 @@ end
 
 group :system_tests do
   gem 'voxpupuli-acceptance',  :require => false
-  gem 'beaker-vagrant',        :require => false
 end
 
 group :release do
