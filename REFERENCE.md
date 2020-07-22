@@ -165,15 +165,6 @@ checksum. Can be md5, sha1, sha224, sha256, sha384, or sha512. Defaults to
 
 Default value: `'md5'`
 
-##### `follow_redirects`
-
-Data type: `Boolean`
-
-If we should follow HTTP redirects. Ignored when using `puppet/archive`.
-Defaults to false.
-
-Default value: ``false``
-
 ##### `extpack_path`
 
 Data type: `Stdlib::Absolutepath`
@@ -182,16 +173,4 @@ This is the path where VirtualBox looks for extension packs. Defaults to
 '/usr/lib/virtualbox/ExtensionPacks'
 
 Default value: `'/usr/lib/virtualbox/ExtensionPacks'`
-
-##### `archive_provider`
-
-Data type: `Optional[Enum['puppet','puppet-community','voxpupuli','camptocamp']]`
-
-This param eter is used to tell the module which `archive` module to expect.
-This can be set to the Puppet Forge username of the developer of the
-`archive` module you wish to use. If a falsey value is passed, this module
-will try and determine the module author by using the `load_module_metadata`
-function from Stdlib. This is the default behavior. Defaults to `undef`.
-
-Default value: ``undef``
 
