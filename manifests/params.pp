@@ -5,7 +5,6 @@
 # @api private
 #
 class virtualbox::params {
-
   case $facts['os']['family'] {
     'Debian': {
       $package_name = 'virtualbox'
@@ -15,7 +14,6 @@ class virtualbox::params {
         "linux-headers-${facts['kernelrelease']}",
         'build-essential',
       ]
-
     }
     'RedHat': {
       $manage_repo = true

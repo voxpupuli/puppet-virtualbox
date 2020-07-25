@@ -38,7 +38,6 @@ class virtualbox (
   Array $vboxdrv_dependencies   = $virtualbox::params::vboxdrv_dependencies,
   Optional[String] $repo_proxy  = undef,
 ) inherits virtualbox::params {
-
   if versioncmp($version, '5.0') == -1 {
     $vboxdrv_command = '/etc/init.d/vboxdrv'
   } else {
