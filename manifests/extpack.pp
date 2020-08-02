@@ -60,7 +60,6 @@ define virtualbox::extpack (
 
   case $valid_archive_provider {
     'camptocamp': {
-
       warning 'Support for module camptocamp/archive is deprecated. Futur version of this module will only support puppet/archive.'
       archive::download { "${name}.tgz":
         ensure           => $ensure,
@@ -117,5 +116,4 @@ define virtualbox::extpack (
     }
     default: { fail('Unknown value for $ensure.') }
   }
-
 }

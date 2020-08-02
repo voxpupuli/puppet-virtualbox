@@ -26,7 +26,6 @@ class virtualbox::install (
   Optional[String] $repo_proxy  = $virtualbox::repo_proxy,
   Boolean $manage_package       = $virtualbox::manage_package
 ) {
-
   if $package_name == $virtualbox::params::package_name {
     $validated_package_name = "${package_name}-${version}"
   } else {
@@ -36,7 +35,6 @@ class virtualbox::install (
   case $facts['os']['family'] {
     'Debian': {
       if $manage_repo {
-
         include apt
 
         if $repo_proxy {
