@@ -1,6 +1,8 @@
 require 'voxpupuli/acceptance/spec_helper_acceptance'
 
-configure_beaker
+configure_beaker do |host|
+  on host, puppet('module', 'install', 'puppet-archive')
+end
 
 shared_examples 'an idempotent puppet code' do
   it 'applies without error' do
