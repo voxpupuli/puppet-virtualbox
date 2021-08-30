@@ -52,7 +52,7 @@ define virtualbox::extpack (
         command => "mkdir -p ${dest} && tar --no-same-owner --no-same-permissions -xzf /usr/src/${name}.tgz -C ${dest}",
         creates => $dest,
         timeout => 120,
-        path    => $::path,
+        path    => $facts['path'],
         require => Archive["/usr/src/${name}.tgz"],
       }
     }
