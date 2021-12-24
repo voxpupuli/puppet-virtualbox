@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v5.0.0) (2021-12-24)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v4.0.1...v5.0.0)
+
+**Breaking changes:**
+
+- Drop support for RedHat 6, CentOS 6, Debian 8, 9 and Ubuntu 16.04 \(EOL\) [\#124](https://github.com/voxpupuli/puppet-virtualbox/pull/124) ([smortex](https://github.com/smortex))
+- Drop support for Puppet 5 \(EOL\) [\#123](https://github.com/voxpupuli/puppet-virtualbox/pull/123) ([smortex](https://github.com/smortex))
+- Drop support for camptocamp archive provider [\#115](https://github.com/voxpupuli/puppet-virtualbox/pull/115) ([ekohl](https://github.com/ekohl))
+- Require puppet-epel over stahnma-epel [\#113](https://github.com/voxpupuli/puppet-virtualbox/pull/113) ([dhoppe](https://github.com/dhoppe))
+
+**Implemented enhancements:**
+
+- Add support for Puppet 7 [\#126](https://github.com/voxpupuli/puppet-virtualbox/pull/126) ([smortex](https://github.com/smortex))
+- Add support for Debian 10, 11 and Ubuntu 20.04 [\#125](https://github.com/voxpupuli/puppet-virtualbox/pull/125) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- Replace the dependency on \(deprecated\) stahnma/epel with puppet/epel [\#111](https://github.com/voxpupuli/puppet-virtualbox/issues/111)
+
+**Merged pull requests:**
+
+- cleanup .fixtures.yml [\#128](https://github.com/voxpupuli/puppet-virtualbox/pull/128) ([bastelfreak](https://github.com/bastelfreak))
+- puppet-lint: fix top\_scope\_facts warnings [\#121](https://github.com/voxpupuli/puppet-virtualbox/pull/121) ([bastelfreak](https://github.com/bastelfreak))
+- Allow stdlib 8.0.0 [\#120](https://github.com/voxpupuli/puppet-virtualbox/pull/120) ([smortex](https://github.com/smortex))
+- modulesync 3.0.0 & puppet-lint updates [\#117](https://github.com/voxpupuli/puppet-virtualbox/pull/117) ([bastelfreak](https://github.com/bastelfreak))
+- Drop HTML docs & regen REFERENCE.md [\#116](https://github.com/voxpupuli/puppet-virtualbox/pull/116) ([ekohl](https://github.com/ekohl))
+- Use voxpupuli-acceptance [\#114](https://github.com/voxpupuli/puppet-virtualbox/pull/114) ([ekohl](https://github.com/ekohl))
+
 ## [v4.0.1](https://github.com/voxpupuli/puppet-virtualbox/tree/v4.0.1) (2020-03-18)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v4.0.0...v4.0.1)

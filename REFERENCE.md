@@ -22,15 +22,25 @@
 
 ## Classes
 
-### `virtualbox`
+### <a name="virtualbox"></a>`virtualbox`
 
 Installs VirtualBox.
 
 #### Parameters
 
-The following parameters are available in the `virtualbox` class.
+The following parameters are available in the `virtualbox` class:
 
-##### `version`
+* [`version`](#version)
+* [`package_ensure`](#package_ensure)
+* [`manage_repo`](#manage_repo)
+* [`manage_ext_repo`](#manage_ext_repo)
+* [`repo_proxy`](#repo_proxy)
+* [`manage_package`](#manage_package)
+* [`manage_kernel`](#manage_kernel)
+* [`vboxdrv_dependencies`](#vboxdrv_dependencies)
+* [`package_name`](#package_name)
+
+##### <a name="version"></a>`version`
 
 Data type: `String`
 
@@ -38,7 +48,7 @@ The major version of the package to install.
 
 Default value: `'6.0'`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -47,7 +57,7 @@ parameter. This can be used to specify a package version.
 
 Default value: `'present'`
 
-##### `manage_repo`
+##### <a name="manage_repo"></a>`manage_repo`
 
 Data type: `Boolean`
 
@@ -56,7 +66,7 @@ Defaults to true
 
 Default value: `$virtualbox::params::manage_repo`
 
-##### `manage_ext_repo`
+##### <a name="manage_ext_repo"></a>`manage_ext_repo`
 
 Data type: `Boolean`
 
@@ -66,7 +76,7 @@ Defaults to true
 
 Default value: ``true``
 
-##### `repo_proxy`
+##### <a name="repo_proxy"></a>`repo_proxy`
 
 Data type: `Optional[String]`
 
@@ -74,7 +84,7 @@ proxy used by yum
 
 Default value: ``undef``
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
@@ -83,7 +93,7 @@ Defaults to true
 
 Default value: ``true``
 
-##### `manage_kernel`
+##### <a name="manage_kernel"></a>`manage_kernel`
 
 Data type: `Boolean`
 
@@ -92,7 +102,7 @@ Defaults to true
 
 Default value: ``true``
 
-##### `vboxdrv_dependencies`
+##### <a name="vboxdrv_dependencies"></a>`vboxdrv_dependencies`
 
 Data type: `Array`
 
@@ -101,7 +111,7 @@ Defaults depend on the platform. See virtualbox::params.
 
 Default value: `$virtualbox::params::vboxdrv_dependencies`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `String`
 
@@ -114,21 +124,28 @@ Default value: `$virtualbox::params::package_name`
 
 ## Defined types
 
-### `virtualbox::extpack`
+### <a name="virtualboxextpack"></a>`virtualbox::extpack`
 
 This class (un)installs Oracle's VirtualBox extension pack.
 
 #### Parameters
 
-The following parameters are available in the `virtualbox::extpack` defined type.
+The following parameters are available in the `virtualbox::extpack` defined type:
 
-##### `source`
+* [`source`](#source)
+* [`ensure`](#ensure)
+* [`verify_checksum`](#verify_checksum)
+* [`checksum_string`](#checksum_string)
+* [`checksum_type`](#checksum_type)
+* [`extpack_path`](#extpack_path)
+
+##### <a name="source"></a>`source`
 
 Data type: `String`
 
 Download extension pack from the given URL. Required string.
 
-##### `ensure`
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -137,7 +154,7 @@ Defaults to 'present'
 
 Default value: `'present'`
 
-##### `verify_checksum`
+##### <a name="verify_checksum"></a>`verify_checksum`
 
 Data type: `Boolean`
 
@@ -146,7 +163,7 @@ Defaults to true.
 
 Default value: ``true``
 
-##### `checksum_string`
+##### <a name="checksum_string"></a>`checksum_string`
 
 Data type: `Optional[String]`
 
@@ -155,7 +172,7 @@ downloaded file against.
 
 Default value: ``undef``
 
-##### `checksum_type`
+##### <a name="checksum_type"></a>`checksum_type`
 
 Data type: `Enum['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512']`
 
@@ -165,7 +182,7 @@ checksum. Can be md5, sha1, sha224, sha256, sha384, or sha512. Defaults to
 
 Default value: `'md5'`
 
-##### `extpack_path`
+##### <a name="extpack_path"></a>`extpack_path`
 
 Data type: `Stdlib::Absolutepath`
 
