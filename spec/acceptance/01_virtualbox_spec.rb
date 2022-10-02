@@ -3,121 +3,66 @@
 require 'spec_helper_acceptance'
 
 describe 'virtualbox class' do
-  package_name = case fact('osfamily')
-                 when 'RedHat'
-                   'VirtualBox-5.1'
-                 else
-                   'virtualbox-5.1'
-                 end
-  upgraded_package_name52 = case fact('osfamily')
-                            when 'RedHat'
-                              'VirtualBox-5.2'
-                            else
-                              'virtualbox-5.2'
-                            end
-  upgraded_package_name60 = case fact('osfamily')
-                            when 'RedHat'
-                              'VirtualBox-6.0'
-                            else
-                              'virtualbox-6.0'
-                            end
+  virtualbox_versions = ['5.0', '5.1', '5.2', '6.0', '6.1']
 
-  context 'with version parameter to 5.1' do
-    let(:pp) do
-      <<-EOS
-      class { 'virtualbox':
-        version => '5.1',
-      }
-      EOS
-    end
+  test_from = case fact('os.name')
+              when 'CentOS', 'RedHat'
+                '5.1'
+              when 'Ubuntu'
+                case fact('os.release.major')
+                when '18.04'
+                  '5.1'
+                when '20.04'
+                  '6.0'
+                end
+              when 'Debian'
+                case fact('os.release.major')
+                when '10'
+                  '6.0'
+                when '11'
+                  '6.1'
+                end
+              end
 
-    it_behaves_like 'an idempotent puppet code'
+  version_sequence = virtualbox_versions[virtualbox_versions.index(test_from)..-1]
 
-    describe package(package_name) do
-      it { is_expected.to be_installed }
-    end
+  version_sequence.each do |version|
+    package_name = case fact('osfamily')
+                   when 'RedHat'
+                     "VirtualBox-#{version}"
+                   else
+                     "virtualbox-#{version}"
+                   end
 
-    describe command('VBoxManage --version') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{^5.1} }
-    end
+    context "with version parameter to #{version}" do
+      let(:pp) do
+        <<-EOS
+        class { 'virtualbox':
+          version => '#{version}',
+        }
+        EOS
+      end
 
-    describe command('/usr/lib/virtualbox/vboxdrv.sh status') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{VirtualBox kernel modules \(.*\) are loaded\.} }
-    end
+      it_behaves_like 'an idempotent puppet code'
 
-    describe command('modinfo vboxdrv') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{version:.* 5\.1} }
-    end
-  end
+      describe package(package_name) do
+        it { is_expected.to be_installed }
+      end
 
-  context 'version parameter to upgrade from 5.1 to 5.2' do
-    let(:pp) do
-      <<-EOS
-      class { 'virtualbox':
-        version => '5.2',
-      }
-      EOS
-    end
+      describe command('VBoxManage --version') do
+        its(:exit_status) { is_expected.to eq 0 }
+        its(:stdout) { is_expected.to match Regexp.new("^#{Regexp.escape(version)}") }
+      end
 
-    it_behaves_like 'an idempotent puppet code'
+      describe command('/usr/lib/virtualbox/vboxdrv.sh status') do
+        its(:exit_status) { is_expected.to eq 0 }
+        its(:stdout) { is_expected.to match %r{VirtualBox kernel modules \(.*\) are loaded\.} }
+      end
 
-    describe package(upgraded_package_name52) do
-      it { is_expected.to be_installed }
-    end
-
-    describe package(package_name) do
-      it { is_expected.not_to be_installed }
-    end
-
-    describe command('VBoxManage --version') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{^5.2} }
-    end
-
-    describe command('/usr/lib/virtualbox/vboxdrv.sh status') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{VirtualBox kernel modules \(.*\) are loaded\.} }
-    end
-
-    describe command('modinfo vboxdrv') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{version:.* 5\.2} }
-    end
-  end
-
-  context 'version parameter to upgrade from 5.2 to 6.0' do
-    let(:pp) do
-      <<-EOS
-      include virtualbox
-      EOS
-    end
-
-    it_behaves_like 'an idempotent puppet code'
-
-    describe package(upgraded_package_name60) do
-      it { is_expected.to be_installed }
-    end
-
-    describe package(upgraded_package_name52) do
-      it { is_expected.not_to be_installed }
-    end
-
-    describe command('VBoxManage --version') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{^6.0} }
-    end
-
-    describe command('/usr/lib/virtualbox/vboxdrv.sh status') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{VirtualBox kernel modules \(.*\) are loaded\.} }
-    end
-
-    describe command('modinfo vboxdrv') do
-      its(:exit_status) { is_expected.to eq 0 }
-      its(:stdout) { is_expected.to match %r{version:.* 6\.0} }
+      describe command('modinfo vboxdrv') do
+        its(:exit_status) { is_expected.to eq 0 }
+        its(:stdout) { is_expected.to match %r{version:.* #{Regexp.escape(version)}} }
+      end
     end
   end
 end
