@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'virtualbox class' do
@@ -65,6 +67,7 @@ describe 'virtualbox class' do
     describe package(upgraded_package_name52) do
       it { is_expected.to be_installed }
     end
+
     describe package(package_name) do
       it { is_expected.not_to be_installed }
     end
@@ -97,6 +100,7 @@ describe 'virtualbox class' do
     describe package(upgraded_package_name60) do
       it { is_expected.to be_installed }
     end
+
     describe package(upgraded_package_name52) do
       it { is_expected.not_to be_installed }
     end
