@@ -4,7 +4,26 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v5.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v5.0.0) (2021-12-24)
+## [v6.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v6.0.0) (2023-07-07)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v5.0.0...v6.0.0)
+
+**Breaking changes:**
+
+- Drop Puppet 6 support [\#136](https://github.com/voxpupuli/puppet-virtualbox/pull/136) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add Puppet 8 support [\#140](https://github.com/voxpupuli/puppet-virtualbox/pull/140) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#139](https://github.com/voxpupuli/puppet-virtualbox/pull/139) ([bastelfreak](https://github.com/bastelfreak))
+- Allow up-to-date dependencies [\#131](https://github.com/voxpupuli/puppet-virtualbox/pull/131) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Update acceptance tests and disable them on GitHub Actions [\#132](https://github.com/voxpupuli/puppet-virtualbox/pull/132) ([smortex](https://github.com/smortex))
+- Remove unsupported acceptance nodesets [\#130](https://github.com/voxpupuli/puppet-virtualbox/pull/130) ([ekohl](https://github.com/ekohl))
+
+## [v5.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v5.0.0) (2021-12-25)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v4.0.1...v5.0.0)
 
