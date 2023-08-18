@@ -24,7 +24,7 @@ describe 'virtualbox class' do
                 end
               end
 
-  version_sequence = virtualbox_versions[virtualbox_versions.index(test_from)..-1]
+  version_sequence = virtualbox_versions[virtualbox_versions.index(test_from)..]
 
   version_sequence.each do |version|
     package_name = case fact('osfamily')
