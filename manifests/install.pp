@@ -66,7 +66,7 @@ class virtualbox::install (
         yumrepo { 'virtualbox':
           descr    => 'Oracle Linux / RHEL / CentOS-$releasever / $basearch - VirtualBox',
           baseurl  => "https://download.virtualbox.org/virtualbox/rpm/${platform}/\$releasever/\$basearch",
-          gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox.asc',
+          gpgkey   => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
           gpgcheck => 1,
           enabled  => 1,
           proxy    => $repo_proxy,
