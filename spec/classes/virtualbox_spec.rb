@@ -92,9 +92,9 @@ describe 'virtualbox', type: :class do
       when 'RedHat'
         case facts[:os]['name']
         when 'Fedora'
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
         else
-          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox.asc') }
+          it { is_expected.to contain_yumrepo('virtualbox').with_baseurl('https://download.virtualbox.org/virtualbox/rpm/el/$releasever/$basearch').with_gpgkey('https://www.virtualbox.org/download/oracle_vbox_2016.asc') }
         end
 
         context 'with a custom version' do
