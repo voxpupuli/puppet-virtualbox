@@ -46,8 +46,8 @@ class virtualbox::install (
           location     => 'https://download.virtualbox.org/virtualbox/debian',
           repos        => 'contrib',
           key          => {
-            'id'     => 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF',
-            'source' => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
+            name   => 'virtualbox.asc',
+            source => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
           },
         }
 
