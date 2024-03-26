@@ -4,7 +4,25 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v6.0.0) (2023-07-07)
+## [v7.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v7.0.0) (2024-03-25)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v6.0.0...v7.0.0)
+
+**Breaking changes:**
+
+- Drop Ubuntu 18.04 support [\#148](https://github.com/voxpupuli/puppet-virtualbox/pull/148) ([zilchms](https://github.com/zilchms))
+
+**Implemented enhancements:**
+
+- Add Ubuntu 22.04 support [\#149](https://github.com/voxpupuli/puppet-virtualbox/pull/149) ([zilchms](https://github.com/zilchms))
+- puppet/epel: Allow 5.x [\#147](https://github.com/voxpupuli/puppet-virtualbox/pull/147) ([zilchms](https://github.com/zilchms))
+- Use modern APT keyrings on Debian family [\#145](https://github.com/voxpupuli/puppet-virtualbox/pull/145) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Update yum repository signing key [\#143](https://github.com/voxpupuli/puppet-virtualbox/pull/143) ([Tamerz](https://github.com/Tamerz))
+
+## [v6.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v6.0.0) (2023-07-12)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v5.0.0...v6.0.0)
 
