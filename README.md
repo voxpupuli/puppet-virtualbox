@@ -13,13 +13,7 @@ By default, this module will install the Oracle VirtualBox yum/apt repo, install
 
 ## Support
 
-This module is tested with:
-
-- CentOS 6
-- CentOS 7
-- Debian 8
-- Debian 9
-- Ubuntu 16.04
+This module is tested with Ubuntu 22.04.
 
 It may work on other distros and OS versions, but these are the versions that we're targeting. If you wish to see another distro/version added to this list, so would we! PRs are welcome :)
 
