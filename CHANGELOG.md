@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v7.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v7.0.0) (2024-03-25)
+## [v8.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v8.0.0) (2025-06-24)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v7.0.0...v8.0.0)
+
+**Breaking changes:**
+
+- drop CentOS 7, Debian 10, Ubuntu 20.04 [\#166](https://github.com/voxpupuli/puppet-virtualbox/pull/166) ([Dan33l](https://github.com/Dan33l))
+- Namespace ensure\_packages\(\) [\#151](https://github.com/voxpupuli/puppet-virtualbox/pull/151) ([smortex](https://github.com/smortex))
+
+**Implemented enhancements:**
+
+- Allow puppetlabs/apt 10.x [\#162](https://github.com/voxpupuli/puppet-virtualbox/pull/162) ([smortex](https://github.com/smortex))
+- metadata.json: Add OpenVox [\#161](https://github.com/voxpupuli/puppet-virtualbox/pull/161) ([jstraw](https://github.com/jstraw))
+
+## [v7.0.0](https://github.com/voxpupuli/puppet-virtualbox/tree/v7.0.0) (2024-03-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-virtualbox/compare/v6.0.0...v7.0.0)
 
