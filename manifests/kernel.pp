@@ -14,7 +14,7 @@ class virtualbox::kernel (
   Array $vboxdrv_dependencies = $virtualbox::vboxdrv_dependencies,
   String $vboxdrv_command     = $virtualbox::vboxdrv_command
 ) {
-  ensure_packages($vboxdrv_dependencies)
+  stdlib::ensure_packages($vboxdrv_dependencies)
 
   exec { 'vboxdrv':
     command     => "${vboxdrv_command} setup",
