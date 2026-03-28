@@ -1,3 +1,6 @@
 ---
 .github/workflows/ci.yml:
-  acceptance_tests: false
+  with:
+    beaker_hypervisor: vagrant_libvirt
+spec/spec_helper_acceptance.rb:
+  unmanaged: false
