@@ -3,7 +3,7 @@
 require 'spec_helper_acceptance'
 
 describe 'virtualbox class' do
-  virtualbox_versions = ['5.0', '5.1', '5.2', '6.0', '6.1', '7.0']
+  virtualbox_versions = ['5.0', '5.1', '5.2', '6.0', '6.1', '7.0', '7.1', '7.2']
 
   test_from = case fact('os.name')
               when 'CentOS', 'RedHat'
@@ -14,6 +14,8 @@ describe 'virtualbox class' do
                   '5.1'
                 when '20.04'
                   '6.0'
+                when '22.04', '24.04'
+                  '7.2'
                 end
               when 'Debian'
                 case fact('os.release.major')
