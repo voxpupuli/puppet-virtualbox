@@ -35,15 +35,15 @@ describe 'virtualbox class' do
                    end
 
     context "with version parameter to #{version}" do
-      let(:pp) do
-        <<-EOS
-        class { 'virtualbox':
-          version => '#{version}',
-        }
-        EOS
+      it_behaves_like 'an idempotent resource' do
+        let(:manifest) do
+          <<-EOS
+          class { 'virtualbox':
+            version => '#{version}',
+          }
+          EOS
+        end
       end
-
-      it_behaves_like 'an idempotent puppet code'
 
       describe package(package_name) do
         it { is_expected.to be_installed }
