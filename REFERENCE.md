@@ -190,4 +190,3 @@ This is the path where VirtualBox looks for extension packs. Defaults to
 '/usr/lib/virtualbox/ExtensionPacks'
 
 Default value: `'/usr/lib/virtualbox/ExtensionPacks'`
-
